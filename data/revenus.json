@@ -1,0 +1,18 @@
+[
+    {
+        "id_transaction": "da96f297-c37d-4a90-a57e-1adbc7a8343c",
+        "montant": 1000,
+        "date_transaction": "2023-10-01",
+        "imposable": true,
+        "utilisateur_id": "utilisateur123",
+        "libelle": "Salaire"
+    },
+    {
+        "id_transaction": "05b26529-6387-41fa-8daf-e0a143f3a1f7",
+        "montant": 1200,
+        "date_transaction": "2023-10-01",
+        "imposable": true,
+        "utilisateur_id": "utilisateur123",
+        "libelle": "prime de fin d'année"
+    }
+]
