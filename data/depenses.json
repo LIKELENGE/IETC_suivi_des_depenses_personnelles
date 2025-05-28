@@ -1,0 +1,18 @@
+[
+    {
+        "id_transaction": "158bd5e9-8db6-4807-88fe-42b2126aedcc",
+        "montant": 250,
+        "date_transaction": "2023-10-01",
+        "categorie": "Santé",
+        "personne_id": "utilisateur123",
+        "libelle": "Pharmacie"
+    },
+    {
+        "id_transaction": "b59cd0bd-e868-4b52-b240-73f9c5e0b710",
+        "montant": 250,
+        "date_transaction": "2023-10-01",
+        "categorie": "Alimentation",
+        "personne_id": "utilisateur123",
+        "libelle": "Courses du mois"
+    }
+]
