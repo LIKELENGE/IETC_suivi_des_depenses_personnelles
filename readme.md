@@ -1,26 +1,167 @@
+
 # 💸 La Pécuniaire Magique
 
-**Une application de gestion financière simple, pédagogique et 100% JSON.**
+**Une application web pédagogique de gestion de finances personnelles, construite avec Flask, sans base de données relationnelle.**
 
 ---
 
 ## 📌 Objectif du Projet
 
-Développer une application web de gestion de transactions personnelles, à visée pédagogique, sans base de données relationnelle. Le projet met l'accent sur la séparation des responsabilités, la programmation orientée objet (POO), et l'architecture MVT avec Flask.
+Développer une application permettant la gestion de transactions (revenus/dépenses), en respectant les bonnes pratiques de la programmation orientée objet et l'architecture MVT (Model - View - Template), tout en stockant les données dans des fichiers JSON.
 
 ---
 
 ## 🧱 Architecture
 
-### 🔄 Modèle - Vue - Template (MVT) avec Flask
+### 🔄 MVT (Model - View - Template) avec Flask
 
-| Composant      | Rôle                                                                 |
-|----------------|----------------------------------------------------------------------|
-| **Models**     | Gestion des entités métier (Utilisateur, Catégorie, Transaction) et logique métier (CRUD via fichiers JSON) |
-| **Views (Routes)**  | Traitement des requêtes HTTP, logique de contrôle et gestion des sessions |
-| **Forms**       | Validation des données utilisateurs via WTForms                     |
-| **Templates**   | Génération dynamique des pages avec Jinja2                          |
+| Composant      | Description                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| **Models**     | Contiennent les classes métier : `Utilisateur`, `Catégorie`, `Transaction`. Opérations CRUD via fichiers JSON, orientées objet. |
+| **Views**      | Gèrent les routes Flask (GET/POST), la logique de contrôle et les sessions. |
+| **Forms**      | Validation des données utilisateurs via WTForms.                            |
+| **Templates**  | Génération des pages HTML avec Jinja2.                                      |
 
 ---
 
 ## 📂 Structure du Projet
+
+```
+la-pecuniaire-magique/
+│
+├── models/             # Modèles métier (POO + JSON)
+│   ├── base.py         # Classe mère avec logique de persistance
+│   ├── utilisateur.py
+│   ├── categorie.py
+│   └── transaction.py
+│
+├── views/              # Routes Flask
+│   └── routes.py
+│
+├── forms/              # Formulaires et validation
+│   └── forms.py
+│
+├── templates/          # Fichiers HTML Jinja2
+│   └── ...
+│
+├── static/             # Fichiers CSS, JS ou images (si nécessaire)
+│
+├── data/               # Données persistées au format JSON
+│   ├── utilisateurs.json
+│   ├── categories.json
+│   └── transactions.json
+│
+├── app.py              # Point d’entrée de l’application Flask
+├── requirements.txt    # Dépendances Python
+└── README.md           # Ce fichier
+```
+
+---
+
+## ⚙️ Technologies
+
+- **Python 3.10+**
+- **Flask**
+- **WTForms**
+- **Jinja2**
+- **JSON (fichiers)**
+
+---
+
+## 📌 Contraintes
+
+- ❌ Aucune base de données relationnelle (pas de MySQL, PostgreSQL, etc.)
+- ✅ Stockage via fichiers `.json`
+- ✅ Respect des principes POO : héritage, polymorphisme, surcharge, constructeur
+- ✅ Architecture MVT claire et séparée
+
+---
+
+## 👥 Équipe & Répartition des Tâches
+
+| Fonctionnalité              | Responsable     |
+|----------------------------|-----------------|
+| CRUD Utilisateur           | Harry           |
+| CRUD Catégorie             | Jean-Pierre     |
+| CRUD Transaction           | Moïse           |
+| Validateurs de formulaires | Nourridine      |
+
+---
+
+## 📅 Méthodologie de Travail
+
+- **Sprints** de 2 jours
+- **Stand-up meetings** quotidiens (15 min)
+- Répartition flexible en cas de blocage ou retard
+- Les fonctionnalités **bonus** seront traitées après le MVP
+
+---
+
+## ✅ Fonctionnalités Clés
+
+- 🔹 Création / édition / suppression d’**utilisateurs**
+- 🔹 Gestion de **catégories** de revenus/dépenses
+- 🔹 Enregistrement de **transactions**
+- 🔹 Validation de formulaires (type, champs requis, etc.)
+- 🔹 Interface utilisateur HTML avec templating Jinja2
+- 🔹 Persistance des données en JSON
+
+---
+
+## 🚀 Installation et Lancement
+
+### 1. Cloner le projet
+```bash
+git clone https://github.com/votre-compte/la-pecuniaire-magique.git
+cd la-pecuniaire-magique
+```
+
+### 2. Créer un environnement virtuel
+```bash
+python -m venv venv
+source venv/bin/activate  # Linux/macOS
+# ou venv\Scripts\activate  # Windows
+```
+
+### 3. Installer les dépendances
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Lancer l'application
+```bash
+flask run
+```
+
+> **Note** : Assurez-vous que le fichier `.env` contient :
+> ```
+> FLASK_APP=app.py
+> FLASK_ENV=development
+> ```
+
+---
+
+## 📁 Fichier requirements.txt
+
+```txt
+Flask==2.3.3
+WTForms==3.1.2
+python-dotenv==1.0.1
+```
+
+---
+
+## 🏁 Évolutions Possibles
+
+- 🔐 Authentification sécurisée
+- 📊 Statistiques des dépenses / revenus
+- 📤 Exportation CSV des transactions
+- 🎨 Thème visuel plus avancé (avec Bootstrap)
+
+---
+
+## 📄 Licence
+
+Projet à but pédagogique, sans licence officielle.
+
+---
