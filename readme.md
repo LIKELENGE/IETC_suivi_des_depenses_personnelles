@@ -30,7 +30,7 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 la-pecuniaire-magique/
 │
 ├── models/             # Modèles métier (POO + JSON)
-│   ├── base.py         # Classe mère avec logique de persistance
+│   ├── classe_generique.py         # Classe mère avec logique de persistance
 │   ├── utilisateur.py
 │   ├── categorie.py
 │   └── transaction.py
@@ -75,18 +75,7 @@ la-pecuniaire-magique/
 - ✅ Respect des principes POO : héritage, polymorphisme, surcharge, constructeur
 - ✅ Architecture MVT claire et séparée
 
----
 
-## 👥 Équipe & Répartition des Tâches
-
-| Fonctionnalité              | Responsable     |
-|----------------------------|-----------------|
-| CRUD Utilisateur           | Harry           |
-| CRUD Catégorie             | Jean-Pierre     |
-| CRUD Transaction           | Moïse           |
-| Validateurs de formulaires | Nourridine      |
-
----
 
 ## 📅 Méthodologie de Travail
 
