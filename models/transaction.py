@@ -16,3 +16,6 @@ class Transaction(ABC):
             "date_transaction": self.date_transaction,
             "utilisateur_id": self.utilisateur_id
         }
+        
+        def __str__(self):
+            return f"Transaction(id={self.id_transaction}, montant={self.montant}, date={self.date_transaction}, utilisateur_id={self.utilisateur_id}, libelle={self.libelle})" 

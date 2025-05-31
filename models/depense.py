@@ -54,7 +54,7 @@ class Depense(Transaction):
 #cas d'utilisation supprimer
 #Depense.supprimer(id_transaction="b59cd0bd-e868-4b52-b240-73f9c5e0b710")
 #cas d'utilisation modifier
-#Depense.modifier(id_transaction="158bd5e9-8db6-4807-88fe-42b2126aedcc",montant=200, categorie="Santé",libelle="Pharmacie")
+#Depense.modifier(id_transaction="b59cd0bd-e868-4b52-b240-73f9c5e0b710",montant=250)
 
 #cas d'utilisation ajouter
 #d = Depense(100, "2023-10-01", "Alimentation", "utilisateur123", "Courses du mois")

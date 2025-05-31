@@ -57,6 +57,7 @@ class CategorieDepense:
 
     @staticmethod
     def lister_categorie_par_personne():
+        """cette méthode permet de lister les catégories de dépenses par utilisateur"""
         data = gestionnaire.lire()
         if not data:
             print("Aucune catégorie enregistrée.")
