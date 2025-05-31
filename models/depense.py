@@ -49,6 +49,14 @@ class Depense(Transaction):
             return item['id_transaction'] == id_transaction
         gestionnaire.supprimer(condition)
         print("Dépense supprimée.")
+        
+    @staticmethod
+    def depenses_par_utilisateur(utilisateur_id):
+        """cette méthode permet de lister les dépenses par utilisateur"""
+        def condition(item):
+            return item['personne_id'] == utilisateur_id
+        depenses = gestionnaire.lister(condition)
+        return [Depense(**depense) for depense in depenses]
 
 
 #cas d'utilisation supprimer

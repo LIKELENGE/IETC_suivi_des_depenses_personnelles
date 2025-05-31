@@ -56,20 +56,9 @@ class CategorieDepense:
 
 
     @staticmethod
-    def lister_categorie_par_personne():
+    def lister_categorie_par_personne(utilisateur_id):
         """cette méthode permet de lister les catégories de dépenses par utilisateur"""
-        data = gestionnaire.lire()
-        if not data:
-            print("Aucune catégorie enregistrée.")
-        else:
-            print("Liste des catégories par utilisateur :")
-            categories_par_utilisateur = {}
-            for item in data:
-                utilisateur = item['id_utilisateur']
-                if utilisateur not in categories_par_utilisateur:
-                    categories_par_utilisateur[utilisateur] = []
-                categories_par_utilisateur[utilisateur].append(item)
-            for utilisateur, categories in categories_par_utilisateur.items():
-                print(f"\nUtilisateur : {utilisateur}")
-                for cat in categories:
-                    print(f"- [{cat['id_categorie']}] {cat['description']} (limite: {cat['limite']}€)")
+        def condition(item):
+            return item['utilisateur_id'] == utilisateur_id
+        categories = gestionnaire.lister(['utilisateur_id'] == utilisateur_id)
+        return [categorie(**categorie) for categorie in categories]

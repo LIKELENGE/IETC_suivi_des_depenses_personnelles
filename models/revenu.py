@@ -44,7 +44,13 @@ class Revenu(Transaction):
             return item['id_transaction'] == id_transaction
         gestionnaire.supprimer(condition)
         print("Revenu supprimé.")
-        
+    
+    def revenue_par_utilisateur(utilisateur_id):
+        def condition(item):
+            return item['utilisateur_id'] == utilisateur_id
+        revenus = gestionnaire.lister(condition)
+        return [Revenu(**revenu) for revenu in revenus]
+    
 #cas d'utilisation ajouter
 #r = Revenu(1000, "2023-10-01", "utilisateur123", imposable=True, libelle="retour impot")
 #r.ajouter()
