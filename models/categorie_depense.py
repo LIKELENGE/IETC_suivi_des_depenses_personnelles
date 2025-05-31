@@ -12,7 +12,7 @@ class CategorieDepense:
         self.limite = limite
         self.id_utilisateur = id_utilisateur
 
-    def to_dict(self):
+    def convert_class_vers_dict(self):
         return {
             "id_categorie": self.id_categorie,
             "description": self.description,
@@ -30,38 +30,45 @@ class CategorieDepense:
         )
 
     def ajouter(self):
-        # Empêche les doublons de description
-        data = gestionnaire.lire()
-        if any(item["description"] == self.description for item in data):
-            print(f"Erreur : La description '{self.description}' existe déjà.")
-            return False
-        gestionnaire.ajouter(self.to_dict())
-        print(f"✅ Catégorie '{self.description}' ajoutée.")
-        return True
-
-    def modifier(self, nouvelle_description=None, nouvelle_limite=None):
-        def condition(item):
-            return item["id_categorie"] == self.id_categorie
-
-        def update(item):
-            if nouvelle_description:
-                item["description"] = nouvelle_description
-            if nouvelle_limite is not None:
-                item["limite"] = nouvelle_limite
-
-        gestionnaire.modifier(condition, update)
-        print(f"✏️ Catégorie '{self.id_categorie}' modifiée.")
-
-    def supprimer(self):
-        gestionnaire.supprimer(lambda item: item["id_categorie"] == self.id_categorie)
-        print(f"🗑️ Catégorie '{self.id_categorie}' supprimée.")
+      #il faut ajouter la logique la vrfication du doublon
+      gestionnaire.ajouter(self.convert_class_vers_dict())
 
     @staticmethod
-    def afficher_toutes():
+    def modifier(id_categorie, **updates):
+        def condition(item):
+            return item["id_categorie"] == id_categorie
+
+        def update(item):
+            for key, value in updates.items():
+                if key in item:
+                    item[key] = value
+
+
+        gestionnaire.modifier(condition, update)
+        print(f"Catégorie '{id_categorie}' modifiée.")
+
+    @staticmethod
+    def supprimer(id_categorie):
+        def condition(item):
+            return item['id_categorie'] == id_categorie
+        gestionnaire.supprimer(condition)       
+        print("categorie de dépense")
+
+
+    @staticmethod
+    def lister_categorie_par_personne():
         data = gestionnaire.lire()
         if not data:
             print("Aucune catégorie enregistrée.")
         else:
-            print("📋 Liste des catégories :")
+            print("Liste des catégories par utilisateur :")
+            categories_par_utilisateur = {}
             for item in data:
-                print(f"- [{item['id_categorie']}] {item['description']} (limite: {item['limite']}€, utilisateur: {item['id_utilisateur']})")
+                utilisateur = item['id_utilisateur']
+                if utilisateur not in categories_par_utilisateur:
+                    categories_par_utilisateur[utilisateur] = []
+                categories_par_utilisateur[utilisateur].append(item)
+            for utilisateur, categories in categories_par_utilisateur.items():
+                print(f"\nUtilisateur : {utilisateur}")
+                for cat in categories:
+                    print(f"- [{cat['id_categorie']}] {cat['description']} (limite: {cat['limite']}€)")
