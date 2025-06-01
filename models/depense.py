@@ -1,3 +1,4 @@
+import datetime
 try:
     from .transaction import Transaction
     from .classe_generique import JSONManager
@@ -66,21 +67,33 @@ class Depense(Transaction):
             return item['utilisateur_id'] == utilisateur_id and item['categorie'] == categorie
         depenses = gestionnaire.lire_avec_conditions(condition)
         return [Depense(**depense) for depense in depenses]
+        
     
     @staticmethod
-    def total_depenses_par_utilisateur_categorie(utilisateur_id, categorie):
-        """Cette méthode permet de calculer le total des dépenses par utilisateur, catégorie."""
+    def total_par_utilisateur_categorie_mois(utilisateur_id, categorie, mois, annee):
+        """
+        Calcule le total des dépenses d'un utilisateur pour une catégorie donnée,
+        sur un mois et une année spécifiques.
+        """
         def condition(item):
-            return item['utilisateur_id'] == utilisateur_id and item['categorie'] == categorie    
+            if item['utilisateur_id'] != utilisateur_id or item['categorie'] != categorie:
+                return False
+            try:
+                date = datetime.datetime.strptime(item['date_transaction'], "%Y-%m-%d")
+                return date.month == mois and date.year == annee
+            except ValueError:
+                return False
 
         depenses = gestionnaire.lire_avec_conditions(condition)
         total = sum(float(depense['montant']) for depense in depenses)
         return total
+
     
     
     
     
-print(Depense.total_depenses_par_utilisateur_categorie("utilisateur123", "Alimentation"))
+print(Depense.total_par_utilisateur_categorie_mois("utilisateur123", "Alimentation", 11, 2023))
+print(Depense.total_par_utilisateur_categorie_mois("utilisateur123", "Alimentation", 10, 2023))
 
     # @staticmethod
     # def depense_par_categorie_par_utilisateur(id_utilisateur, categorie):

@@ -22,6 +22,21 @@
         "categorie": "Alimentation",
         "utilisateur_id": "utilisateur123",
         "libelle": "Achat de fruits et légumes"
+    },
+        {
+        "id_transaction": "b69cd0bd-e868-4b52-b240-73f9c5e0b710",
+        "montant": 70,
+        "date_transaction": "2023-11-01",
+        "categorie": "Alimentation",
+        "utilisateur_id": "utilisateur123",
+        "libelle": "Courses du mois"
+    }, 
+        {
+        "id_transaction": "c60cc1bd-e868-4b52-c350-73f9c5e0b800",
+        "montant": 125,
+        "date_transaction": "2023-11-01",
+        "categorie": "Alimentation",
+        "utilisateur_id": "utilisateur123",
+        "libelle": "Achat de fruits et légumes"
     }
-    
 ]
