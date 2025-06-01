@@ -36,3 +36,10 @@ class JSONManager:
             if condition_fn(item):
                 update_fn(item)
         self.ecrire(data)
+        
+    def lire_avec_conditions(self, *conditions):
+        data = self.lire()
+        for cond in conditions:
+            data = [item for item in data if cond(item)]
+        return data
+

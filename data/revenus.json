@@ -14,5 +14,13 @@
         "imposable": true,
         "utilisateur_id": "utilisateur123",
         "libelle": "prime de fin d'année"
+    },
+    {
+        "id_transaction": "02c26529-6387-41fa-8daf-e0a143f3a1f7",
+        "montant": 800,
+        "date_transaction": "2023-10-01",
+        "imposable": true,
+        "utilisateur_id": "utilisateur123",
+        "libelle": "Salaire"
     }
 ]

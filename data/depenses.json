@@ -4,15 +4,24 @@
         "montant": 250,
         "date_transaction": "2023-10-01",
         "categorie": "Santé",
-        "personne_id": "utilisateur123",
+        "utilisateur_id": "utilisateur123",
         "libelle": "Pharmacie"
     },
     {
         "id_transaction": "b59cd0bd-e868-4b52-b240-73f9c5e0b710",
-        "montant": 250,
+        "montant": 50,
         "date_transaction": "2023-10-01",
         "categorie": "Alimentation",
-        "personne_id": "utilisateur123",
+        "utilisateur_id": "utilisateur123",
         "libelle": "Courses du mois"
+    }, 
+        {
+        "id_transaction": "c60cd0bd-e868-4b52-c350-73f9c5e0b800",
+        "montant": 125,
+        "date_transaction": "2023-10-01",
+        "categorie": "Alimentation",
+        "utilisateur_id": "utilisateur123",
+        "libelle": "Achat de fruits et légumes"
     }
+    
 ]

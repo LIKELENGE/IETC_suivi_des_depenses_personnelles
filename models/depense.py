@@ -10,9 +10,12 @@ gestionnaire = JSONManager(chemin)
 #Reste à implementer la logique du système d'alerte pour les dépenses
 
 class Depense(Transaction):
-    def __init__(self, montant, date_transaction, categorie, utilisateur_id, libelle=None):
+    def __init__(self, montant, date_transaction, categorie, utilisateur_id, libelle=None, id_transaction=None):
         super().__init__(montant, date_transaction, utilisateur_id, libelle)
         self.categorie = categorie
+
+    def __str__(self):
+        return f"Dépense(id={self.id_transaction}, montant={self.montant}, date={self.date_transaction}, catégorie={self.categorie}, utilisateur_id={self.utilisateur_id}, libelle={self.libelle})"
 
     def convert_class_vers_dict(self):
         return {
@@ -20,16 +23,14 @@ class Depense(Transaction):
             "montant": self.montant,
             "date_transaction": self.date_transaction,
             "categorie": self.categorie,
-            "personne_id": self.utilisateur_id,
+            "utilisateur_id": self.utilisateur_id,
             "libelle": self.libelle
         }
     
     def ajouter(self):
         gestionnaire.ajouter(self.convert_class_vers_dict())
     
-    def modifer(self, condition_fn, update_fn):
-        gestionnaire.modifier(condition_fn, update_fn)
-    
+
     @staticmethod
     def modifier(id_transaction, **updates):
         def condition(item):
@@ -54,15 +55,54 @@ class Depense(Transaction):
     def depenses_par_utilisateur(utilisateur_id):
         """cette méthode permet de lister les dépenses par utilisateur"""
         def condition(item):
-            return item['personne_id'] == utilisateur_id
-        depenses = gestionnaire.lister(condition)
+            return item['utilisateur_id'] == utilisateur_id
+        depenses = gestionnaire.lire_avec_conditions(condition)
         return [Depense(**depense) for depense in depenses]
+    
+    @staticmethod
+    def depenses_par_utilisateur_et_categorie(utilisateur_id, categorie):
+        """Cette méthode permet de lister les dépenses par utilisateur et par catégorie."""
+        def condition(item):
+            return item['utilisateur_id'] == utilisateur_id and item['categorie'] == categorie
+        depenses = gestionnaire.lire_avec_conditions(condition)
+        return [Depense(**depense) for depense in depenses]
+    
+    @staticmethod
+    def total_depenses_par_utilisateur_categorie(utilisateur_id, categorie):
+        """Cette méthode permet de calculer le total des dépenses par utilisateur, catégorie."""
+        def condition(item):
+            return item['utilisateur_id'] == utilisateur_id and item['categorie'] == categorie    
+
+        depenses = gestionnaire.lire_avec_conditions(condition)
+        total = sum(float(depense['montant']) for depense in depenses)
+        return total
+    
+    
+    
+    
+print(Depense.total_depenses_par_utilisateur_categorie("utilisateur123", "Alimentation"))
+
+    # @staticmethod
+    # def depense_par_categorie_par_utilisateur(id_utilisateur, categorie):
+    #     """Cette méthode permet de lister les dépenses par catégorie pour un utilisateur donné."""
+    #     def condition(item):
+    #         return item['categorie'] == categorie and item['utilisateur_id'] == id_utilisateur
+    #     depenses = gestionnaire.lire(condition)
+    #     return [Depense(**depense) for depense in depenses]
+
+
+
+#cas d'utilisation lister les dépenses par utilisateur
+#print(Depense.depenses_par_utilisateur("utilisateur123"))
+
+#cas d'utilisation lister les dépenses par utilisateur et par catégorie
+#print(Depense.depenses_par_utilisateur_et_categorie("utilisateur123", "Alimentation"))
 
 
 #cas d'utilisation supprimer
 #Depense.supprimer(id_transaction="b59cd0bd-e868-4b52-b240-73f9c5e0b710")
 #cas d'utilisation modifier
-#Depense.modifier(id_transaction="b59cd0bd-e868-4b52-b240-73f9c5e0b710",montant=250)
+#Depense.modifier(id_transaction="b59cd0bd-e868-4b52-b240-73f9c5e0b710",montant=50)
 
 #cas d'utilisation ajouter
 #d = Depense(100, "2023-10-01", "Alimentation", "utilisateur123", "Courses du mois")
