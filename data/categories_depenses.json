@@ -1,0 +1,9 @@
+[
+    {
+        "id_categorie": "9c180bde-3aa1-4c2d-9e12-f43b4fc7e847",
+        "description": "Loyer principal",
+        "limite": 600,
+        "id_utilisateur": "utilisateur123",
+        "type_periode": "mensuelle"
+    }
+]
