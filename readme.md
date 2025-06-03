@@ -7,7 +7,7 @@
 
 ## 📌 Objectif du Projet
 
-Développer une application permettant la gestion de transactions (revenus/dépenses), en respectant les bonnes pratiques de la programmation orientée objet et l'architecture MVT (Model - View - Template), tout en stockant les données dans des fichiers JSON.
+Développer une application permettant la gestion de transactions (revenus/dépenses), en respectant les bonnes pratiques de la programmation orientée objet et en stockant les données dans des fichiers JSON.
 
 ---
 
@@ -18,7 +18,7 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 | Composant      | Description                                                                 |
 |----------------|-----------------------------------------------------------------------------|
 | **Models**     | Contiennent les classes métier : `Utilisateur`, `Catégorie`, `Transaction`. Opérations CRUD via fichiers JSON, orientées objet. |
-| **Views**      | Gèrent les routes Flask (GET/POST), la logique de contrôle et les sessions. |
+| **Routes**      | Gèrent les routes Flask (GET/POST), la logique de contrôle et les sessions. |
 | **Forms**      | Validation des données utilisateurs via WTForms.                            |
 | **Templates**  | Génération des pages HTML avec Jinja2.                                      |
 
@@ -35,7 +35,7 @@ la-pecuniaire-magique/
 │   ├── categorie.py
 │   └── transaction.py
 │
-├── views/              # Routes Flask
+├── routes/              # Routes Flask
 │   └── routes.py
 │
 ├── forms/              # Formulaires et validation
@@ -48,6 +48,8 @@ la-pecuniaire-magique/
 │
 ├── data/               # Données persistées au format JSON
 │   ├── utilisateurs.json
+│   ├── depenses.json
+│   ├── revenus.json
 │   ├── categories.json
 │   └── transactions.json
 │
@@ -88,13 +90,15 @@ la-pecuniaire-magique/
 
 ## ✅ Fonctionnalités Clés
 
-- 🔹 Création / édition / suppression d’**utilisateurs**
-- 🔹 Gestion de **catégories** de revenus/dépenses
-- 🔹 Enregistrement de **transactions**
-- 🔹 Validation de formulaires (type, champs requis, etc.)
-- 🔹 Interface utilisateur HTML avec templating Jinja2
-- 🔹 Persistance des données en JSON
-
+-  Création / édition / suppression d’**utilisateurs**
+-  Gestion de **catégories** de revenus/dépenses
+-  Enregistrement de **transactions**
+-  Validation de formulaires (type, champs requis, etc.)
+-  Interface utilisateur HTML avec templating Jinja2
+-  Persistance des données en JSON
+-  Authentification sécurisée
+-  Statistiques des dépenses / revenus
+-  Exportation CSV des transactions
 ---
 
 ## 🚀 Installation et Lancement
@@ -119,16 +123,10 @@ pip install -r requirements.txt
 
 ### 4. Lancer l'application
 ```bash
-flask run
+python app.py
 ```
 
-> **Note** : Assurez-vous que le fichier `.env` contient :
-> ```
-> FLASK_APP=app.py
-> FLASK_ENV=development
-> ```
 
----
 
 ## 📁 Fichier requirements.txt
 
@@ -136,18 +134,11 @@ flask run
 Flask==2.3.3
 WTForms==3.1.2
 python-dotenv==1.0.1
+Flask-Login==0.6.3
 ```
 
 ---
 
-## 🏁 Évolutions Possibles
-
-- 🔐 Authentification sécurisée
-- 📊 Statistiques des dépenses / revenus
-- 📤 Exportation CSV des transactions
-- 🎨 Thème visuel plus avancé (avec Bootstrap)
-
----
 
 ## 📄 Licence
 
