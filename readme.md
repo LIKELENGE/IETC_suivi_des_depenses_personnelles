@@ -13,8 +13,6 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 
 ## 🧱 Architecture
 
-### 🔄 MVT (Model - View - Template) avec Flask
-
 | Composant      | Description                                                                 |
 |----------------|-----------------------------------------------------------------------------|
 | **Models**     | Contiennent les classes métier : `Utilisateur`, `Catégorie`, `Transaction`. Opérations CRUD via fichiers JSON, orientées objet. |
