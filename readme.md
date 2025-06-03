@@ -1,7 +1,7 @@
 
 # 💸 La Pécuniaire Magique
 
-**Une application web pédagogique de gestion de finances personnelles, construite avec Flask, sans base de données relationnelle.**
+**Une application pédagogique de gestion de finances personnelles, construite avec Flask, sans base de données relationnelle.**
 
 ---
 
