@@ -73,7 +73,7 @@ la-pecuniaire-magique/
 - ❌ Aucune base de données relationnelle (pas de MySQL, PostgreSQL, etc.)
 - ✅ Stockage via fichiers `.json`
 - ✅ Respect des principes POO : héritage, polymorphisme, surcharge, constructeur
-- ✅ Architecture MVT claire et séparée
+  
 
 
 
