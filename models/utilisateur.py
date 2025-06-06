@@ -18,9 +18,29 @@ class Utilisateur(UserMixin):
         self.prenom = prenom
         self.email = email
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
+
+    
+    @staticmethod
+    def from_dict(data):
+        utilisateur = Utilisateur(
+            email=data["email"]
+            nom=data["nom"]
+            prenom=data["prenom"]
+            mot_de_passe=""
+        )
+        utilisateur.id_utilisateur = data["id_utilisaeur"]
+        utilisateur.mot_de_passe=data["mot_de_passe"]
     
     def get_id(self):
         return self.id_utilisateur
+    
+    @staticmethod
+    def get_by_id(id_utilisateur):
+        utilisateur = gestionnaire.lire()
+        for u in utilisateur:
+            if u['id_utilisateur'] == id_utilisateur:
+                return Utilisateur.from_dict(u)
+            return None
     
     def convert_class_vers_dict(self):
         return {
