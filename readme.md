@@ -13,7 +13,7 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 
 ## 👥 Membres de l'équipe
 
-- **https://github.com/MarcelVermeulen536.pngMarcel Vermeulen 536**
+- **https://github.com/MarcelVermeulen536.png Marcel Vermeulen 536**
 - **
   LIKELENGE**
 - **
