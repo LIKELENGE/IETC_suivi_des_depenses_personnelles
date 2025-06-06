@@ -51,6 +51,25 @@ class Depense(Transaction):
             return item['id_transaction'] == id_transaction
         gestionnaire.supprimer(condition)
         print("Dépense supprimée.")
+    @staticmethod
+    def supprimer_cascade_personne(id_personne):
+        """
+        Supprime toutes les dépenses associées à un utilisateur.
+        """
+        def condition(item):
+            return item['utilisateur_id'] == id_personne
+        gestionnaire.supprimer(condition)
+        print("Toutes les dépenses de l'utilisateur ont été supprimées.")
+    
+    @staticmethod
+    def supprimer_cascade_categorie(id_categorie):
+        """
+        Supprime toutes les dépenses associées à une catégorie.
+        """
+        def condition(item):
+            return item['categorie'] == id_categorie
+        gestionnaire.supprimer(condition)
+        print("Toutes les dépenses de la catégorie ont été supprimées.")
         
     @staticmethod
     def depenses_par_utilisateur(utilisateur_id):

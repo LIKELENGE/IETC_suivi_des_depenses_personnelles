@@ -2,6 +2,8 @@ from abc import ABC, abstractmethod
 from uuid import uuid4
 class Transaction(ABC):
     def __init__(self, montant, date_transaction, utilisateur_id, libelle = None):
+        """Les formats des données seront verifier par les validateurs au niveau des formulaires avec Flask-WTF 
+        pour avoir pas des codes sur les classes"""
         self.id_transaction = str(uuid4())
         self.montant = montant
         self.date_transaction = date_transaction

@@ -9,31 +9,19 @@ gestionnaire = JSONManager(chemin)
 
 
 class CategorieDepense:
-    """_les contraintes de la classe CategorieDepense sont les suivantes: _
-        type_periode peut être "mensuel", "hebdomadaire", "annuel" "trimestriel", 
-        "quadrimestriel " ou "semestriel" cette contrainte sera gérée au niveau du validateur (form) 
-        pour n'est pas trop charger la logique de la classe
-        la modification de la periode doit être interdite une fois la catégorie créée
-        la modification dois se faire en respectant la logique de la catégorie
-        avant d'enregistrer la modifition de la période, il faut vérifier si la limite est respectée
-        
-    """
-    def __init__(self, description, limite, id_utilisateur, type_periode = "mensuelle", id_categorie=None):
+    def __init__(self, description, id_utilisateur, id_categorie=None):
         self.id_categorie = id_categorie or str(uuid4())
         self.description = description
-        self.limite = limite
         self.id_utilisateur = id_utilisateur
-        self.type_periode = type_periode
-
+        
 
 
     def convert_class_vers_dict(self):
         return {
             "id_categorie": self.id_categorie,
             "description": self.description,
-            "limite": self.limite,
             "id_utilisateur": self.id_utilisateur,
-            "type_periode": self.type_periode
+            
         }
 
 
@@ -53,10 +41,6 @@ class CategorieDepense:
     
     @staticmethod
     def modifier(id_categorie, **updates):
-        # Interdiction de modifier la période
-        if "type_periode" in updates:
-            print("La modification du champ 'type_periode' est interdite.")
-            return
 
         # Vérifier unicité si description est modifiée
         if "description" in updates and "id_utilisateur" in updates:
@@ -98,12 +82,12 @@ class CategorieDepense:
 
 
 #cas d'utilisation ajouter
-#c = CategorieDepense("loyer", 500, "utilisateur123", type_periode="mensuelle")
+#c = CategorieDepense("loyer", 500, "utilisateur123", )
 #c.ajouter()
 
 # CategorieDepense.modifier(
 #     id_categorie="9c180bde-3aa1-4c2d-9e12-f43b4fc7e847",
 #     description="Loyer principal",
 #     limite=700,
-#     id_utilisateur="utilisateur123"  # Nécessaire pour vérifier unicité
+#     id_utilisateur="utilisateur123"  
 # )
