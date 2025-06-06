@@ -11,6 +11,14 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 
 ---
 
+## 👥 Membres de l'équipe
+
+- **MarcelVermeulen536**
+- **LIKELENGE**
+- **ietc-JPierre**
+
+---
+
 ## 🧱 Architecture
 
 | Composant      | Description                                                                 |

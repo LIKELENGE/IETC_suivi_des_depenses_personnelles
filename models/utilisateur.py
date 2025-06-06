@@ -1,5 +1,6 @@
 import hashlib
 from uuid import uuid4
+from flask_login import UserMixin
 
 
 try:
@@ -10,13 +11,16 @@ except ImportError:
 chemin = "data/utilisateur.json"
 gestionnaire = JSONManager(chemin)
 
-class Utilisateur:
+class Utilisateur(UserMixin):
     def __init__(self, nom, prenom, email, mot_de_passe, id_utilisateur=None):
         self.id_utilisateur = id_utilisateur or str(uuid4())
         self.nom = nom
         self.prenom = prenom
         self.email = email
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
+    
+    def get_id(self):
+        return self.id_utilisateur
     
     def convert_class_vers_dict(self):
         return {
@@ -49,6 +53,23 @@ class Utilisateur:
             return item['id_utilisateur'] == id_utilisateur
         gestionnaire.supprimer(condition)
         print("Utilisateur supprimé.")
+
+    
+    @staticmethod
+    def se_connecter(email, mot_de_passe):
+        data = gestionnaire.lire()
+        mot_de_passe_hache = hashlib.sha256(mot_de_passe.encode()).hexdigest()
+        for item in data:
+            if item["email"] == email and item["mot_de_passe"] == mot_de_passe_hache:
+                return Utilisateur(
+                    nom=item["nom"],
+                    prenom=item["prenom"],
+                    email=item["email"],
+                    mot_de_passe=item["mot_de_passe"],
+                    id_utilisateur=item["id_utilisateur"],
+                    hashed=True
+                )
+        return None
         
 
 #cas d'utilisation ajouter
