@@ -11,6 +11,17 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 
 ---
 
+## 👥 Membres de l'équipe
+
+- **![214677194](https://github.com/user-attachments/assets/42ce89ad-70e1-4b25-9b70-87d0c7665fa2)
+Marcel Vermeulen 536**
+- **![165259282](https://github.com/user-attachments/assets/cec88697-e0aa-41d0-9417-7d18faca3375)
+  LIKELENGE**
+- **![206765075](https://github.com/user-attachments/assets/3f5e22f4-772c-4483-bccd-9d57c2cf3953)
+  ietc-JPierre**
+
+---
+
 ## 🧱 Architecture
 
 | Composant      | Description                                                                 |
