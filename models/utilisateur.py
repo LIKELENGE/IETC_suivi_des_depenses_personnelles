@@ -22,12 +22,7 @@ class Utilisateur(UserMixin):
     
     @staticmethod
     def from_dict(data):
-        utilisateur = Utilisateur(
-            email=data["email"]
-            nom=data["nom"]
-            prenom=data["prenom"]
-            mot_de_passe=""
-        )
+        utilisateur = Utilisateur(email=data["email"],nom=data["nom"],prenom=data["prenom"],mot_de_passe="")
         utilisateur.id_utilisateur = data["id_utilisaeur"]
         utilisateur.mot_de_passe=data["mot_de_passe"]
     
