@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "id_utilisateur": "e4bd43d7-6797-4b45-a3fd-4f908ed5aa6f",
+        "nom": "Dupont",
+        "prenom": "Jean",
+        "email": "jeandupont@gmail.com",
+        "mot_de_passe": "a58df53d782ec0e3ed0e64226ae34b2519457e405954edc29c8cfa515de1eb02"
+    },
+    {
+        "id_utilisateur": "6f7abb61-7c6d-4e93-84b0-c3595a0fd4f8",
+        "nom": "Dupont",
+        "prenom": "Jean",
+        "email": "test@gmail.com",
+        "mot_de_passe": "87924606b4131a8aceeeae8868531fbb9712aaa07a5d3a756b26ce0f5d6ca674"
+    }
+]

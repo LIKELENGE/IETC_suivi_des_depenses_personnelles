@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = "super-secret-key"
 
 login_manager = LoginManager()
-login_manager.login_view = "login"
+login_manager.login_view = "utilisateur.accueil"
 login_manager.init_app(app)
 
 @login_manager.user_loader

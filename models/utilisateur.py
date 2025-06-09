@@ -30,12 +30,19 @@ class Utilisateur(UserMixin):
         return self.id_utilisateur
     
     @staticmethod
-    def get_by_id(id_utilisateur):
-        utilisateur = gestionnaire.lire()
-        for u in utilisateur:
-            if u['id_utilisateur'] == id_utilisateur:
-                return Utilisateur.from_dict(u)
-            return None
+    def get_by_id(user_id):
+        data = gestionnaire.lire()
+        for item in data:
+            if str(item["id_utilisateur"]) == str(user_id):
+                return Utilisateur(
+                    nom=item["nom"],
+                    prenom=item["prenom"],
+                    email=item["email"],
+                    mot_de_passe=item["mot_de_passe"],
+                    id_utilisateur=item["id_utilisateur"]
+                )
+        return None
+
     
     def convert_class_vers_dict(self):
         return {
@@ -47,6 +54,9 @@ class Utilisateur(UserMixin):
         }
     
     def ajouter(self):
+        utilisateurs = gestionnaire.lire()
+        if self.email in [u['email'] for u in utilisateurs]:
+            raise ValueError("L'utilisateur existe déjà.")
         gestionnaire.ajouter(self.convert_class_vers_dict())
     
     @staticmethod
@@ -76,19 +86,13 @@ class Utilisateur(UserMixin):
         mot_de_passe_hache = hashlib.sha256(mot_de_passe.encode()).hexdigest()
         for item in data:
             if item["email"] == email and item["mot_de_passe"] == mot_de_passe_hache:
-                return Utilisateur(
-                    nom=item["nom"],
-                    prenom=item["prenom"],
-                    email=item["email"],
-                    mot_de_passe=item["mot_de_passe"],
-                    id_utilisateur=item["id_utilisateur"],
-                    hashed=True
-                )
+                print("Utilisateur trouvé")
+                return Utilisateur(nom=item["nom"], prenom=item["prenom"],email=item["email"], mot_de_passe=item["mot_de_passe"], id_utilisateur=item["id_utilisateur"])
         return None
         
 
 #cas d'utilisation ajouter
-#u = Utilisateur("Dupont", "Jean", "jeandupont@gmail.com", "jeandupont@gmail.com")
+#u = Utilisateur("Dupont", "Jean", "test@gmail.com", "test@gmail.com")
 #u.ajouter()
 
 #cas d'utilisation modifier
