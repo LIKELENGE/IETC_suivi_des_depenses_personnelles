@@ -24,7 +24,7 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 | Composant      | Description                                                                 |
 |----------------|-----------------------------------------------------------------------------|
 | **Models**     | Contiennent les classes métier : `Utilisateur`, `Catégorie`, `Transaction`. Opérations CRUD via fichiers JSON, orientées objet. |
-| **Routes**      | Gèrent les routes Flask (GET/POST), la logique de contrôle et les sessions. |
+| **views**      | Gèrent les routes Flask (GET/POST), la logique de contrôle et les sessions. |
 | **Forms**      | Validation des données utilisateurs via WTForms.                            |
 | **Templates**  | Génération des pages HTML avec Jinja2.                                      |
 
@@ -41,8 +41,11 @@ la-pecuniaire-magique/
 │   ├── categorie.py
 │   └── transaction.py
 │
-├── routes/              # Routes Flask
-│   └── routes.py
+├── views/              
+│   └── personne_view.py
+│   └── depense_view.py
+│   └── revenu_view.py
+│   └── categorie_depense_view.py
 │
 ├── forms/              # Formulaires et validation
 │   └── forms.py
