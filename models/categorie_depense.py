@@ -9,9 +9,10 @@ gestionnaire = JSONManager(chemin)
 
 
 class CategorieDepense:
-    def __init__(self, description, id_utilisateur, id_categorie=None):
+    def __init__(self, description, id_utilisateur, limite,id_categorie=None):
         self.id_categorie = id_categorie or str(uuid4())
         self.description = description
+        self.limite =  limite
         self.id_utilisateur = id_utilisateur
         
 
