@@ -12,8 +12,8 @@ try:
 except ImportError:
     from classe_generique import JSONManager
 
-chemin = "data/categories_depenses.json"
-gestionnaire = JSONManager(chemin)
+CHEMIN = "data/categories_depenses.json"
+gestionnaire = JSONManager(CHEMIN)
 
 
 class CategorieDepense:
@@ -77,7 +77,9 @@ class CategorieDepense:
 
             deja_existe = gestionnaire.lire_avec_conditions(meme_description)
             if deja_existe:
-                print("Erreur : une catégorie avec cette description existe déjà pour cet utilisateur.")
+                print("Erreur : une catégorie avec cette description"
+                       "existe déjà pour cet utilisateur."
+                     )
                 return
 
         def condition(item):
