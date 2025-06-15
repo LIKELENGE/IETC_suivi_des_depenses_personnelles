@@ -34,6 +34,10 @@ class Utilisateur(UserMixin):
     def get_id(self):
         return self.id_utilisateur
     
+    @property
+    def id(self):
+        return self.id_utilisateur
+    
     @staticmethod
     def get_by_id(user_id):
         data = gestionnaire.lire()
