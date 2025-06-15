@@ -72,15 +72,21 @@ class Utilisateur(UserMixin):
                 if id_utilisateur_actuel is None or u["id_utilisateur"] != id_utilisateur_actuel:
                     raise ValueError("Ce mail est déjà utilisé par un autre utilisateur.")
                 
+   
     def ajouter(self):
         Utilisateur.verifier_email(self.email)  # lèvera une erreur si nécessaire
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
 
+    
     @staticmethod
     def modifier(id_utilisateur, **updates):
+        nouvel_email = updates.get("email")
+        if nouvel_email:
+            Utilisateur.verifier_email(nouvel_email, id_utilisateur_actuel=id_utilisateur)
+
         def condition(item):
-            return item['id_utilisateur'] == id_utilisateur
+            return item["id_utilisateur"] == id_utilisateur
 
         def update(item):
             for key, value in updates.items():
@@ -89,6 +95,7 @@ class Utilisateur(UserMixin):
 
         gestionnaire.modifier(condition, update)
         print("Utilisateur modifié.")
+
     
     @staticmethod
     def supprimer(id_utilisateur):
