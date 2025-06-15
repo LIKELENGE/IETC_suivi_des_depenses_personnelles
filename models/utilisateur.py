@@ -1,4 +1,4 @@
-import hashlib
+mport hashlib
 from uuid import uuid4
 from flask_login import UserMixin
 
@@ -11,7 +11,10 @@ except ImportError:
 chemin = "data/utilisateur.json"
 gestionnaire = JSONManager(chemin)
 
+
 class Utilisateur(UserMixin):
+    """Cette classe gère les utilisateurs de l'application"""
+
     def __init__(self, nom, prenom, email, mot_de_passe, id_utilisateur=None):
         self.id_utilisateur = id_utilisateur or str(uuid4())
         self.nom = nom
@@ -19,13 +22,15 @@ class Utilisateur(UserMixin):
         self.email = email
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
 
-    
     @staticmethod
     def from_dict(data):
-        utilisateur = Utilisateur(email=data["email"],nom=data["nom"],prenom=data["prenom"],mot_de_passe="")
-        utilisateur.id_utilisateur = data["id_utilisaeur"]
-        utilisateur.mot_de_passe=data["mot_de_passe"]
-    
+        """Crée une instance d'Utilisateur à partir d'un dictionnaire."""
+        utilisateur = Utilisateur(
+            email=data["email"], nom=data["nom"], prenom=data["prenom"], mot_de_passe=""
+        )
+        utilisateur.id_utilisateur = data["id_utilisateur"]
+        utilisateur.mot_de_passe = data["mot_de_passe"]
+
     def get_id(self):
         return self.id_utilisateur
     
