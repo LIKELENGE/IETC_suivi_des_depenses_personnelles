@@ -53,6 +53,16 @@ class Utilisateur(UserMixin):
             "mot_de_passe": self.mot_de_passe
         }
     
+     @staticmethod
+    def verifier_email(email, id_utilisateur_actuel=None):
+        """Vérifie si un email est déjà utilisé par un autre utilisateur.
+        Lève une ValueError si c'est le cas."""
+        utilisateurs = gestionnaire.lire()
+        for u in utilisateurs:
+            if u["email"] == email:
+                if id_utilisateur_actuel is None or u["id_utilisateur"] != id_utilisateur_actuel:
+                    raise ValueError("Ce mail est déjà utilisé par un autre utilisateur.")
+                
     def ajouter(self):
         utilisateurs = gestionnaire.lire()
         if self.email in [u['email'] for u in utilisateurs]:
