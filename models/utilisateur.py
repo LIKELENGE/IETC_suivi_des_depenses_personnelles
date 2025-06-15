@@ -73,11 +73,10 @@ class Utilisateur(UserMixin):
                     raise ValueError("Ce mail est déjà utilisé par un autre utilisateur.")
                 
     def ajouter(self):
-        utilisateurs = gestionnaire.lire()
-        if self.email in [u['email'] for u in utilisateurs]:
-            raise ValueError("L'utilisateur existe déjà.")
+        Utilisateur.verifier_email(self.email)  # lèvera une erreur si nécessaire
         gestionnaire.ajouter(self.convert_class_vers_dict())
-    
+        return 1
+
     @staticmethod
     def modifier(id_utilisateur, **updates):
         def condition(item):
