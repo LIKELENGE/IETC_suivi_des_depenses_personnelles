@@ -1,4 +1,4 @@
-mport hashlib
+import hashlib
 from uuid import uuid4
 from flask_login import UserMixin
 
