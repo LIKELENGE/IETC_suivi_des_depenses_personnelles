@@ -1,8 +1,35 @@
+"""
+Fichier classe_generique
+
+Ce fichier contient la classe JSONManager, un gestionnaire générique permettant de manipuler
+des fichiers JSON utilisés pour stocker les données des différentes entités de l'application 
+(ex : catégories de dépenses, utilisateurs, etc.).
+
+Les opérations principales incluent : lecture, écriture, ajout, suppression, modification, 
+et filtrage conditionnel des objets stockés dans un fichier JSON.
+"""
 import json
 import os
 
 #encoding: utf-8 pour avoir les accents correctement gérés dans les fichiers JSON
 class JSONManager:
+    """
+    Cette classe sert de gestionnaire générique pour la manipulation de fichiers JSON.
+    
+    Elle permet de centraliser toutes les opérations liées à la persistance des données 
+    (lecture, écriture, ajout, suppression, mise à jour, filtrage).
+
+    Attributs :
+        chemin (str) : Chemin du fichier JSON à manipuler.
+
+    Méthodes :
+        lire() : Lit les données du fichier JSON et retourne une liste d'objets.
+        ecrire(data) : Écrit la liste d'objets fournie dans le fichier JSON.
+        ajouter(objet_dict) : Ajoute un nouvel objet à la liste JSON.
+        supprimer(condition_fn) : Supprime les objets qui remplissent la condition donnée.
+        modifier(condition_fn, update_fn) : Modifie les objets qui remplissent la condition.
+        lire_avec_conditions(*conditions) : Retourne les objets qui remplissent toutes les conditions fournies.
+    """
     def __init__(self, chemin_fichier):
         self.chemin = chemin_fichier
         os.makedirs(os.path.dirname(self.chemin), exist_ok=True)
