@@ -53,7 +53,7 @@ class Utilisateur(UserMixin):
             "mot_de_passe": self.mot_de_passe
         }
     
-     @staticmethod
+    @staticmethod
     def verifier_email(email, id_utilisateur_actuel=None):
         """Vérifie si un email est déjà utilisé par un autre utilisateur.
         Lève une ValueError si c'est le cas."""
