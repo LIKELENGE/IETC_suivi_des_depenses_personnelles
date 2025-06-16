@@ -7,10 +7,10 @@
         "mot_de_passe": "a58df53d782ec0e3ed0e64226ae34b2519457e405954edc29c8cfa515de1eb02"
     },
     {
-        "id_utilisateur": "6f7abb61-7c6d-4e93-84b0-c3595a0fd4f8",
-        "nom": "Dupont",
-        "prenom": "Jean",
-        "email": "test@gmail.com",
-        "mot_de_passe": "87924606b4131a8aceeeae8868531fbb9712aaa07a5d3a756b26ce0f5d6ca674"
+        "id_utilisateur": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "nom": "rose",
+        "prenom": "lina",
+        "email": "linarose@test.com",
+        "mot_de_passe": "b3e4642b3a26b5ba9f8480e8f612c185f924f844de0a78e63ac41ac8870db140"
     }
 ]
