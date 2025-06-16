@@ -16,6 +16,7 @@ Développer une application permettant la gestion de transactions (revenus/dépe
 - **MarcelVermeulen536**
 - **LIKELENGE**
 - **ietc-JPierre**
+- **Ajsama Abiel-Jason** 
 
 ---
 
