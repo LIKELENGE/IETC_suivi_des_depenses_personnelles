@@ -1,3 +1,4 @@
+<h4>Bonjour {{utilisateur.prenom}} {{utilisateur.nom}} !</h4>
 <form method="post">
   <label for="mois">Mois :</label>
   <select name="mois" id="mois" required>
@@ -17,3 +18,25 @@
 
   <button type="submit">Valider</button>
 </form>
+
+{% if categories_depenses %}
+  <ul>
+    {% for cd in categories_depenses %}
+      <li>
+        {{ cd.description }} - {{ cd.limite }} €
+        <a href="{{ url_for('categorie_depense.afficher_categorie_depense', id_categorie=cd.id_categorie) }}">Detail</a>
+
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Aucune catégorie de dépense trouvée.</p>
+{% endif %}
+
+
+
+<a href="{{url_for('utilisateur.modification')}}">Modifier son profil</a>
+<a href="{{url_for('utilisateur.deconnexion') }}">Déconnexion</a>
+<a href="{{url_for('utilisateur.suppression')}}"> supprimer son compte</a>
+<a href="{{url_for('categorie_depense.ajouter_categorie_depense')}}"> ajouter une catégorie de dépense</a>
+
