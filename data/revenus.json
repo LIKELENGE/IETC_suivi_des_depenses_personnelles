@@ -1,26 +1,65 @@
 [
     {
-        "id_transaction": "da96f297-c37d-4a90-a57e-1adbc7a8343c",
-        "montant": 1000,
-        "date_transaction": "2023-10-01",
+        "id_transaction": "443fcfa7-29a4-4913-a53b-f08e3c792346",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 350.0,
+        "date_transaction": "2025-06-15",
+        "heure_transaction": "09:47",
         "imposable": true,
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Salaire"
+        "libelle": "Salaire intérim adecco"
     },
     {
-        "id_transaction": "05b26529-6387-41fa-8daf-e0a143f3a1f7",
-        "montant": 1200,
-        "date_transaction": "2023-10-01",
+        "id_transaction": "500fcfa7-29a4-4913-a53b-f08e3c792346",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 250.0,
+        "date_transaction": "2025-05-15",
+        "heure_transaction": "09:47",
         "imposable": true,
-        "utilisateur_id": "utilisateur123",
-        "libelle": "prime de fin d'année"
+        "libelle": "Salaire intérim adecco"
     },
     {
-        "id_transaction": "02c26529-6387-41fa-8daf-e0a143f3a1f7",
-        "montant": 800,
-        "date_transaction": "2023-10-01",
+        "id_transaction": "6a7b8c9d-e0f1-2345-6789-0abcdef12345",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 1800.0,
+        "date_transaction": "2025-06-01",
+        "heure_transaction": "09:00",
         "imposable": true,
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Salaire"
+        "libelle": "Salaire Principal"
+    },
+    {
+        "id_transaction": "7b8c9d0e-f1a2-3456-7890-abcdef123456",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 450.0,
+        "date_transaction": "2025-06-10",
+        "heure_transaction": "16:15",
+        "imposable": true,
+        "libelle": "Revenus freelance (projet X)"
+    },
+    {
+        "id_transaction": "8c9d0e1f-2a3b-4567-8901-bcdef1234567",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 50.0,
+        "date_transaction": "2025-06-12",
+        "heure_transaction": "10:30",
+        "imposable": false,
+        "libelle": "Remboursement ami (dîner)"
+    },
+    {
+        "id_transaction": "9d0e1f2a-3b4c-5678-9012-cdef12345678",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 120.0,
+        "date_transaction": "2025-05-28",
+        "heure_transaction": "14:00",
+        "imposable": true,
+        "libelle": "Vente article Vinted"
+    },
+    {
+        "id_transaction": "cfd995ec-498e-4cfa-99ee-f2a71c0b39c4",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 120.0,
+        "date_transaction": "2025-06-15",
+        "heure_transaction": "14:28",
+        "imposable": true,
+        "libelle": "uber"
     }
 ]
