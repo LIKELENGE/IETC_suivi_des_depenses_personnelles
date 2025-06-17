@@ -6,7 +6,9 @@ d’un utilisateur dans un système de gestion des depenses personnel.
 
 Les données sont stockées dans un fichier JSON via un gestionnaire générique.
 """
+
 from uuid import uuid4
+
 try:
     from .classe_generique import JSONManager
 except ImportError:
@@ -17,7 +19,7 @@ gestionnaire = JSONManager(CHEMIN)
 
 
 class CategorieDepense:
-    """ Cette classe represente categorie de dépense liées à l'utilisateur de l'application
+    """Cette classe represente categorie de dépense liées à l'utilisateur de l'application
     Avec
     lES attributs;
         id_categorie (str) : Identifiant unique de la catégorie (UUID).
@@ -31,37 +33,38 @@ class CategorieDepense:
         lister_categorie_par_personne() : Lister les catégories liées à un utilisateur.
         afficher_categorie() : Afficher une catégorie spécifique par son ID.
     """
-    def __init__(self, description, id_utilisateur, limite,id_categorie=None):
+
+    def __init__(self, description, id_utilisateur, limite, id_categorie=None):
         self.id_categorie = id_categorie or str(uuid4())
         self.description = description
-        self.limite =  limite
+        self.limite = limite
         self.id_utilisateur = id_utilisateur
-        
+
     def convert_class_vers_dict(self):
         return {
             "id_categorie": self.id_categorie,
             "description": self.description,
             "limite": self.limite,
             "id_utilisateur": self.id_utilisateur,
-            
         }
+
     @staticmethod
     def verification_unicite(description, id_utilisateur):
         def condition(item):
             return (
-                item["description"] == description 
+                item["description"] == description
                 and item["id_utilisateur"] == id_utilisateur
             )
+
         if gestionnaire.lire_avec_conditions(condition):
             print("Cette catégorie de dépense existe déjà pour cet utilisateur.")
             return False
         return True
- 
+
     def ajouter(self):
         if self.verification_unicite(self.description, self.id_utilisateur):
             gestionnaire.ajouter(self.convert_class_vers_dict())
 
-  
     @staticmethod
     def modifier(id_categorie, **updates):
         if "description" in updates and "id_utilisateur" in updates:
@@ -70,16 +73,17 @@ class CategorieDepense:
 
             def meme_description(item):
                 return (
-                    item["description"] == nouvelle_description and
-                    item["id_utilisateur"] == id_utilisateur and
-                    item["id_categorie"] != id_categorie 
+                    item["description"] == nouvelle_description
+                    and item["id_utilisateur"] == id_utilisateur
+                    and item["id_categorie"] != id_categorie
                 )
 
             deja_existe = gestionnaire.lire_avec_conditions(meme_description)
             if deja_existe:
-                print("Erreur : une catégorie avec cette description"
-                       "existe déjà pour cet utilisateur."
-                     )
+                print(
+                    "Erreur : une catégorie avec cette description"
+                    "existe déjà pour cet utilisateur."
+                )
                 return
 
         def condition(item):
@@ -99,17 +103,21 @@ class CategorieDepense:
             return item["id_categorie"] == id_categorie
 
         resultats = gestionnaire.lire_avec_conditions(condition)
-        
+
         if resultats:
-            return CategorieDepense(**resultats[0]) 
+            return CategorieDepense(**resultats[0])
         return None
 
     @staticmethod
     def lister_categorie_par_personne(id_utilisateur):
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
+
         categories_depenses = gestionnaire.lire_avec_conditions(condition)
-        return [CategorieDepense(**categorie_depense) for categorie_depense in categories_depenses]
+        return [
+            CategorieDepense(**categorie_depense)
+            for categorie_depense in categories_depenses
+        ]
 
     @staticmethod
     def supprimer(id_categorie):
@@ -118,14 +126,39 @@ class CategorieDepense:
 
         gestionnaire.supprimer(condition)
 
+    @staticmethod
+    def supprimer_cascade_personne(id_personne):
+        """Supprime toutes les catégories de dépense associées à un utilisateur"""
 
-#cas d'utilisation ajouter
-#c = CategorieDepense("loyer", 500, "utilisateur123", )
-#c.ajouter()
+        def condition(item):
+            return item["id_utilisateur"] == id_personne
+
+        gestionnaire.supprimer(condition)
+
+    @staticmethod
+    def afficher_categorie_par_utilisateur(id_utilisateur):
+        def condition(item):
+            return item["id_utilisateur"] == id_utilisateur
+
+        categories = gestionnaire.lire_avec_conditions(condition)
+        return [CategorieDepense(**categorie) for categorie in categories]
+
+    @staticmethod
+    def afficher_limite(id_categorie):
+        def condition(item):
+            return item["id_categorie"] == id_categorie
+
+        limite = gestionnaire.lire_avec_conditions(condition)
+        return limite[0]["limite"]
+
+
+# cas d'utilisation ajouter
+# c = CategorieDepense("loyer", 500, "utilisateur123", )
+# c.ajouter()
 
 # CategorieDepense.modifier(
 #     id_categorie="9c180bde-3aa1-4c2d-9e12-f43b4fc7e847",
 #     description="Loyer principal",
 #     limite=700,
-#     id_utilisateur="utilisateur123"  
+#     id_utilisateur="utilisateur123"
 # )
