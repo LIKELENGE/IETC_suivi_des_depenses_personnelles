@@ -37,7 +37,7 @@ class Utilisateur(UserMixin):
     @property
     def id(self):
         return self.id_utilisateur
-    
+
     @staticmethod
     def get_by_id(user_id):
         data = gestionnaire.lire()
@@ -48,20 +48,19 @@ class Utilisateur(UserMixin):
                     prenom=item["prenom"],
                     email=item["email"],
                     mot_de_passe=item["mot_de_passe"],
-                    id_utilisateur=item["id_utilisateur"]
+                    id_utilisateur=item["id_utilisateur"],
                 )
         return None
 
-    
     def convert_class_vers_dict(self):
         return {
             "id_utilisateur": self.id_utilisateur,
             "nom": self.nom,
             "prenom": self.prenom,
             "email": self.email,
-            "mot_de_passe": self.mot_de_passe
+            "mot_de_passe": self.mot_de_passe,
         }
-    
+        
     @staticmethod
     def verifier_email(email, id_utilisateur_actuel=None):
         """Vérifie si un email est déjà utilisé par un autre utilisateur.
@@ -71,14 +70,15 @@ class Utilisateur(UserMixin):
             if u["email"] == email:
                 if id_utilisateur_actuel is None or u["id_utilisateur"] != id_utilisateur_actuel:
                     raise ValueError("Ce mail est déjà utilisé par un autre utilisateur.")
-                
-   
+
+
+        
     def ajouter(self):
         Utilisateur.verifier_email(self.email)  # lèvera une erreur si nécessaire
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
 
-    
+
     @staticmethod
     def modifier(id_utilisateur, **updates):
         nouvel_email = updates.get("email")
@@ -96,15 +96,15 @@ class Utilisateur(UserMixin):
         gestionnaire.modifier(condition, update)
         print("Utilisateur modifié.")
 
-    
+
     @staticmethod
     def supprimer(id_utilisateur):
         def condition(item):
-            return item['id_utilisateur'] == id_utilisateur
-        gestionnaire.supprimer(condition)
-        print("Utilisateur supprimé.")
+            return item["id_utilisateur"] == id_utilisateur
 
-    
+        if not gestionnaire.supprimer(condition):
+            raise ValueError("Utilisateur introuvable.")
+
     @staticmethod
     def se_connecter(email, mot_de_passe):
         data = gestionnaire.lire()
@@ -112,16 +112,22 @@ class Utilisateur(UserMixin):
         for item in data:
             if item["email"] == email and item["mot_de_passe"] == mot_de_passe_hache:
                 print("Utilisateur trouvé")
-                return Utilisateur(nom=item["nom"], prenom=item["prenom"],email=item["email"], mot_de_passe=item["mot_de_passe"], id_utilisateur=item["id_utilisateur"])
+                return Utilisateur(
+                    nom=item["nom"],
+                    prenom=item["prenom"],
+                    email=item["email"],
+                    mot_de_passe=item["mot_de_passe"],
+                    id_utilisateur=item["id_utilisateur"],
+                )
         return None
-        
 
-#cas d'utilisation ajouter
-#u = Utilisateur("Dupont", "Jean", "test@gmail.com", "test@gmail.com")
-#u.ajouter()
 
-#cas d'utilisation modifier
-#Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
+# cas d'utilisation ajouter
+# u = Utilisateur("Dupont", "Jean", "test@gmail.com", "test@gmail.com")
+# u.ajouter()
 
-#cas utilisation supprimer
-#Utilisateur.supprimer("125f6cea-a3c2-46de-8554-78b3d4f81da6")
+# cas d'utilisation modifier
+# Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
+
+# cas utilisation supprimer
+# Utilisateur.supprimer("125f6cea-a3c2-46de-8554-78b3d4f81da6")
