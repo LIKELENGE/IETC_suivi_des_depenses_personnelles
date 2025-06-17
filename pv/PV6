@@ -1,0 +1,61 @@
+# PV N°6 de la Réunion – 16 Juin 2025
+
+## Projet : Création d’une application de suivi de dépenses personnelles – *La Pécuniaire Magique*
+
+---
+
+### 👥 Participants ==> Modication des participants
+1. Jean Pierre  
+2. Marcel
+3. Moïse  
+4. Abiel
+
+---
+
+### 🎯 Objectif
+
+Faire un point d’avancement sur le projet *La Pécuniaire Magique*, vérifier le respect des premières échéances, ajuster l'architecture si besoin et planifier les prochaines tâches à réaliser.
+Attribution de tâches explicites aux deux nouveaux arrivants.
+---
+
+### 🏛️ Décisions sur l'Architecture
+
+- Validation des choix précèdents.
+- Explication des choix et de la cohérence au nouveaux collaborateur. Suite et répartition. Discussion sur la viabilité du projet
+
+---
+
+### 📅 Avancement
+
+- Tâches redéfinies. Quelles questions poser au professeur.
+
+---
+
+### 🗂️ Répartition des tâches
+
+| Tâche | Responsable | Deadline |
+|-------|-------------|----------|
+| Finaliser le modèle de données | Moïse | 16/06/2025 |
+| Révisions et test du code | Jean Pierre | 16/06/2025 |
+| Préparer le la présentation sur la cohérence du code et les choix dans le cadre de la présentation via un Power Point + création de commit suite à la compréhension | Marcel | 16/06/2025 |
+| Checker la compréhension du groupe sur le projet en cours + création de commit suite à la compréhension| Tâche générale | 15/06/2025 |
+
+---
+
+### 🚧 Points de vigilance
+
+- Attention à la cohérence entre les modèles et les vues. Toujours d'actualité. Détecter manquement et erreur de codes des nouveaux arrivants
+- Prendre en compte la venue du nouveau collaborateur dans le cadre des divergences d'opinions et de sa logique sur un telle projet. Réglé
+- Maintenir une documentation claire sur l'architecture pour faciliter les contributions futures. Toujours d'actualité
+
+---
+
+### ✅ Prochaine réunion
+
+Date : 20 et 22 Juin 2025  
+Objectifs :
+- Finaliser. Répéter la présention..
+- Préparer la démonstration complète de l’application.
+- Démonstration de la présentation visuelle de justification des choix liés au travail.
+
+---

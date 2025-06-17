@@ -1,42 +1,62 @@
 [
     {
-        "id_transaction": "158bd5e9-8db6-4807-88fe-42b2126aedcc",
-        "montant": 250,
-        "date_transaction": "2023-10-01",
-        "categorie": "Santé",
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Pharmacie"
+        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 300.0,
+        "date_transaction": "2025-06-15",
+        "heure_transaction": "14:30",
+        "categorie": "e147918c-fdbf-4606-806f-39ea52800e1c",
+        "libelle": "test",
+        "deductible_fiscalement": true
     },
     {
-        "id_transaction": "b59cd0bd-e868-4b52-b240-73f9c5e0b710",
-        "montant": 50,
-        "date_transaction": "2023-10-01",
-        "categorie": "Alimentation",
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Courses du mois"
-    }, 
-        {
-        "id_transaction": "c60cd0bd-e868-4b52-c350-73f9c5e0b800",
-        "montant": 125,
-        "date_transaction": "2023-10-01",
-        "categorie": "Alimentation",
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Achat de fruits et légumes"
+        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 300.0,
+        "date_transaction": "2025-05-15",
+        "heure_transaction": "14:30",
+        "categorie": "e147918c-fdbf-4606-806f-39ea52800e1c",
+        "libelle": "test2",
+        "deductible_fiscalement": true
     },
-        {
-        "id_transaction": "b69cd0bd-e868-4b52-b240-73f9c5e0b710",
-        "montant": 70,
-        "date_transaction": "2023-11-01",
-        "categorie": "Alimentation",
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Courses du mois"
-    }, 
-        {
-        "id_transaction": "c60cc1bd-e868-4b52-c350-73f9c5e0b800",
-        "montant": 125,
-        "date_transaction": "2023-11-01",
-        "categorie": "Alimentation",
-        "utilisateur_id": "utilisateur123",
-        "libelle": "Achat de fruits et légumes"
+    {
+        "id_transaction": true,
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 100.0,
+        "date_transaction": "2025-04-16",
+        "heure_transaction": "12:25",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "abonnement tec",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": false,
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 150.0,
+        "date_transaction": "2025-05-16",
+        "heure_transaction": "12:32",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "aller-retour bruxelle charleroi",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": true,
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 100.0,
+        "date_transaction": "2025-05-16",
+        "heure_transaction": "18:12",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "uber",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": false,
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 100.0,
+        "date_transaction": "2025-06-17",
+        "heure_transaction": "17:58",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "tetst transport",
+        "deductible_fiscalement": true
     }
 ]
