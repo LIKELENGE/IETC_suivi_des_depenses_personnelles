@@ -8,8 +8,8 @@ try:
 except ImportError:
     from classe_generique import JSONManager
 
-chemin = "data/utilisateur.json"
-gestionnaire = JSONManager(chemin)
+CHEMIN = "data/utilisateur.json"
+gestionnaire = JSONManager(CHEMIN)
 
 
 class Utilisateur(UserMixin):
