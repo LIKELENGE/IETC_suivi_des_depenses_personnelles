@@ -1,26 +1,38 @@
 from abc import ABC, abstractmethod
 from uuid import uuid4
+
+
 class Transaction(ABC):
-    def __init__(self, montant, date_transaction, utilisateur_id, libelle = None):
-        """Les formats des données seront verifier par les validateurs au niveau des formulaires avec Flask-WTF 
-        pour avoir pas des codes sur les classes"""
-        self.id_transaction = str(uuid4())
-        self.montant = montant
-        self.date_transaction = date_transaction
+    def __init__(
+        self,
+        utilisateur_id,
+        montant: float,
+        date_transaction,
+        heure_transaction,
+        libelle,
+        id_transaction=None,
+    ):
+        self.id_transaction = (
+            id_transaction if id_transaction is not None else str(uuid4())
+        )
         self.utilisateur_id = utilisateur_id
+        self.montant = montant
         self.libelle = libelle
-    
-    
-    def convert_class_vers_dict(self):
+        self.date_transaction = date_transaction
+        self.heure_transaction = heure_transaction
+
+    def to_dict(self):
         return {
+            "utilisateur_id": self.utilisateur_id,
             "id_transaction": self.id_transaction,
             "montant": self.montant,
+            "libelle": self.libelle,
             "date_transaction": self.date_transaction,
-            "utilisateur_id": self.utilisateur_id
+            "heure_transaction": self.heure_transaction,
         }
-        
+
     def __str__(self):
-        return f"Transaction(id={self.id_transaction}, montant={self.montant}, date={self.date_transaction}, utilisateur_id={self.utilisateur_id}, libelle={self.libelle})" 
-    
+        return f"Transaction(id={self.id_transaction}, libelle='{self.libelle}', montant={self.montant}, date={self.date_transaction}, utilisateur_id={self.utilisateur_id})"
+
     def __repr__(self):
         return self.__str__()
