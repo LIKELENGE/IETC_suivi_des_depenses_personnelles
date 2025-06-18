@@ -1,0 +1,9 @@
+<h2>Supprimer la catégorie de dépense</h2>
+<p>Êtes-vous sûr de vouloir supprimer définitivement votre compte ? Cette action est irréversible.</p>
+{{categorie_depense.id_categorie}}{{ categorie_depense.description }} {{ categorie_depense.limite }} €
+
+<form method="post">
+    <button type="submit">Oui, supprimer cette catégorie de dépense</button>
+</form>
+
+<a href="{{ url_for('utilisateur.profil') }}">Annuler</a>

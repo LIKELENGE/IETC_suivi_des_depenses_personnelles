@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Ajouter une dépense</title>
+</head>
+<body>
+    <h1>Ajouter une dépense</h1>
+
+    <!-- 🔹 Étape 1 : Sélection de la catégorie -->
+    <form method="GET" action="{{ url_for('depense.ajouter_depense') }}">
+        <label for="id_categorie">Choisissez une catégorie :</label>
+        <select name="id_categorie" required>
+            {% for categorie in categories %}
+                <option value="{{ categorie.id_categorie }}"
+                    {% if categorie.id_categorie == selected_id_categorie %}selected{% endif %}>
+                    {{ categorie.description }}
+                </option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="mois" value="{{ mois }}">
+        <input type="hidden" name="annee" value="{{ annee }}">
+        <button type="submit">Afficher le quota</button>
+    </form>
+
+    <br>
+
+    {% if quota_restant is defined %}
+        <!-- 🔸 Affichage du quota disponible -->
+        <p><strong>Quota restant :</strong> {{ quota_restant }} €</p>
+
+        {% if erreur %}
+            <p style="color: red;">{{ erreur }}</p>
+        {% endif %}
+
+        {% if message %}
+            <p style="color: green;">{{ message }}</p>
+        {% endif %}
+
+        <!-- 🔹 Étape 2 : Formulaire pour ajouter la dépense -->
+        <form method="POST" action="{{ url_for('depense.ajouter_depense') }}">
+            <input type="hidden" name="id_categorie" value="{{ selected_id_categorie }}">
+            <input type="hidden" name="mois" value="{{ mois }}">
+            <input type="hidden" name="annee" value="{{ annee }}">
+
+            <label for="montant">Montant (€) :</label>
+            <input type="number" step="0.01" name="montant" required><br>
+
+            <label for="date_transaction">Date :</label>
+            <input type="date" name="date_transaction" required><br>
+
+            <label for="heure_transaction">Heure :</label>
+            <input type="time" name="heure_transaction" required><br>
+
+            <label for="libelle">Libellé :</label>
+            <input type="text" name="libelle"><br>
+
+            <label for="deductible_fiscalement">Déductible fiscalement :</label>
+            <select name="deductible_fiscalement">
+                <option value="True">Oui</option>
+                <option value="False">Non</option>
+            </select><br><br>
+
+            <button type="submit">Ajouter la dépense</button>
+        </form>
+    {% endif %}
+</body>
+</html>

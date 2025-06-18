@@ -1,0 +1,13 @@
+<form method="POST">
+    {% if erreur %}
+        <div style="color:red;">{{ erreur }}</div>
+    {% endif %}
+
+    <label>Description :</label>
+    <input type="text" name="description" value="{{ categorie.description }}" required><br><br>
+
+    <label>Limite :</label>
+    <input type="number" name="limite" step="0.01" value="{{ categorie.limite }}" required><br><br>
+
+    <button type="submit">Modifier</button>
+</form>

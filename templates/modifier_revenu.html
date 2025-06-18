@@ -1,0 +1,9 @@
+<h2>Modifier un revenu</h2>
+<form method="post">
+    Montant: <input type="number" name="montant" step="0.01" value="{{ revenu.montant }}" required><br>
+    Date: <input type="date" name="date" value="{{ revenu.date_transaction }}" required><br>
+    Libellé: <input type="text" name="libelle" value="{{ revenu.libelle }}" required><br> <!-- Ajout de 'required' -->
+    <label><input type="checkbox" name="imposable" {% if revenu.imposable %}checked{% endif %}> Imposable</label><br>
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="{{ url_for('revenu_bp.lister_revenus') }}">Annuler</a>

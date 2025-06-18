@@ -1,0 +1,9 @@
+<h2>Ajouter un revenu</h2>
+<form method="post">
+    Montant: <input type="number" name="montant" step="0.01" required><br>
+    Date: <input type="date" name="date" required><br>
+    Libellé: <input type="text" name="libelle" required><br> <!-- Ajout de required -->
+    <label><input type="checkbox" name="imposable" checked> Imposable</label><br>
+    <button type="submit">Ajouter</button>
+</form>
+<a href="{{ url_for('revenu_bp.lister_revenus') }}">Retour à la liste</a>
