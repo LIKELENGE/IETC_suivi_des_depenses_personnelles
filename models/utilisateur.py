@@ -72,14 +72,17 @@ class Utilisateur(UserMixin):
                     )
 
     def ajouter(self):
-        """Cette méthode ajoute un nouvel utilisateur dans le fichier JSON.
-        Retourne 1 si l'ajout est réussi."""
+        """Cette méthode ajoute un nouvel utilisateur dans le fichier JSON. Verifie si l'email est unique.
+        Si l'email est déjà utilisé, une ValueError est levée. 
+        Sinon, l'utilisateur est ajouté et la méthode retourne 1."""
         Utilisateur.verifier_email(self.email)
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
 
     @staticmethod
     def modifier(id_utilisateur, **updates):
+        """Cette méthode modifie un utilisateur dans le fichier JSON.
+        Elle prend en paramètre l'identifiant de l'utilisateur et les mises à jour à effectuer."""
         nouvel_email = updates.get("email")
         if nouvel_email:
             Utilisateur.verifier_email(
@@ -99,6 +102,8 @@ class Utilisateur(UserMixin):
 
     @staticmethod
     def supprimer(id_utilisateur):
+        """Cette méthode supprime un utilisateur du fichier JSON.
+        Elle prend en paramètre l'identifiant de l'utilisateur à supprimer."""
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -107,6 +112,9 @@ class Utilisateur(UserMixin):
 
     @staticmethod
     def se_connecter(email, mot_de_passe):
+        """Cette méthode permet à un utilisateur de se connecter.
+        Elle prend en paramètre l'email et le mot de passe de l'utilisateur. 
+        Attention que le mot de passe est haché dans le fichier JSON."""
         data = gestionnaire.lire()
         mot_de_passe_hache = hashlib.sha256(mot_de_passe.encode()).hexdigest()
         for item in data:
