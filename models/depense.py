@@ -16,6 +16,7 @@ gestionnaire_categories = JSONManager(chemin_categories)
 
 
 class Depense(Transaction):
+    """Cette classe gère les dépenses des utilisateurs de l'application. Elle hérite de la classe Transaction."""
     def __init__(
         self,
         utilisateur_id,
@@ -39,6 +40,7 @@ class Depense(Transaction):
         self.deductible_fiscalement = deductible_fiscalement
 
     def __str__(self):
+        
         return f"Dépense(id={self.id_transaction}, montant={self.montant}, date={self.date_transaction}, heure={self.heure_transaction}, catégorie={self.categorie}, utilisateur_id={self.utilisateur_id}, libelle={self.libelle}, deductible_fiscalement={self.deductible_fiscalement})"
 
     def convert_class_vers_dict(self):
@@ -54,6 +56,7 @@ class Depense(Transaction):
         }
 
     def ajouter(self):
+        """Cette méthode ajoute une dépense à la liste des dépenses de l'utilisateur."""
         gestionnaire_depenses.ajouter(self.convert_class_vers_dict())
         print(f" Dépense ajoutée : {self.libelle} ({self.montant}€)")
 
@@ -156,14 +159,7 @@ class Depense(Transaction):
         return plafond_restant_categorie
 
 
-print(
-    Depense.verifier_limite(
-        "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        6,
-        2025,
-        "e147918c-fdbf-4606-806f-39ea52800e1c",
-    )
-)
+
 
 # d = Depense("818b873d-c6f2-47a1-8995-41da0623f0c8", 150, "2025-06-15", "14:28", "e147918c-fdbf-4606-806f-39ea52800e1c", "test")
 # d.ajouter()
