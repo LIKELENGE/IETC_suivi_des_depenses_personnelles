@@ -12,5 +12,12 @@
         "prenom": "lina",
         "email": "linarose@test.com",
         "mot_de_passe": "b3e4642b3a26b5ba9f8480e8f612c185f924f844de0a78e63ac41ac8870db140"
+    },
+    {
+        "id_utilisateur": "1e2c6351-c28d-480e-bdf1-53f5736d59d6",
+        "nom": "Doe",
+        "prenom": "John",
+        "email": "johndoe@gmail.com",
+        "mot_de_passe": "06a240d11cc201676da976f7b49341181fd180da37cbe40a77432c0a366c80c3"
     }
 ]

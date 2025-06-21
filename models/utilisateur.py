@@ -2,7 +2,6 @@ import hashlib
 from uuid import uuid4
 from flask_login import UserMixin
 
-
 try:
     from .classe_generique import JSONManager
 except ImportError:
@@ -11,35 +10,30 @@ except ImportError:
 CHEMIN = "data/utilisateur.json"
 gestionnaire = JSONManager(CHEMIN)
 
-
 class Utilisateur(UserMixin):
     """Cette classe gère les utilisateurs de l'application"""
-
     def __init__(self, nom, prenom, email, mot_de_passe, id_utilisateur=None):
+        """Cette méthode est un constructeur qui initialise un utilisateur."""
         self.id_utilisateur = id_utilisateur or str(uuid4())
         self.nom = nom
         self.prenom = prenom
         self.email = email
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
 
-    @staticmethod
-    def from_dict(data):
-        """Crée une instance d'Utilisateur à partir d'un dictionnaire."""
-        utilisateur = Utilisateur(
-            email=data["email"], nom=data["nom"], prenom=data["prenom"], mot_de_passe=""
-        )
-        utilisateur.id_utilisateur = data["id_utilisateur"]
-        utilisateur.mot_de_passe = data["mot_de_passe"]
+
 
     def get_id(self):
+        """Cette méthode retourne l'identifiant de l'utilisateur."""
         return self.id_utilisateur
 
     @property
     def id(self):
+        """Cette méthode est utilisée par Flask-Login pour obtenir l'identifiant de l'utilisateur."""
         return self.id_utilisateur
 
     @staticmethod
     def get_by_id(user_id):
+        """Cette méthode retourne un utilisateur à partir de son identifiant."""
         data = gestionnaire.lire()
         for item in data:
             if str(item["id_utilisateur"]) == str(user_id):
@@ -53,6 +47,7 @@ class Utilisateur(UserMixin):
         return None
 
     def convert_class_vers_dict(self):
+        """Convertit l'instance de la classe Utilisateur en dictionnaire."""
         return {
             "id_utilisateur": self.id_utilisateur,
             "nom": self.nom,
@@ -77,7 +72,9 @@ class Utilisateur(UserMixin):
                     )
 
     def ajouter(self):
-        Utilisateur.verifier_email(self.email)  # lèvera une erreur si nécessaire
+        """Cette méthode ajoute un nouvel utilisateur dans le fichier JSON.
+        Retourne 1 si l'ajout est réussi."""
+        Utilisateur.verifier_email(self.email)
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
 
@@ -126,8 +123,10 @@ class Utilisateur(UserMixin):
 
 
 # cas d'utilisation ajouter
-# u = Utilisateur("Dupont", "Jean", "test@gmail.com", "test@gmail.com")
-# u.ajouter()
+#u = Utilisateur("Doe", "John", "johndoe@gmail.com", "johndoe@gmail.com")
+#u.ajouter()
+
+
 
 # cas d'utilisation modifier
 # Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
