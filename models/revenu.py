@@ -15,6 +15,7 @@ gestionnaire = JSONManager(chemin)
 
 
 class Revenu(Transaction):
+    """Cette classe gère les revenus des utilisateurs de l'application. Elle hérite de la classe Transaction."""
     def __init__(
         self,
         utilisateur_id,
@@ -36,6 +37,8 @@ class Revenu(Transaction):
         self.imposable = imposable
 
     def convert_class_vers_dict(self):
+        """Cette méthode convertit l'instance de la classe Revenu en dictionnaire. 
+        C'est une surcharge de la méthode convert_class_vers_dict de la classe Transaction."""
         return {
             "id_transaction": self.id_transaction,
             "utilisateur_id": self.utilisateur_id,
@@ -47,10 +50,12 @@ class Revenu(Transaction):
         }
 
     def ajouter(self):
+        """Cette méthode ajoute un revenu à la liste des revenus de l'utilisateur."""
         gestionnaire.ajouter(self.convert_class_vers_dict())
 
     @staticmethod
     def modifier(id_transaction, **updates):
+        """Cette méthode modifie un revenu existant en fonction de son identifiant et des mises à jour fournies."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -64,6 +69,7 @@ class Revenu(Transaction):
 
     @staticmethod
     def supprimer(id_transaction):
+        """cette méthode supprime un revenu existant en fonction de son identifiant."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -72,6 +78,7 @@ class Revenu(Transaction):
 
     @staticmethod
     def revenue_par_utilisateur(utilisateur_id):
+        """"Cette méthode retourne tous les revenus d'un utilisateur spécifique."""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -80,6 +87,7 @@ class Revenu(Transaction):
 
     @staticmethod
     def revenus_par_utilisateur_et_mois(utilisateur_id, mois, annee):
+        """Cette méthode retourne les revenus d'un utilisateur pour un mois et une année spécifiques."""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
