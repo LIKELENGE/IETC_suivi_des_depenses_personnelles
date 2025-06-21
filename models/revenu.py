@@ -1,7 +1,6 @@
 from datetime import datetime
 from uuid import uuid4
 
-
 try:
     from .transaction import Transaction
     from .classe_generique import JSONManager
@@ -9,10 +8,8 @@ except ImportError:
     from transaction import Transaction
     from classe_generique import JSONManager
 
-
 chemin = "data/revenus.json"
 gestionnaire = JSONManager(chemin)
-
 
 class Revenu(Transaction):
     """Cette classe gère les revenus des utilisateurs de l'application. Elle hérite de la classe Transaction."""
