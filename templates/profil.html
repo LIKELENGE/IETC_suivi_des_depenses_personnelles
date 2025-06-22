@@ -93,7 +93,7 @@
             <strong>{{ depense.montant }} €</strong> — {{ depense.date_transaction }} — {{ depense.libelle }}
           </div>
           <div>
-            <a href="{{ url_for('depense.modifier_depense', id_transaction=depense.id_transaction) }}" class="btn btn-sm btn-outline-warning me-2">Modifier</a>
+            
             <form method="post" action="{{ url_for('depense.supprimer_depense', id_transaction=depense.id_transaction) }}" class="d-inline">
               <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette dépense ?');">Supprimer</button>
             </form>

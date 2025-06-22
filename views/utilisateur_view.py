@@ -22,23 +22,41 @@ def accueil():
             return redirect(url_for("utilisateur.profil"))
     return render_template("index.html")
 
-@utilisateur_bp.route("/profil")
+@utilisateur_bp.route("/profil", methods=["GET", "POST"])
 @login_required
 def profil():
-    categories_depenses = CategorieDepense.lister_categorie_par_personne(current_user.id_utilisateur)
-   
     utilisateur = {
         "id_utilisateur": current_user.id_utilisateur,
         "nom": current_user.nom,
         "prenom": current_user.prenom,
-        "email": current_user.email
+        "email": current_user.email,
     }
-    mois_courant = datetime.now().month
-    annee_courante = datetime.now().year 
-    return render_template("profil.html", utilisateur=utilisateur,
-                            mois_courant=mois_courant, 
-                            annee_courante=annee_courante,
-                            categories_depenses=categories_depenses)
+
+    now = datetime.now()
+    mois_courant = now.month
+    annee_courante = now.year
+
+    if request.method == "POST":
+        mois_courant = int(request.form["mois"])
+        annee_courante = int(request.form["annee"])
+        
+    statistique_financiere = StatistiqueFinanciere(mois_courant, annee_courante)
+    solde = statistique_financiere.solde()
+    revenus = statistique_financiere.revenus
+    depenses = statistique_financiere.depenses
+    solde_par_categorie = statistique_financiere.solde_par_categorie()
+    return render_template(
+        "profil.html",
+        utilisateur=utilisateur,
+        mois_courant=mois_courant,
+        annee_courante=annee_courante,
+        revenus=revenus, 
+        depenses=depenses,
+        solde=solde,
+        solde_par_categorie=solde_par_categorie,
+        
+    )
+    
 
 @utilisateur_bp.route("/inscription", methods=["GET", "POST"])
 def inscription():
