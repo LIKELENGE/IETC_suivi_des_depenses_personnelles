@@ -1,34 +1,46 @@
-<h1>Inscription</h1>
+{% extends "base.html" %}
 
-{% if erreur %}
-    <p>{{ erreur }}</p>
-{% endif %}
+{% block content %}
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="mb-4 text-center">Inscription</h1>
 
-<form method="POST" action="{{ url_for('utilisateur.inscription') }}">
-    <div class="form-group">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required>
-    </div>
-    <div class="form-group">
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Email :</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="mot_de_passe">Mot de passe :</label>
-        <input type="password" id="mot_de_passe" name="mot_de_passe" required>
-    </div>
-    <div class="form-group">
-        <label for="mot_de_passe_confirmation">confimer le mot de passe :</label>
-        <input type="password" id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" required>
-    </div>
+      {% if erreur %}
+        <div class="alert alert-danger" role="alert">
+          {{ erreur }}
+        </div>
+      {% endif %}
 
-    <button type="submit">S'inscrire</button>
-</form>
-
-<div class="login-link">
-    Vous avez déjà un compte ? <a href="{{ url_for('utilisateur.accueil') }}">Connectez-vous ici</a>
+      <form method="POST" action="{{ url_for('utilisateur.inscription') }}">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" id="nom" name="nom" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="prenom" class="form-label">Prénom</label>
+          <input type="text" id="prenom" name="prenom" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" name="email" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="mot_de_passe" class="form-label">Mot de passe</label>
+          <input type="password" id="mot_de_passe" name="mot_de_passe" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="mot_de_passe_confirmation" class="form-label">Confirmer le mot de passe</label>
+          <input type="password" id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">S'inscrire</button>
+      </form>
+      
+      <div class="text-center mt-3">
+        <span>Vous avez déjà un compte ? </span>
+        <a href="{{ url_for('utilisateur.accueil') }}">Connectez-vous ici</a>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}

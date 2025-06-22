@@ -1,8 +1,27 @@
-<h1>Détails de la catégorie</h1>
-    
-<p><strong>ID :</strong> {{ categorie_depense.id_categorie }}</p>
-<p><strong>Description :</strong> {{ categorie_depense.description }} {{ categorie_depense.limite}} €</p>  
+{% extends "base.html" %}
 
-<a href="{{ url_for('categorie_depense.modifier_categorie_depense', id_categorie=categorie_depense.id_categorie) }}">Modifier cette catégorie de dépense</a>
-<a href="{{ url_for('categorie_depense.supprimer_categorie_depense', id_categorie=categorie_depense.id_categorie) }}">Supprimer cette catégorie de dépense</a>
-<a href="{{ url_for('utilisateur.profil') }}">Retour</a>
+{% block content %}
+<div class="container mt-5" style="max-width: 500px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h1 class="card-title mb-4">Détails de la catégorie</h1>
+      <p><strong>ID :</strong> {{ categorie_depense.id_categorie }}</p>
+      <p>
+        <strong>Description :</strong> {{ categorie_depense.description }}<br>
+        <strong>Limite :</strong> {{ categorie_depense.limite }} €
+      </p>
+      <div class="d-flex flex-column gap-2 mt-4">
+        <a href="{{ url_for('categorie_depense.modifier_categorie_depense', id_categorie=categorie_depense.id_categorie) }}" class="btn btn-primary">
+          Modifier cette catégorie de dépense
+        </a>
+        <a href="{{ url_for('categorie_depense.supprimer_categorie_depense', id_categorie=categorie_depense.id_categorie) }}" class="btn btn-danger">
+          Supprimer cette catégorie de dépense
+        </a>
+        <a href="{{ url_for('utilisateur.profil') }}" class="btn btn-link">
+          Retour
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

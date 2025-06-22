@@ -1,24 +1,41 @@
-<h2>Modifier mon profil</h2>
+{% extends "base.html" %}
 
-{% if erreur %}
-    <p style="color: red;">{{ erreur }}</p>
-{% endif %}
+{% block content %}
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-4 text-center">Modifier mon profil</h2>
 
-<form method="post">
-    <label for="nom">Nom</label><br>
-    <input type="text" name="nom" id="nom" required value="{{ utilisateur.nom }}"><br><br>
+      {% if erreur %}
+        <div class="alert alert-danger" role="alert">
+          {{ erreur }}
+        </div>
+      {% endif %}
 
-    <label for="prenom">Prénom</label><br>
-    <input type="text" name="prenom" id="prenom" required value="{{ utilisateur.prenom }}"><br><br>
-
-    <label for="email">Email</label><br>
-    <input type="email" name="email" id="email" required value="{{ utilisateur.email }}"><br><br>
-
-    <label for="mot_de_passe">Nouveau mot de passe</label><br>
-    <input type="password" name="mot_de_passe" id="mot_de_passe" placeholder="Laissez vide pour ne pas changer"><br><br>
-
-    <label for="mot_de_passe_confirmation">Confirmation du mot de passe</label><br>
-    <input type="password" name="mot_de_passe_confirmation" id="mot_de_passe_confirmation"><br><br>
-
-    <button type="submit">Enregistrer les modifications</button>
-</form>
+      <form method="post">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom</label>
+          <input type="text" name="nom" id="nom" class="form-control" required value="{{ utilisateur.nom }}">
+        </div>
+        <div class="mb-3">
+          <label for="prenom" class="form-label">Prénom</label>
+          <input type="text" name="prenom" id="prenom" class="form-control" required value="{{ utilisateur.prenom }}">
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" name="email" id="email" class="form-control" required value="{{ utilisateur.email }}">
+        </div>
+        <div class="mb-3">
+          <label for="mot_de_passe" class="form-label">Nouveau mot de passe</label>
+          <input type="password" name="mot_de_passe" id="mot_de_passe" class="form-control" placeholder="Laissez vide pour ne pas changer">
+        </div>
+        <div class="mb-3">
+          <label for="mot_de_passe_confirmation" class="form-label">Confirmation du mot de passe</label>
+          <input type="password" name="mot_de_passe_confirmation" id="mot_de_passe_confirmation" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Enregistrer les modifications</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

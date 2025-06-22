@@ -1,9 +1,28 @@
-<h2>Supprimer la catégorie de dépense</h2>
-<p>Êtes-vous sûr de vouloir supprimer définitivement votre compte ? Cette action est irréversible.</p>
-{{categorie_depense.id_categorie}}{{ categorie_depense.description }} {{ categorie_depense.limite }} €
+{% extends "base.html" %}
 
-<form method="post">
-    <button type="submit">Oui, supprimer cette catégorie de dépense</button>
-</form>
-
-<a href="{{ url_for('utilisateur.profil') }}">Annuler</a>
+{% block content %}
+<div class="container mt-5" style="max-width: 460px;">
+  <div class="card border-danger shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-3 text-danger">Supprimer la catégorie de dépense</h2>
+      <div class="alert alert-warning" role="alert">
+        Êtes-vous sûr de vouloir supprimer définitivement cette catégorie ?<br>
+        <strong>Cette action est irréversible.</strong>
+      </div>
+      <p>
+        <strong>ID :</strong> {{ categorie_depense.id_categorie }}<br>
+        <strong>Description :</strong> {{ categorie_depense.description }}<br>
+        <strong>Limite :</strong> {{ categorie_depense.limite }} €
+      </p>
+      <form method="post" class="mb-2">
+        <button type="submit" class="btn btn-danger w-100">
+          Oui, supprimer cette catégorie de dépense
+        </button>
+      </form>
+      <a href="{{ url_for('utilisateur.profil') }}" class="btn btn-secondary w-100">
+        Annuler
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

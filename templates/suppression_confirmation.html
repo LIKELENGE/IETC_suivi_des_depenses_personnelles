@@ -1,8 +1,23 @@
-<h2>Supprimer mon compte</h2>
-<p>Êtes-vous sûr de vouloir supprimer définitivement votre compte ? Cette action est irréversible.</p>
+{% extends "base.html" %}
 
-<form method="post">
-    <button type="submit">Oui, supprimer mon compte</button>
-</form>
-
-<a href="{{ url_for('utilisateur.profil') }}">Annuler</a>
+{% block content %}
+<div class="container mt-5" style="max-width: 460px;">
+  <div class="card border-danger shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-3 text-danger">Supprimer mon compte</h2>
+      <div class="alert alert-warning" role="alert">
+        Êtes-vous sûr de vouloir supprimer définitivement votre compte ?<br>
+        <strong>Cette action est irréversible.</strong>
+      </div>
+      <form method="post" class="mb-2">
+        <button type="submit" class="btn btn-danger w-100">
+          Oui, supprimer mon compte
+        </button>
+      </form>
+      <a href="{{ url_for('utilisateur.profil') }}" class="btn btn-secondary w-100">
+        Annuler
+      </a>
+    </div>
+  </div>
+</div>
+{% endblock %}

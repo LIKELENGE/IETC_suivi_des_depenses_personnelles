@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <title>Connexion</title>
-</head>
-<body>
-    <h1>Connexion</h1>
+{% extends "base.html" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 80vh;">
+  <div class="card bg-black text-white p-4 w-100" style="max-width: 400px;">
+    <h1 class="text-center mb-4">Connexion</h1>
+
     <form method="post">
-        <label for="email">Email :</label>
-        <input type="email" name="email" required><br><br>
+      <div class="mb-3">
+        <label for="email" class="form-label">Email :</label>
+        <input type="email" class="form-control" name="email" id="email" required>
+      </div>
 
-        <label for="mot_de_passe">Mot de passe :</label>
-        <input type="password" name="mot_de_passe" required><br><br>
+      <div class="mb-3">
+        <label for="mot_de_passe" class="form-label">Mot de passe :</label>
+        <input type="password" class="form-control" name="mot_de_passe" id="mot_de_passe" required>
+      </div>
 
-        <input type="submit" value="Se connecter">
+      <div class="d-grid mb-3">
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+      </div>
     </form>
-</body>
-</html>
+
+    <div class="text-center">
+      <a href="{{ url_for('utilisateur.inscription') }}" class="text-decoration-none text-info">S'inscrire</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

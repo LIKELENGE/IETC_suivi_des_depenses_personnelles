@@ -1,13 +1,29 @@
-<form method="POST">
-    {% if erreur %}
-        <div style="color:red;">{{ erreur }}</div>
-    {% endif %}
+{% extends "base.html" %}
 
-    <label>Description :</label>
-    <input type="text" name="description" value="{{ categorie.description }}" required><br><br>
+{% block content %}
+<div class="container mt-5" style="max-width: 400px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h3 class="mb-4 text-center">Modifier la catégorie</h3>
 
-    <label>Limite :</label>
-    <input type="number" name="limite" step="0.01" value="{{ categorie.limite }}" required><br><br>
+      {% if erreur %}
+        <div class="alert alert-danger" role="alert">
+          {{ erreur }}
+        </div>
+      {% endif %}
 
-    <button type="submit">Modifier</button>
-</form>
+      <form method="POST">
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <input type="text" id="description" name="description" class="form-control" value="{{ categorie.description }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="limite" class="form-label">Limite</label>
+          <input type="number" id="limite" name="limite" class="form-control" step="0.01" value="{{ categorie.limite }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Modifier</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

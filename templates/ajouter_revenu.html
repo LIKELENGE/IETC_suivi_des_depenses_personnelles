@@ -1,9 +1,33 @@
-<h2>Ajouter un revenu</h2>
-<form method="post">
-    Montant: <input type="number" name="montant" step="0.01" required><br>
-    Date: <input type="date" name="date" required><br>
-    Libellé: <input type="text" name="libelle" required><br> <!-- Ajout de required -->
-    <label><input type="checkbox" name="imposable" checked> Imposable</label><br>
-    <button type="submit">Ajouter</button>
-</form>
-<a href="{{ url_for('revenu_bp.lister_revenus') }}">Retour à la liste</a>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-4">Ajouter un revenu</h2>
+      <form method="post">
+        <div class="mb-3">
+          <label for="montant" class="form-label">Montant</label>
+          <input type="number" name="montant" id="montant" step="0.01" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" name="date" id="date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label for="libelle" class="form-label">Libellé</label>
+          <input type="text" name="libelle" id="libelle" class="form-control" required>
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" name="imposable" id="imposable" class="form-check-input" checked>
+          <label for="imposable" class="form-check-label">Imposable</label>
+        </div>
+        <button type="submit" class="btn btn-success w-100">Ajouter</button>
+      </form>
+      <div class="text-center mt-3">
+        <a href="{{ url_for('revenu_bp.lister_revenus') }}" class="btn btn-link">Retour à la liste</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

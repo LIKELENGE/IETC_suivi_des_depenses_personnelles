@@ -1,9 +1,33 @@
-<h2>Modifier un revenu</h2>
-<form method="post">
-    Montant: <input type="number" name="montant" step="0.01" value="{{ revenu.montant }}" required><br>
-    Date: <input type="date" name="date" value="{{ revenu.date_transaction }}" required><br>
-    Libellé: <input type="text" name="libelle" value="{{ revenu.libelle }}" required><br> <!-- Ajout de 'required' -->
-    <label><input type="checkbox" name="imposable" {% if revenu.imposable %}checked{% endif %}> Imposable</label><br>
-    <button type="submit">Enregistrer</button>
-</form>
-<a href="{{ url_for('revenu_bp.lister_revenus') }}">Annuler</a>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 420px;">
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <h2 class="mb-4 text-center">Modifier un revenu</h2>
+      <form method="post">
+        <div class="mb-3">
+          <label for="montant" class="form-label">Montant</label>
+          <input type="number" name="montant" id="montant" step="0.01" class="form-control" value="{{ revenu.montant }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="date" class="form-label">Date</label>
+          <input type="date" name="date" id="date" class="form-control" value="{{ revenu.date_transaction }}" required>
+        </div>
+        <div class="mb-3">
+          <label for="libelle" class="form-label">Libellé</label>
+          <input type="text" name="libelle" id="libelle" class="form-control" value="{{ revenu.libelle }}" required>
+        </div>
+        <div class="form-check mb-3">
+          <input type="checkbox" name="imposable" id="imposable" class="form-check-input" {% if revenu.imposable %}checked{% endif %}>
+          <label for="imposable" class="form-check-label">Imposable</label>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Enregistrer</button>
+      </form>
+      <div class="text-center mt-3">
+        <a href="{{ url_for('revenu_bp.lister_revenus') }}" class="btn btn-link">Annuler</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

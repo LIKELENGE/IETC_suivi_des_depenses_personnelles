@@ -1,42 +1,125 @@
-<h4>Bonjour {{utilisateur.prenom}} {{utilisateur.nom}} !</h4>
-<form method="post">
-  <label for="mois">Mois :</label>
-  <select name="mois" id="mois" required>
-    <option value="">-- Sélectionner --</option>
-    {% for mois in range(1, 13) %}
-      <option value="{{ mois }}" {% if mois == mois_courant %}selected{% endif %}>{{ mois }}</option>
-    {% endfor %}
-  </select>
+{% extends "base.html" %}
 
-  <label for="annee">Année :</label>
-  <select name="annee" id="annee" required>
-    <option value="">-- Sélectionner --</option>
-    {% for annee in range(2018, 2031) %}
-      <option value="{{ annee }}" {% if annee == annee_courante %}selected{% endif %}>{{ annee }}</option>
-    {% endfor %}
-  </select>
+{% block title %}Profil utilisateur{% endblock %}
 
-  <button type="submit">Valider</button>
-</form>
+{% block content %}
+<div class="container my-4">
+  <h4 class="mb-4">Bonjour {{ utilisateur.prenom }} {{ utilisateur.nom }} !</h4>
 
-{% if categories_depenses %}
-  <ul>
-    {% for cd in categories_depenses %}
-      <li>
-        {{ cd.description }} - {{ cd.limite }} €
-        <a href="{{ url_for('categorie_depense.afficher_categorie_depense', id_categorie=cd.id_categorie) }}">Detail</a>
+  <!-- Formulaire de filtre -->
+  <form method="post" class="row g-3 align-items-end">
+    <div class="col-md-4">
+      <label for="mois" class="form-label">Mois :</label>
+      <select name="mois" id="mois" class="form-select" required>
+        <option value="">-- Sélectionner --</option>
+        {% for mois in range(1, 13) %}
+          <option value="{{ mois }}" {% if mois == mois_courant %}selected{% endif %}>{{ mois }}</option>
+        {% endfor %}
+      </select>
+    </div>
 
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>Aucune catégorie de dépense trouvée.</p>
-{% endif %}
+    <div class="col-md-4">
+      <label for="annee" class="form-label">Année :</label>
+      <select name="annee" id="annee" class="form-select" required>
+        <option value="">-- Sélectionner --</option>
+        {% for annee in range(2018, 2031) %}
+          <option value="{{ annee }}" {% if annee == annee_courante %}selected{% endif %}>{{ annee }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-primary w-100">Valider</button>
+    </div>
+  </form>
+
+  <hr class="my-4">
+  {% if solde %}
+  Solde : {{ solde }}
+  
+  {%endif%}
+
+  <!-- Statistiques par catégorie -->
+  {% if solde_par_categorie %}
+    <h5>Statistiques par catégorie</h5>
+    <ul class="list-group mb-4">
+      {% for categorie, details in solde_par_categorie.items() %}
+        <li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ details.description }}</strong> — {{ details.total }} € (Limite : {{ details.limite }} €)
+          </div>
+          <span class="badge bg-success">{{ details.solde }} €</span>
+          <a href="{{ url_for('categorie_depense.afficher_categorie_depense', id_categorie=details.id_categorie) }}" class="btn btn-sm btn-outline-info">Détail</a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-warning">Aucune donnée de catégorie trouvée pour cette période.</div>
+  {% endif %}
 
 
+  <!-- Revenus -->
+  {% if revenus %}
+    <h5>Revenus pour {{ mois_courant }}/{{ annee_courante }}</h5>
+    <ul class="list-group mb-4">
+      {% for revenu in revenus %}
+        <li class="list-group-item bg-dark text-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <strong>{{ revenu.montant }} €</strong> — {{ revenu.date_transaction }} — {{ revenu.libelle }}
+            </div>
+            <div>
+              <a href="{{ url_for('revenu_bp.modifier_revenu', id_transaction=revenu.id_transaction) }}" class="btn btn-sm btn-outline-warning me-2">Modifier</a>
+              <form method="post" action="{{ url_for('revenu_bp.supprimer_revenu', id_transaction=revenu.id_transaction) }}" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce revenu ?');">Supprimer</button>
+              </form>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info">Aucun revenu trouvé pour cette période.</div>
+  {% endif %}
 
-<a href="{{url_for('utilisateur.modification')}}">Modifier son profil</a>
-<a href="{{url_for('utilisateur.deconnexion') }}">Déconnexion</a>
-<a href="{{url_for('utilisateur.suppression')}}"> supprimer son compte</a>
-<a href="{{url_for('categorie_depense.ajouter_categorie_depense')}}"> ajouter une catégorie de dépense</a>
+  <!-- Dépenses -->
+  <a href="{{ url_for('depense.ajouter_depense') }}" class="btn btn-outline-primary mb-3">Ajouter une dépense</a>
+  {% if depenses %}
+    <h5>Dépenses pour {{ mois_courant }}/{{ annee_courante }}</h5>
+    <ul class="list-group mb-4">
+      {% for depense in depenses %}
+        <li class="list-group-item bg-dark text-white d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ depense.montant }} €</strong> — {{ depense.date_transaction }} — {{ depense.libelle }}
+          </div>
+          <div>
+            <a href="{{ url_for('depense.modifier_depense', id_transaction=depense.id_transaction) }}" class="btn btn-sm btn-outline-warning me-2">Modifier</a>
+            <form method="post" action="{{ url_for('depense.supprimer_depense', id_transaction=depense.id_transaction) }}" class="d-inline">
+              <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer cette dépense ?');">Supprimer</button>
+            </form>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <div class="alert alert-info">Aucune dépense trouvée pour cette période.</div>
+  {% endif %}
 
+  <!-- Actions utilisateur -->
+  <div class="mt-4">
+    <a href="{{ url_for('utilisateur.modification') }}" class="btn btn-outline-secondary me-2">Modifier le profil</a>
+    <a href="{{ url_for('utilisateur.deconnexion') }}" class="btn btn-outline-danger me-2">Déconnexion</a>
+    <a href="{{ url_for('utilisateur.suppression') }}" class="btn btn-outline-danger me-2">Supprimer le compte</a>
+    <a href="{{ url_for('categorie_depense.ajouter_categorie_depense') }}" class="btn btn-outline-info">Ajouter une catégorie</a>
+  </div>
+
+
+  <a href="{{ url_for('utilisateur.export_pdf', mois=mois_courant, annee=annee_courante) }}" class="btn btn-danger">
+    Exporter en PDF
+</a>
+<a href="{{ url_for('utilisateur.export_csv', mois=mois_courant, annee=annee_courante) }}" class="btn btn-success">
+    Exporter en CSV
+</a>
+
+</div>
+{% endblock %}

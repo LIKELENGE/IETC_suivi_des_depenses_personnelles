@@ -40,12 +40,12 @@ def ajouter_categorie_depense():
     return render_template("ajouter_categorie_depense.html")
 
 
-@categorie_depense_bp.route(
-    "/modifier_categorie_depense/<string:id_categorie>", methods=["GET", "POST"]
-)
 
+@categorie_depense_bp.route('/supprimer_categorie_depense/<string:id_categorie>', methods=['GET', 'POST'])
 @login_required
 def supprimer_categorie_depense(id_categorie):
+    """Cette view permet de supprimer une catégorie de dépense."""
+    #sur la page de la confirmation afficher les depenses associées à la catégorie qui seront supprimées en cascade
     categorie_depense = CategorieDepense.afficher_categorie(id_categorie)
     if request.method == "POST":
         try:
