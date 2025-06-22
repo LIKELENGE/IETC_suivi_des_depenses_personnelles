@@ -3,6 +3,7 @@ from datetime import datetime
 from flask import Blueprint, redirect,request, render_template, url_for
 from flask_login import login_user, current_user, login_required,logout_user
 from models.categorie_depense import CategorieDepense
+from models.statistique_financiere import StatistiqueFinanciere
 
 utilisateur_bp = Blueprint("utilisateur", __name__)
 
@@ -105,18 +106,18 @@ def deconnexion():
     return redirect(url_for("utilisateur.accueil"))
 
 
+@utilisateur_bp.route("/export_csv", endpoint="export_csv")
+@login_required
+def export_csv():
+    mois = request.args.get('mois', type=int)
+    annee = request.args.get('annee', type=int)
+    stats = StatistiqueFinanciere(mois, annee)
+    return stats.generer_csv()
 
-# @utilisateur_bp.route("/inscription/", methods=["GET", "POST"])
-# def inscription():
-#     if request.method == "POST":
-#         nom = request.form["nom"]
-#         prenom = request.form["prenom"]
-#         email = request.form["email"]
-#         mot_de_passe = request.form["mot_de_passe"]
-#         utilisateur = Utilisateur.ajouter()
-#         if any(u["email"] == email for u in utilisateur):
-#             return "Email déjà utilisé", 409
-#         nouvel_utilisateur = Utilisateur(nom, prenom, email, mot_de_passe)
-#         nouvel_utilisateur.ajouter()
-#         return redirect(url_for("utilisateur.accueil"))
-#     return render_template("inscription.html")
+@utilisateur_bp.route("/export_pdf", endpoint="export_pdf")
+@login_required
+def export_pdf():
+    mois = request.args.get('mois', type=int)
+    annee = request.args.get('annee', type=int)
+    stats = StatistiqueFinanciere(mois, annee)
+    return stats.generer_pdf()
