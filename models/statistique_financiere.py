@@ -16,6 +16,8 @@ except ImportError:
     from categorie_depense import CategorieDepense
 
 class StatistiqueFinanciere:
+    """Cette classe permet de générer des statistiques financières pour un utilisateur donné, 
+    au cours d’un mois et d’une année spécifiques."""
     def __init__(self, mois, annee):
         self.utilisateur_id = current_user.id_utilisateur
         self.mois = mois
@@ -25,9 +27,11 @@ class StatistiqueFinanciere:
         self.categories_depenses = CategorieDepense.lister_categorie_par_personne(self.utilisateur_id)
 
     def solde(self):
+        """Cette méthode calcule le solde financier de l'utilisateur pour le mois et l'année spécifiés."""
         return sum(r.montant for r in self.revenus) - sum(d.montant for d in self.depenses)
 
     def solde_par_categorie(self):
+        """Cette méthode calcule le solde par catégorie de dépenses pour l'utilisateur."""
         resultats = {}
         for categorie in self.categories_depenses:
             montant_total = sum(
@@ -45,23 +49,28 @@ class StatistiqueFinanciere:
 
     
     def moyenne_depenses(self):
+        """Cette méthode calcule la moyenne des dépenses pour le mois et l'année spécifiés."""
         if not self.depenses:
             return 0
         return round(sum(d.montant for d in self.depenses) / len(self.depenses), 2)
 
     def moyenne_revenus(self):
+        """Cette méthode calcule la moyenne des revenus pour le mois et l'année spécifiés."""
         if not self.revenus:
             return 0
         return round(sum(r.montant for r in self.revenus) / len(self.revenus), 2)
     
     def total_revenus(self):
+        """Cette méthode calcule le total des revenus pour le mois et l'année spécifiés."""
         return sum(r.montant for r in self.revenus)
 
     def total_depenses(self):
+        """Cette méthode calcule le total des dépenses pour le mois et l'année spécifiés."""
         return sum(d.montant for d in self.depenses)
     
     
     def generer_csv(self):
+        """Cette méthode génère un fichier CSV contenant les statistiques financières de l'utilisateur."""
         output = StringIO()
         writer = csv.writer(output)
 
@@ -101,6 +110,7 @@ class StatistiqueFinanciere:
 
 
     def generer_csv(self):
+        """Cette méthode génère un fichier CSV contenant les statistiques financières de l'utilisateur."""
         output = StringIO()
         writer = csv.writer(output)
 

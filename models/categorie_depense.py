@@ -1,12 +1,3 @@
-"""
-Fichier categorie_depense
-
-Ce fichier contient la classe CategorieDepense qui permet de gérer les catégories de dépenses
-d’un utilisateur dans un système de gestion des depenses personnel.
-
-Les données sont stockées dans un fichier JSON via un gestionnaire générique.
-"""
-
 from uuid import uuid4
 
 try:
@@ -17,23 +8,8 @@ except ImportError:
 CHEMIN = "data/categories_depenses.json"
 gestionnaire = JSONManager(CHEMIN)
 
-
 class CategorieDepense:
-    """Cette classe represente categorie de dépense liées à l'utilisateur de l'application
-    Avec
-    lES attributs;
-        id_categorie (str) : Identifiant unique de la catégorie (UUID).
-        description (str) : Nom ou description de la catégorie (ex : 'loyer', 'courses').
-        limite (float/int) : Montant limite autorisé pour cette catégorie.
-        id_utilisateur (str) : Identifiant de l’utilisateur auquel appartient la catégorie.
-    Les méthodes:
-        ajouter() : Ajoute la catégorie dans le fichier JSON si elle est unique.
-        modifier() : Modifie les propriétés d’une catégorie existante.
-        supprimer() : Supprime une catégorie existante.
-        lister_categorie_par_personne() : Lister les catégories liées à un utilisateur.
-        afficher_categorie() : Afficher une catégorie spécifique par son ID.
-    """
-
+    """Cette classe represente categorie de dépense liées à l'utilisateur de l'application."""
     def __init__(self, description, id_utilisateur, limite, id_categorie=None):
         self.id_categorie = id_categorie or str(uuid4())
         self.description = description
@@ -99,6 +75,7 @@ class CategorieDepense:
 
     @staticmethod
     def afficher_categorie(id_categorie):
+        """Cette méthode permet d'afficher une catégorie de dépense par son identifiant."""
         def condition(item):
             return item["id_categorie"] == id_categorie
 
@@ -110,6 +87,7 @@ class CategorieDepense:
 
     @staticmethod
     def lister_categorie_par_personne(id_utilisateur):
+        """Cette méthode permet de lister les catégories de dépenses par utilisateur."""
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -121,6 +99,7 @@ class CategorieDepense:
 
     @staticmethod
     def supprimer(id_categorie):
+        """Cette méthode supprime une catégorie de dépense par son identifiant."""
         def condition(item):
             return item["id_categorie"] == id_categorie
 
@@ -137,6 +116,7 @@ class CategorieDepense:
 
     @staticmethod
     def afficher_categorie_par_utilisateur(id_utilisateur):
+        """Cette méthode permet d'afficher les catégories de dépenses par utilisateur."""
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -145,6 +125,7 @@ class CategorieDepense:
 
     @staticmethod
     def afficher_limite(id_categorie):
+        """Cette méthode permet d'afficher la limite d'une catégorie de dépense par son identifiant."""
         def condition(item):
             return item["id_categorie"] == id_categorie
 
