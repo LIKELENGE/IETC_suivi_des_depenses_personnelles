@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Statistiques financières</title>
+</head>
+<body>
+    <h1>Statistiques financières</h1>
+    <p><strong>Mois :</strong> {{ mois }} &nbsp;|&nbsp; <strong>Année :</strong> {{ annee }}</p>
+    <p><strong>Solde :</strong> {{ solde }} €</p>
+    <p>
+        <strong>Total revenus :</strong> {{ total_revenus }} € &nbsp;|&nbsp;
+        <strong>Total dépenses :</strong> {{ total_depenses }} €
+    </p>
+    <p>
+        <strong>Moyenne revenus :</strong> {{ moyenne_revenus }} € &nbsp;|&nbsp;
+        <strong>Moyenne dépenses :</strong> {{ moyenne_depenses }} €
+    </p>
+
+    <h2>Liste des revenus</h2>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>Libellé</th>
+            <th>Montant (€)</th>
+        </tr>
+        {% for revenu in revenus %}
+        <tr>
+            <td>{{ revenu.date_transaction }}</td>
+            <td>{{ revenu.libelle }}</td>
+            <td>{{ revenu.montant }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Liste des dépenses</h2>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Date</th>
+            <th>Libellé</th>
+            <th>Montant (€)</th>
+        </tr>
+        {% for depense in depenses %}
+        <tr>
+            <td>{{ depense.date_transaction }}</td>
+            <td>{{ depense.libelle }}</td>
+            <td>{{ depense.montant }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h2>Statistiques par catégorie</h2>
+    <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+            <th>Catégorie</th>
+            <th>Total dépensé (€)</th>
+            <th>Limite (€)</th>
+            <th>Solde (€)</th>
+        </tr>
+        {% for cat, data in stats_categorie.items() %}
+        <tr>
+            <td>{{ cat }}</td>
+            <td>{{ data.total }}</td>
+            <td>{{ data.limite }}</td>
+            <td>{{ data.solde }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
