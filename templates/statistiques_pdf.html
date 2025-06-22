@@ -23,12 +23,14 @@
             <th>Date</th>
             <th>Libellé</th>
             <th>Montant (€)</th>
+            <th>Catégorie</th>
         </tr>
         {% for revenu in revenus %}
         <tr>
             <td>{{ revenu.date_transaction }}</td>
             <td>{{ revenu.libelle }}</td>
             <td>{{ revenu.montant }}</td>
+            <td>{% if revenu.categorie %}{{ revenu.categorie.description }}{% endif %}</td>
         </tr>
         {% endfor %}
     </table>
@@ -39,12 +41,14 @@
             <th>Date</th>
             <th>Libellé</th>
             <th>Montant (€)</th>
+            <th>Catégorie</th>
         </tr>
         {% for depense in depenses %}
         <tr>
             <td>{{ depense.date_transaction }}</td>
             <td>{{ depense.libelle }}</td>
             <td>{{ depense.montant }}</td>
+            <td>{% if depense.categorie %}{{ depense.categorie.description }}{% endif %}</td>
         </tr>
         {% endfor %}
     </table>
