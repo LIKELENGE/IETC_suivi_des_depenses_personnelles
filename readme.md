@@ -143,8 +143,8 @@ python app.py
 ```txt
 Flask==2.3.3
 WTForms==3.1.2
-python-dotenv==1.0.1
 Flask-Login==0.6.3
+xhtml2pdf==0.2.11
 ```
 
 ---
