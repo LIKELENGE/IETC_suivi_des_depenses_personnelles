@@ -56,29 +56,6 @@ def ajouter_depense():
 
 
 
-
-
-@depense_bp.route('/modifier_depense/<string:id_transaction>', methods=['GET', 'POST'])       
-@login_required
-def modifier_depense(id_transaction):
-    depenses = Depense.depenses_par_utilisateur(current_user.id)
-    depense = next((d for d in depenses if d.id_transaction == id_transaction), None)
-    
-    if not depense:
-        flash("Dépense introuvable.", "error")
-        return redirect(url_for('utilisateur.profil'))
-    if request.method == 'POST':
-        montant = float(request.form['montant'])
-        date_transaction = request.form['date_transaction']
-        heure_transaction = request.form['heure_transaction']
-        libelle = request.form['libelle']
-        deductible_fiscalement = request.form.get('deductible_fiscalement') == 'True'
-        Depense.modifier(id_transaction, montant=montant, date_transaction=date_transaction, heure_transaction=heure_transaction, libelle=libelle, deductible_fiscalement=deductible_fiscalement)
-        flash("Dépense modifiée avec succès.", "success")
-        return redirect(url_for('utilisateur.profil'))
-    categorie_depense=CategorieDepense.afficher_categorie(depense.categorie)
-    return render_template('modifier_depense.html', depense=depense, categorie_depense=categorie_depense)
-
     
 
 @depense_bp.route('/depenses_supprimer/<id_transaction>', methods=['POST'])

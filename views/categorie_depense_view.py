@@ -43,46 +43,10 @@ def ajouter_categorie_depense():
 @categorie_depense_bp.route(
     "/modifier_categorie_depense/<string:id_categorie>", methods=["GET", "POST"]
 )
-@login_required
-def modifier_categorie_depense(id_categorie):
 
-    categorie = CategorieDepense.afficher_categorie(id_categorie)
-
-    if not categorie:
-        return redirect(url_for("utilisateur.profil"))
-
-    if request.method == "POST":
-        description = request.form.get("description")
-        limite = request.form.get("limite")
-
-        if not description or not limite:
-            erreur = "Tous les champs sont obligatoires."
-            return render_template(
-                "modifier_categorie_depense.html", categorie=categorie, erreur=erreur
-            )
-
-        try:
-            limite = float(limite)
-        except ValueError:
-            erreur = "La limite doit être un nombre."
-            return render_template(
-                "modifier_categorie_depense.html", categorie=categorie, erreur=erreur
-            )
-
-        updates = {"description": description, "limite": limite}
-        CategorieDepense.modifier(id_categorie=id_categorie, **updates)
-
-        return redirect(url_for("utilisateur.profil"))
-    return render_template("modifier_categorie_depense.html", categorie=categorie)
-
-
-@categorie_depense_bp.route(
-    "/supprimer_categorie_depense/<string:id_categorie>", methods=["GET", "POST"]
-)
 @login_required
 def supprimer_categorie_depense(id_categorie):
     categorie_depense = CategorieDepense.afficher_categorie(id_categorie)
-
     if request.method == "POST":
         try:
             CategorieDepense.supprimer(id_categorie)

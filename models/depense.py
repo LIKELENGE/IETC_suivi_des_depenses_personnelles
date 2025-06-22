@@ -1,5 +1,4 @@
 import datetime
-
 try:
     from .transaction import Transaction
     from .classe_generique import JSONManager
@@ -9,10 +8,9 @@ except ImportError:
     from classe_generique import JSONManager
     from categorie_depense import CategorieDepense
 
-chemin_depenses = "data/depenses.json"
-gestionnaire_depenses = JSONManager(chemin_depenses)
+chemin = "data/depenses.json"
+gestionnaire_depenses = JSONManager(chemin)
 chemin_categories = "data/categories_depenses.json"
-gestionnaire_categories = JSONManager(chemin_categories)
 
 
 class Depense(Transaction):
