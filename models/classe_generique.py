@@ -1,13 +1,3 @@
-"""
-Fichier classe_generique
-
-Ce fichier contient la classe JSONManager, un gestionnaire générique permettant de manipuler
-des fichiers JSON utilisés pour stocker les données des différentes entités de l'application 
-(ex : catégories de dépenses, utilisateurs, etc.).
-
-Les opérations principales incluent : lecture, écriture, ajout, suppression, modification, 
-et filtrage conditionnel des objets stockés dans un fichier JSON.
-"""
 import json
 import os
 
