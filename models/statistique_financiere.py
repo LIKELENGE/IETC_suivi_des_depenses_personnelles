@@ -1,7 +1,12 @@
 import csv
-from io import StringIO, BytesIO
-from flask import Response, render_template, make_response
+from io import StringIO
+from flask import Response
 from flask_login import current_user
+
+
+from flask import render_template, make_response
+from xhtml2pdf import pisa
+from io import BytesIO
 
 try:
     from .depense import Depense
@@ -12,12 +17,7 @@ except ImportError:
     from revenu import Revenu
     from categorie_depense import CategorieDepense
 
-from xhtml2pdf import pisa
-
 class StatistiqueFinanciere:
-    """Cette classe permet de générer des statistiques financières pour un utilisateur donné,
-    au cours d’un mois et d’une année spécifiques."""
-
     def __init__(self, mois, annee):
         self.utilisateur_id = current_user.id_utilisateur
         self.mois = mois
@@ -44,6 +44,8 @@ class StatistiqueFinanciere:
             }
         return resultats
 
+
+    
     def moyenne_depenses(self):
         if not self.depenses:
             return 0
@@ -53,12 +55,52 @@ class StatistiqueFinanciere:
         if not self.revenus:
             return 0
         return round(sum(r.montant for r in self.revenus) / len(self.revenus), 2)
-
+    
     def total_revenus(self):
         return sum(r.montant for r in self.revenus)
 
     def total_depenses(self):
         return sum(d.montant for d in self.depenses)
+    
+    
+    def generer_csv(self):
+        output = StringIO()
+        writer = csv.writer(output)
+
+        # En-tête générale
+        writer.writerow(["Statistiques financières"])
+        writer.writerow(["Mois", self.mois])
+        writer.writerow(["Année", self.annee])
+        writer.writerow([])
+
+        # Revenus et dépenses globales
+        writer.writerow(["Totaux"])
+        writer.writerow(["Total revenus (€)", self.total_revenus()])
+        writer.writerow(["Total dépenses (€)", self.total_depenses()])
+        writer.writerow(["Solde (€)", self.solde()])
+        writer.writerow(["Moyenne revenus (€)", self.moyenne_revenus()])
+        writer.writerow(["Moyenne dépenses (€)", self.moyenne_depenses()])
+        writer.writerow([])
+
+        # Statistiques par catégorie
+        writer.writerow(["Catégorie", "Total Dépensé (€)", "Limite (€)", "Solde (€)"])
+        for categorie, data in self.solde_par_categorie().items():
+            writer.writerow([
+                categorie,
+                data['total'],
+                data['limite'],
+                data['solde']
+            ])
+
+        # Retourne un objet Flask Response
+        output.seek(0)
+        return Response(
+            output,
+            mimetype="text/csv",
+            headers={"Content-Disposition": f"attachment;filename=statistiques_{self.mois}_{self.annee}.csv"}
+        )
+    
+
 
     def generer_csv(self):
         output = StringIO()
@@ -79,42 +121,24 @@ class StatistiqueFinanciere:
 
         # Liste des revenus
         writer.writerow(["Liste des revenus"])
-        writer.writerow(["Date", "Libellé", "Montant (€)", "Catégorie"])
+        writer.writerow(["Date", "Description", "Montant (€)"])
         for revenu in self.revenus:
-            try:
-                categorie = (
-                    revenu.categorie.description
-                    if hasattr(revenu, "categorie") and revenu.categorie
-                    else ""
-                )
-            except Exception:
-                categorie = ""
             writer.writerow([
-                getattr(revenu, "date_transaction", ""),
+                getattr(revenu, "date", ""),
                 getattr(revenu, "libelle", ""),
-                getattr(revenu, "montant", ""),
-                categorie
+                getattr(revenu, "montant", "")
             ])
         writer.writerow([])
 
         # Liste des dépenses
         writer.writerow(["Liste des dépenses"])
-        writer.writerow(["Date", "Libellé", "Montant (€)", "Catégorie"])
+        writer.writerow(["Date", "libellé", "Montant (€)"])
         for depense in self.depenses:
-            try:
-                categorie = (
-                    depense.categorie.description
-                    if hasattr(depense, "categorie") and depense.categorie
-                    else ""
-                )
-            except Exception:
-                categorie = ""
+
             writer.writerow([
                 getattr(depense, "date_transaction", ""),
                 getattr(depense, "libelle", ""),
-                getattr(depense, "montant", ""),
-                categorie
-            ])
+                getattr(depense, "montant", "")])
         writer.writerow([])
 
         # Statistiques par catégorie
@@ -134,6 +158,7 @@ class StatistiqueFinanciere:
             headers={"Content-Disposition": f"attachment;filename=statistiques_{self.mois}_{self.annee}.csv"}
         )
 
+
     def generer_pdf(self):
         html = render_template(
             "statistiques_pdf.html",
@@ -145,8 +170,8 @@ class StatistiqueFinanciere:
             moyenne_revenus=self.moyenne_revenus(),
             moyenne_depenses=self.moyenne_depenses(),
             stats_categorie=self.solde_par_categorie(),
-            revenus=self.revenus,
-            depenses=self.depenses
+            revenus=self.revenus,         # <-- Ajouté
+            depenses=self.depenses        # <-- Ajouté
         )
 
         result = BytesIO()
