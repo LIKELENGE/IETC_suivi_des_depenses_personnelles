@@ -70,5 +70,32 @@
         "heure_transaction": "16:32",
         "imposable": true,
         "libelle": "Salaire principal mois juin"
+    },
+    {
+        "id_transaction": "79703c64-16d5-4592-9297-631ff977bcb3",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 200.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "17:24",
+        "imposable": false,
+        "libelle": "remboursement impôt "
+    },
+    {
+        "id_transaction": "8469166a-89e3-4d96-85c5-4bc986024c6c",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 100.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "17:31",
+        "imposable": true,
+        "libelle": "Salaire intérim adecco"
+    },
+    {
+        "id_transaction": "507f20bc-550e-42b3-a38c-3d38fb2ce3f8",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 100.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "17:42",
+        "imposable": true,
+        "libelle": "Salaire intérim adecco"
     }
 ]

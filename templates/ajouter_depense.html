@@ -55,24 +55,24 @@
 
             <div class="mb-3">
                 <label for="date_transaction" class="form-label">Date :</label>
-                <input type="date" name="date_transaction" id="date_transaction" class="form-control" required>
+                <input type="date" name="date_transaction" id="date_transaction" class="form-control">
             </div>
 
             <div class="mb-3">
                 <label for="heure_transaction" class="form-label">Heure :</label>
-                <input type="time" name="heure_transaction" id="heure_transaction" class="form-control" required>
+                <input type="time" name="heure_transaction" id="heure_transaction" class="form-control">
             </div>
 
             <div class="mb-3">
                 <label for="libelle" class="form-label">Libellé :</label>
-                <input type="text" name="libelle" id="libelle" class="form-control">
+                <input type="text" name="libelle" id="libelle" class="form-control" required>
             </div>
 
             <div class="mb-3">
                 <label for="deductible_fiscalement" class="form-label">Déductible fiscalement :</label>
                 <select name="deductible_fiscalement" id="deductible_fiscalement" class="form-select">
                     <option value="True">Oui</option>
-                    <option value="False">Non</option>
+                    <option value="False" selected>Non</option>
                 </select>
             </div>
 

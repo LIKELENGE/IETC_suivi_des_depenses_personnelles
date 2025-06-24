@@ -15,8 +15,7 @@ class Transaction(ABC):
         libelle,
         id_transaction=None,
     ):
-        self.id_transaction = (
-            id_transaction if id_transaction is not None else str(uuid4())
+        self.id_transaction = id_transaction if id_transaction else str(uuid4()
         )
         self.utilisateur_id = utilisateur_id
         self.montant = montant

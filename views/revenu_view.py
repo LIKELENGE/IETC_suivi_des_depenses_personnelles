@@ -10,19 +10,44 @@ revenu_bp = Blueprint('revenu_bp', __name__)
 @login_required
 def ajouter_revenu():
     if request.method == 'POST':
-        montant = request.form['montant']
-        date_transaction = request.form['date']
+        montant_str = request.form['montant']
+        date_transaction = request.form.get('date')
+        heure_transaction = request.form.get('heure')
         libelle = request.form['libelle']
         imposable = 'imposable' in request.form
-        heure_transaction = datetime.now().strftime('%H:%M')
+        try:
+            montant = float(montant_str)
+            if montant <= 0:
+                raise ValueError
+        except (ValueError, TypeError):
+            flash("Le montant doit être un nombre positif.", "error")
+            return render_template('ajouter_revenu.html')
 
-        if not libelle.strip():
+        if not date_transaction or not date_transaction.strip():
+            date_transaction = datetime.now().strftime('%Y-%m-%d')
+        else:
+            try:
+                datetime.strptime(date_transaction, "%Y-%m-%d")
+            except ValueError:
+                flash("La date doit être au format AAAA-MM-JJ.", "error")
+                return render_template('ajouter_revenu.html')
+
+        if not heure_transaction or not heure_transaction.strip():
+            heure_transaction = datetime.now().strftime('%H:%M')
+        else:
+            try:
+                datetime.strptime(heure_transaction, "%H:%M")
+            except ValueError:
+                flash("L'heure doit être au format HH:MM.", "error")
+                return render_template('ajouter_revenu.html')
+
+        if not libelle or not libelle.strip():
             flash("Le libellé est obligatoire.", "error")
             return render_template('ajouter_revenu.html')
 
         revenu = Revenu(
             utilisateur_id=current_user.id,
-            montant=float(montant),
+            montant=montant,
             date_transaction=date_transaction,
             heure_transaction=heure_transaction,
             libelle=libelle,

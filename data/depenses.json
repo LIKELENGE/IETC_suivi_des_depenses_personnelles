@@ -40,13 +40,23 @@
         "deductible_fiscalement": true
     },
     {
-        "id_transaction": false,
+        "id_transaction": "ttetsttstst",
         "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
         "montant": 700.0,
         "date_transaction": "2025-06-24",
         "heure_transaction": "16:31",
         "categorie": "a9910a59-2afd-4a70-a313-c89c89f261f8",
         "libelle": "Frais loyer juin 2025",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "114444s",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 20.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "17:51",
+        "categorie": "fb6700af-4a95-4cb3-bd61-0a3a2df9bea5",
+        "libelle": "aller-retour bruxelle charleroi",
         "deductible_fiscalement": true
     }
 ]
