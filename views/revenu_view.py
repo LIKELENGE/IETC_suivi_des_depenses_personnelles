@@ -57,17 +57,12 @@ def ajouter_revenu():
         )
         revenu.ajouter()
         flash("Revenu ajouté avec succès.", "success")
-        return redirect(url_for("revenu_bp.lister_revenus"))
+        return redirect(url_for("utilisateur.profil"))
 
     return render_template("ajouter_revenu.html")
 
 
-@revenu_bp.route("/revenus")
-@login_required
-def lister_revenus():
-    """Route pour lister les revenus de l'utilisateur."""
-    revenus = Revenu.revenue_par_utilisateur(current_user.id)
-    return redirect(url_for("utilisateur.profil"))
+
 
 
 @revenu_bp.route("/revenus/supprimer/<id_transaction>", methods=["POST"])

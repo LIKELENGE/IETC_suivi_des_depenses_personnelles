@@ -58,5 +58,15 @@
         "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
         "libelle": "plein",
         "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "75a52acc-3911-466e-a382-86cb1ef3eaea",
+        "utilisateur_id": "221fea43-3dd4-4307-87e2-508f0680bb71",
+        "montant": 150.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "23:50",
+        "categorie": "df5fa51f-5f7e-47d3-aa41-a1b81838feba",
+        "libelle": "course delhaize",
+        "deductible_fiscalement": true
     }
 ]
