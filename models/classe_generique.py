@@ -1,12 +1,13 @@
 import json
 import os
 
-#encoding: utf-8 pour avoir les accents correctement gérés dans les fichiers JSON
+
+# encoding: utf-8 pour avoir les accents correctement gérés dans les fichiers JSON
 class JSONManager:
     """
     Cette classe sert de gestionnaire générique pour la manipulation de fichiers JSON.
-    
-    Elle permet de centraliser toutes les opérations liées à la persistance des données 
+
+    Elle permet de centraliser toutes les opérations liées à la persistance des données
     (lecture, écriture, ajout, suppression, mise à jour, filtrage).
 
     Attributs :
@@ -20,6 +21,7 @@ class JSONManager:
         modifier(condition_fn, update_fn) : Modifie les objets qui remplissent la condition.
         lire_avec_conditions(*conditions) : Retourne les objets qui remplissent toutes les conditions fournies.
     """
+
     def __init__(self, chemin_fichier):
         self.chemin = chemin_fichier
         os.makedirs(os.path.dirname(self.chemin), exist_ok=True)
@@ -48,17 +50,15 @@ class JSONManager:
         self.ecrire(data_filtrée)
         return len(data_filtrée) < len(data)
 
-
     def modifier(self, condition_fn, update_fn):
         data = self.lire()
         for item in data:
             if condition_fn(item):
                 update_fn(item)
         self.ecrire(data)
-        
+
     def lire_avec_conditions(self, *conditions):
         data = self.lire()
         for cond in conditions:
             data = [item for item in data if cond(item)]
         return data
-

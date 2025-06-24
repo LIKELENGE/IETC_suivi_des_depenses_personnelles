@@ -48,5 +48,15 @@
         "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
         "libelle": "Voyage paris",
         "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "2d95036d-87da-4409-9167-6b6ddffbd2e1",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 100.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "23:21",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "plein",
+        "deductible_fiscalement": true
     }
 ]

@@ -2,13 +2,7 @@
     {
         "id_categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
         "description": "transport",
-        "limite": 550.0,
-        "id_utilisateur": "818b873d-c6f2-47a1-8995-41da0623f0c8"
-    },
-    {
-        "id_categorie": "e147918c-fdbf-4606-806f-39ea52800e1c",
-        "description": "Nourriture",
-        "limite": 800.0,
+        "limite": 650.0,
         "id_utilisateur": "818b873d-c6f2-47a1-8995-41da0623f0c8"
     },
     {
