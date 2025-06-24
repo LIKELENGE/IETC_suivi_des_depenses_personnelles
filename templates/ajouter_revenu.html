@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 <div class="container mt-5" style="max-width: 420px;">
   <div class="card shadow-sm">
@@ -25,7 +26,7 @@
         <button type="submit" class="btn btn-success w-100">Ajouter</button>
       </form>
       <div class="text-center mt-3">
-        <a href="{{ url_for('revenu_bp.lister_revenus') }}" class="btn btn-link">Retour à la liste</a>
+        <a href="{{ url_for('utilisateur.profil') }}" class="btn btn-link">Retour au profil</a>
       </div>
     </div>
   </div>

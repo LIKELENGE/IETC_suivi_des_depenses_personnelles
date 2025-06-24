@@ -98,6 +98,14 @@ class Revenu(Transaction):
                 revenus_filtrés.append(Revenu(**revenu))
 
         return revenus_filtrés
+    
+    def supprimer_cascade_personne(utilisateur_id):
+        """Cette méthode supprime tous les revenus d'un utilisateur spécifique."""
+        def condition(item):
+            return item["utilisateur_id"] == utilisateur_id
+
+        gestionnaire.supprimer(condition)
+        print(f"Tous les revenus de l'utilisateur {utilisateur_id} ont été supprimés.")
 
 
 # cas d'utilisation ajouter

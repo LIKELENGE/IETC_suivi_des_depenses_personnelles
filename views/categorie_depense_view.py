@@ -1,5 +1,5 @@
 from models.categorie_depense import CategorieDepense
-from flask import Blueprint, redirect, request, render_template, url_for
+from flask import Blueprint, flash, redirect, request, render_template, url_for
 from flask_login import current_user, login_required
 
 categorie_depense_bp = Blueprint("categorie_depense", __name__)
@@ -22,14 +22,14 @@ def ajouter_categorie_depense():
         limite = request.form["limite"]
         id_utilisateur = current_user.id
         if not description or not limite:
-            erreur = "Tous les champs sont obligatoires."
-            return render_template("ajouter_categorie_depense.html", erreur=erreur)
+            flash("Tous les champs sont obligatoires.")
+            return render_template("ajouter_categorie_depense.html")
 
         try:
             limite = float(request.form["limite"])
         except ValueError:
-            erreur = "La limite doit être un nombre."
-            return render_template("ajouter_categorie_depense.html", erreur=erreur)
+            flash("La limite doit être un nombre.")
+            return render_template("ajouter_categorie_depense.html")
 
         categorie_depense = CategorieDepense(
             description=description, limite=limite, id_utilisateur=id_utilisateur
@@ -45,14 +45,14 @@ def ajouter_categorie_depense():
 @login_required
 def supprimer_categorie_depense(id_categorie):
     """Cette view permet de supprimer une catégorie de dépense."""
-    #sur la page de la confirmation afficher les depenses associées à la catégorie qui seront supprimées en cascade
     categorie_depense = CategorieDepense.afficher_categorie(id_categorie)
     if request.method == "POST":
         try:
             CategorieDepense.supprimer(id_categorie)
             return redirect(url_for("utilisateur.profil"))
         except ValueError as e:
-            return redirect(url_for("utilisateur.profil", erreur=str(e)))
+            flash(str(e))
+            return redirect(url_for("utilisateur.profil"))
         except Exception as e:
             return redirect(url_for("utilisateur.profil"))
 

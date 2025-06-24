@@ -1,3 +1,4 @@
+from flask import flash
 from models.utilisateur import Utilisateur
 from datetime import datetime
 from flask import Blueprint, redirect,request, render_template, url_for
@@ -16,7 +17,8 @@ def accueil():
         mot_de_passe = request.form.get("mot_de_passe")
         utilisateur = Utilisateur.se_connecter(email,mot_de_passe)
         if utilisateur is None:
-            return render_template("index.html", error="email ou mot de passe invalides")
+            flash("Email ou mot de passe invalides.")
+            return render_template("index.html")
         else:
             login_user(utilisateur)
             return redirect(url_for("utilisateur.profil"))
@@ -60,7 +62,7 @@ def profil():
 
 @utilisateur_bp.route("/inscription", methods=["GET", "POST"])
 def inscription():
-    erreur = None
+    
     if request.method == "POST":
         nom = request.form["nom"]
         prenom = request.form["prenom"]
@@ -68,16 +70,20 @@ def inscription():
         mot_de_passe = request.form["mot_de_passe"]
         mot_de_passe_confirmation = request.form["mot_de_passe_confirmation"]
         if mot_de_passe != mot_de_passe_confirmation:
-            return render_template(
-                "inscription.html", erreur="Les mots de passe ne correspondent pas"
-            )
+            flash("Les mots de passe ne correspondent pas.")
+            return render_template("inscription.html")
         nouvel_utilisateur = Utilisateur(nom, prenom, email, mot_de_passe)
-        resultat = nouvel_utilisateur.ajouter()
+        try:    
+            resultat = nouvel_utilisateur.ajouter()
+        except ValueError as e:
+            flash(str(e))
+            return render_template("inscription.html")
         if resultat == 0:
-            return render_template("inscription.html", erreur="Email déjà utilisé")
+            flash("Email déjà utilisé.")
+            return render_template("inscription.html")
         login_user(nouvel_utilisateur)
         return redirect(url_for("utilisateur.profil"))
-    return render_template("inscription.html", erreur=erreur)
+    return render_template("inscription.html")
 
 
 @utilisateur_bp.route("/modification", methods=["GET", "POST"])
@@ -91,8 +97,8 @@ def modification():
         mot_de_passe_confirmation = request.form["mot_de_passe_confirmation"].strip()
         if mot_de_passe:
             if mot_de_passe != mot_de_passe_confirmation:
-                erreur = "Les mots de passe ne correspondent pas."
-                return render_template("modification.html", utilisateur=current_user, erreur=erreur)
+                flash("Les mots de passe ne correspondent pas.")
+                return render_template("modification.html", utilisateur=current_user)
         try:
             updates = {"nom": nom,"prenom": prenom,"email": email,}
             if mot_de_passe:

@@ -3,6 +3,54 @@
 {% block title %}Profil utilisateur{% endblock %}
 
 {% block content %}
+<nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4">
+  <div class="container-fluid">
+    <span class="navbar-brand fw-bold">Actions rapides</span>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#actionsNavbar" aria-controls="actionsNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="actionsNavbar">
+      <ul class="navbar-nav ms-auto gap-2">
+        <li class="nav-item">
+          <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('categorie_depense.ajouter_categorie_depense') }}">
+            Ajouter une catégorie
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('revenu_bp.ajouter_revenu') }}">
+            Ajouter un revenu
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('depense.ajouter_depense') }}">
+            Ajouter une dépense
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('utilisateur.export_pdf', mois=mois_courant, annee=annee_courante) }}">
+            Exporter en PDF
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('utilisateur.export_csv', mois=mois_courant, annee=annee_courante) }}">
+            Exporter en CSV
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-dark mb-2 mb-lg-0" href="{{ url_for('utilisateur.deconnexion') }}">
+            Déconnexion
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+
+
+
+
 <div class="container my-4">
   <h4 class="mb-4">Bonjour {{ utilisateur.prenom }} {{ utilisateur.nom }} !</h4>
 
@@ -108,18 +156,11 @@
   <!-- Actions utilisateur -->
   <div class="mt-4">
     <a href="{{ url_for('utilisateur.modification') }}" class="btn btn-outline-secondary me-2">Modifier le profil</a>
-    <a href="{{ url_for('utilisateur.deconnexion') }}" class="btn btn-outline-danger me-2">Déconnexion</a>
     <a href="{{ url_for('utilisateur.suppression') }}" class="btn btn-outline-danger me-2">Supprimer le compte</a>
-    <a href="{{ url_for('categorie_depense.ajouter_categorie_depense') }}" class="btn btn-outline-info">Ajouter une catégorie</a>
   </div>
 
 
-  <a href="{{ url_for('utilisateur.export_pdf', mois=mois_courant, annee=annee_courante) }}" class="btn btn-danger">
-    Exporter en PDF
-</a>
-<a href="{{ url_for('utilisateur.export_csv', mois=mois_courant, annee=annee_courante) }}" class="btn btn-success">
-    Exporter en CSV
-</a>
+
 
 </div>
 {% endblock %}

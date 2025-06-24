@@ -19,5 +19,12 @@
         "prenom": "John",
         "email": "johndoe@gmail.com",
         "mot_de_passe": "06a240d11cc201676da976f7b49341181fd180da37cbe40a77432c0a366c80c3"
+    },
+    {
+        "id_utilisateur": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "nom": "De bruyne",
+        "prenom": "Kévin",
+        "email": "kevindebruyne@gmail.com",
+        "mot_de_passe": "d12b983b95a36f2c4802a5c75ed403206ffa53c36488071040603cc453cf8942"
     }
 ]

@@ -62,5 +62,5 @@ def ajouter_depense():
 @login_required
 def supprimer_depense(id_transaction):
     Depense.supprimer(id_transaction)
-    flash("Dépense supprimé.", "info")
+    flash("Dépense supprimée.")
     return redirect(url_for('utilisateur.profil'))

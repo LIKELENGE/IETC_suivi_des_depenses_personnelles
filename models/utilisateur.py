@@ -5,10 +5,11 @@ from flask_login import UserMixin
 try:
     from .classe_generique import JSONManager
     from .categorie_depense import CategorieDepense
+    from .revenu import Revenu
 except ImportError:
     from classe_generique import JSONManager
     from categorie_depense import CategorieDepense
-
+    from revenu import Revenu
 CHEMIN = "data/utilisateur.json"
 gestionnaire = JSONManager(CHEMIN)
 
@@ -111,6 +112,7 @@ class Utilisateur(UserMixin):
         try:
             gestionnaire.supprimer(condition)
             CategorieDepense.supprimer_cascade_personne(id_utilisateur)
+            Revenu.supprimer_cascade_personne(id_utilisateur)
             print("Utilisateur supprimé.")
         except ValueError as e:
             raise ValueError("Utilisateur introuvable.") from e
@@ -146,4 +148,4 @@ class Utilisateur(UserMixin):
 #Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
 
 # cas utilisation supprimer
-Utilisateur.supprimer("test")
+#Utilisateur.supprimer("test")
