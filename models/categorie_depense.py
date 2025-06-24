@@ -18,8 +18,10 @@ class CategorieDepense:
         self.description = description
         self.limite =  limite
         self.id_utilisateur = id_utilisateur
+    
 
     def convert_class_vers_dict(self):
+        """Convertit l'objet CategorieDepense en dictionnaire pour l'enregistrement JSON."""
         return {
             "id_categorie": self.id_categorie,
             "description": self.description,
@@ -29,6 +31,7 @@ class CategorieDepense:
 
     @staticmethod
     def verification_unicite(description, id_utilisateur):
+        """Vérifie si une catégorie avec cette description existe déjà pour l’utilisateur donné."""
         def condition(item):
             return (
                 item["description"] == description
@@ -41,11 +44,14 @@ class CategorieDepense:
         return True
 
     def ajouter(self):
+        """ Ajoute une nouvelle catégorie si elle est unique pour l’utilisateur."""
         if self.verification_unicite(self.description, self.id_utilisateur):
             gestionnaire_categorie_depense.ajouter(self.convert_class_vers_dict())
 
     @staticmethod
     def modifier(id_categorie, **updates):
+        """ Modifie les attributs d'une catégorie tout en assurant l’unicité de la description pour un même utilisateur.
+"""
 
         if "description" in updates and "id_utilisateur" in updates:
             nouvelle_description = updates["description"]
@@ -79,6 +85,7 @@ class CategorieDepense:
     
     @staticmethod
     def afficher_categorie(id_categorie):
+        """Retourne une catégorie à partir de son identifiant."""
         def condition(item):
             return item["id_categorie"] == id_categorie
 
@@ -93,7 +100,8 @@ class CategorieDepense:
 
     @staticmethod
     def lister_categorie_par_personne(id_utilisateur):
-        """Cette méthode permet de lister les catégories de dépenses par utilisateur."""
+        """Liste toutes les catégories appartenant à un utilisateur.
+"""
 
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
@@ -106,7 +114,8 @@ class CategorieDepense:
 
     @staticmethod
     def supprimer(id_categorie):
-        """Cette méthode supprime une catégorie de dépense par son identifiant."""
+        """Supprime une catégorie par son identifiant ainsi que les dépenses associées.
+"""
         def condition(item):
             return item["id_categorie"] == id_categorie
         gestionnaire_categorie_depense.supprimer(condition)
@@ -117,8 +126,9 @@ class CategorieDepense:
 
     @staticmethod
     def supprimer_cascade_personne(id_personne):
-        """Supprime toutes les catégories de dépense associées à un utilisateur ainsi que les dépenses associées"""
-
+        """Supprime toutes les catégories et dépenses associées à un utilisateur.
+"""
+        
         def condition(item):
             return item["id_utilisateur"] == id_personne
         categories = gestionnaire_categorie_depense.lire_avec_conditions(condition)
@@ -134,6 +144,8 @@ class CategorieDepense:
 
     @staticmethod
     def afficher_categorie_par_utilisateur(id_utilisateur):
+        """ Liste les catégories d’un utilisateur sous forme d’objets CategorieDepense.
+"""
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -142,6 +154,7 @@ class CategorieDepense:
      
     @staticmethod
     def afficher_limite(id_categorie):
+        """Retourne uniquement la limite associée à une catégorie."""
         def condition(item):
             return item["id_categorie"] == id_categorie
 

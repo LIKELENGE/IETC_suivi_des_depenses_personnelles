@@ -14,29 +14,33 @@ CHEMIN = "data/utilisateur.json"
 gestionnaire = JSONManager(CHEMIN)
 
 class Utilisateur(UserMixin):
-    """Cette classe gère les utilisateurs de l'application"""
+    """Cette classe gère les utilisateurs de l'application."""
+
+
+    
     def __init__(self, nom, prenom, email, mot_de_passe, id_utilisateur=None):
-        """Cette méthode est un constructeur qui initialise un utilisateur."""
+        """Constructeur : Initialise un utilisateur avec nom, prénom, email et mot de passe.
+Le mot de passe est haché avec SHA-256.
+"""
         self.id_utilisateur = id_utilisateur or str(uuid4())
         self.nom = nom
         self.prenom = prenom
         self.email = email
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
 
-
-
     def get_id(self):
-        """Cette méthode retourne l'identifiant de l'utilisateur."""
+        """Retourne l'identifiant unique de l'utilisateur (requis par Flask-Login).
+"""
         return self.id_utilisateur
 
     @property
     def id(self):
-        """Cette méthode est utilisée par Flask-Login pour obtenir l'identifiant de l'utilisateur."""
+        """Propriété utilisée par Flask-Login pour récupérer l'identifiant."""
         return self.id_utilisateur
 
     @staticmethod
     def get_by_id(user_id):
-        """Cette méthode retourne un utilisateur à partir de son identifiant."""
+        """Retourne un objet Utilisateur à partir de son identifiant s’il existe dans le fichier JSON."""
         data = gestionnaire.lire()
         for item in data:
             if str(item["id_utilisateur"]) == str(user_id):
@@ -50,7 +54,7 @@ class Utilisateur(UserMixin):
         return None
 
     def convert_class_vers_dict(self):
-        """Convertit l'instance de la classe Utilisateur en dictionnaire."""
+        """Convertit un objet Utilisateur en dictionnaire, utile pour l’enregistrement dans un fichier JSON."""
         return {
             "id_utilisateur": self.id_utilisateur,
             "nom": self.nom,
@@ -62,7 +66,7 @@ class Utilisateur(UserMixin):
     @staticmethod
     def verifier_email(email, id_utilisateur_actuel=None):
         """Vérifie si un email est déjà utilisé par un autre utilisateur.
-        Lève une ValueError si c'est le cas."""
+Lève une ValueError si c’est le cas."""
         utilisateurs = gestionnaire.lire()
         for u in utilisateurs:
             if u["email"] == email:
@@ -75,23 +79,23 @@ class Utilisateur(UserMixin):
                     )
 
     def ajouter(self):
-        """Cette méthode ajoute un nouvel utilisateur dans le fichier JSON. Verifie si l'email est unique.
-        Si l'email est déjà utilisé, une ValueError est levée. 
-        Sinon, l'utilisateur est ajouté et la méthode retourne 1."""
+        """Ajoute un nouvel utilisateur dans le fichier JSON après vérification de l’unicité de l’email.
+Retourne 1 si l’ajout est effectué avec succès."""
+        
         Utilisateur.verifier_email(self.email)
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
 
     @staticmethod
     def modifier(id_utilisateur, **updates):
-        """Cette méthode modifie un utilisateur dans le fichier JSON.
-        Elle prend en paramètre l'identifiant de l'utilisateur et les mises à jour à effectuer."""
+        """Modifie les informations d’un utilisateur à partir de son identifiant.
+Si l’email est mis à jour, vérifie qu’il n’est pas déjà pris par un autre utilisateur."""
         nouvel_email = updates.get("email")
         if nouvel_email:
             Utilisateur.verifier_email(
                 nouvel_email, id_utilisateur_actuel=id_utilisateur
             )
-
+            
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -106,6 +110,8 @@ class Utilisateur(UserMixin):
     
     @staticmethod
     def supprimer(id_utilisateur):
+        """Supprime un utilisateur à partir de son identifiant.
+Supprime aussi les données liées : catégories de dépenses et revenus associés."""
         def condition(item):
             return item.get("id_utilisateur") == id_utilisateur
 
@@ -117,12 +123,11 @@ class Utilisateur(UserMixin):
         except ValueError as e:
             raise ValueError("Utilisateur introuvable.") from e
 
-
     @staticmethod
     def se_connecter(email, mot_de_passe):
-        """Cette méthode permet à un utilisateur de se connecter.
-        Elle prend en paramètre l'email et le mot de passe de l'utilisateur. 
-        Attention que le mot de passe est haché dans le fichier JSON."""
+        """Vérifie les identifiants de connexion à partir de l’email et du mot de passe (haché).
+Retourne l’objet Utilisateur si les informations sont valides, sinon None."""
+       
         data = gestionnaire.lire()
         mot_de_passe_hache = hashlib.sha256(mot_de_passe.encode()).hexdigest()
         for item in data:

@@ -19,6 +19,7 @@ except ImportError:
 
 class StatistiqueFinanciere:
     def __init__(self, mois, annee):
+        """Récupère l'utilisateur connecté"""
         self.utilisateur_id = current_user.id_utilisateur
         self.mois = mois
         self.annee = annee
@@ -27,9 +28,11 @@ class StatistiqueFinanciere:
         self.categories_depenses = CategorieDepense.lister_categorie_par_personne(self.utilisateur_id)
 
     def solde(self):
+        """ Calcule la différence entre les revenus et les dépenses"""
         return sum(r.montant for r in self.revenus) - sum(d.montant for d in self.depenses)
 
     def solde_par_categorie(self):
+        """Calcule le total dépensé par catégorie et le solde par rapport à la limite"""
         resultats = {}
         for categorie in self.categories_depenses:
             montant_total = sum(
@@ -103,6 +106,7 @@ class StatistiqueFinanciere:
 
 
     def generer_csv(self):
+        """Génère un fichier CSV avec toutes les statistiques financières"""
         output = StringIO()
         writer = csv.writer(output)
 
@@ -160,6 +164,7 @@ class StatistiqueFinanciere:
 
 
     def generer_pdf(self):
+        """ Génère un fichier PDF avec les statistiques financières en utilisant un template HTML"""
         html = render_template(
             "statistiques_pdf.html",
             mois=self.mois,

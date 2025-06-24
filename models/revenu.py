@@ -8,12 +8,16 @@ except ImportError:
     from transaction import Transaction
     from classe_generique import JSONManager
 
-chemin = "data/revenus.json"
-gestionnaire = JSONManager(chemin)
+CHEMIN = "data/revenus.json"
+gestionnaire = JSONManager(CHEMIN)
 
 class Revenu(Transaction):
     """Cette classe gère les revenus des utilisateurs de l'application. Elle hérite de la classe Transaction."""
+    
+
+
     def __init__(
+              
         self,
         utilisateur_id,
         montant,
@@ -24,6 +28,10 @@ class Revenu(Transaction):
         imposable=True,
     ):
         super().__init__(
+            """Initialise une instance de la classe Revenu, héritée de Transaction, 
+            avec des attributs comme le montant, la date/heure, le libellé, 
+            et un indicateur d’imposabilité."""
+
             utilisateur_id,
             montant,
             date_transaction,
@@ -34,8 +42,10 @@ class Revenu(Transaction):
         self.imposable = imposable
 
     def convert_class_vers_dict(self):
-        """Cette méthode convertit l'instance de la classe Revenu en dictionnaire. 
-        C'est une surcharge de la méthode convert_class_vers_dict de la classe Transaction."""
+        """ Convertit une instance de Revenu en dictionnaire.
+Cette méthode est une surcharge de celle définie dans la classe Transaction.
+"""
+        
         return {
             "id_transaction": self.id_transaction,
             "utilisateur_id": self.utilisateur_id,
@@ -47,12 +57,15 @@ class Revenu(Transaction):
         }
 
     def ajouter(self):
-        """Cette méthode ajoute un revenu à la liste des revenus de l'utilisateur."""
+        """Ajoute un revenu à la base de données (fichier JSON), en appelant le gestionnaire JSONManager.
+"""
+        
         gestionnaire.ajouter(self.convert_class_vers_dict())
 
     @staticmethod
     def modifier(id_transaction, **updates):
-        """Cette méthode modifie un revenu existant en fonction de son identifiant et des mises à jour fournies."""
+        """Modifie un revenu existant identifié par son id_transaction, en mettant à jour les champs spécifiés.
+Affiche un message de confirmation après modification."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -66,7 +79,9 @@ class Revenu(Transaction):
 
     @staticmethod
     def supprimer(id_transaction):
-        """cette méthode supprime un revenu existant en fonction de son identifiant."""
+        """Supprime un revenu spécifique à partir de son identifiant.
+Affiche un message de confirmation après suppression."""
+       
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -75,7 +90,10 @@ class Revenu(Transaction):
 
     @staticmethod
     def revenue_par_utilisateur(utilisateur_id):
-        """"Cette méthode retourne tous les revenus d'un utilisateur spécifique."""
+        """ Récupère tous les revenus enregistrés pour un utilisateur donné.
+Retourne une liste d’objets Revenu.
+"""
+        
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -84,7 +102,9 @@ class Revenu(Transaction):
 
     @staticmethod
     def revenus_par_utilisateur_et_mois(utilisateur_id, mois, annee):
-        """Cette méthode retourne les revenus d'un utilisateur pour un mois et une année spécifiques."""
+        """ Filtre les revenus d’un utilisateur pour un mois et une année donnés.
+Retourne une liste de revenus correspondant à la période spécifiée."""
+        
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -100,7 +120,9 @@ class Revenu(Transaction):
         return revenus_filtrés
     
     def supprimer_cascade_personne(utilisateur_id):
-        """Cette méthode supprime tous les revenus d'un utilisateur spécifique."""
+        """Supprime tous les revenus associés à un utilisateur donné.
+Utilisé notamment lors de la suppression complète d’un utilisateur de la plateforme."""
+        
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 

@@ -1,4 +1,5 @@
 import datetime
+
 try:
     from .transaction import Transaction
     from .classe_generique import JSONManager
@@ -15,6 +16,7 @@ chemin_categories = "data/categories_depenses.json"
 
 class Depense(Transaction):
     """Cette classe gère les dépenses des utilisateurs de l'application. Elle hérite de la classe Transaction."""
+
     def __init__(
         self,
         utilisateur_id,
@@ -27,6 +29,8 @@ class Depense(Transaction):
         deductible_fiscalement=True,
     ):
         super().__init__(
+            """ Initialise une nouvelle instance de dépense avec les détails comme l’utilisateur,
+             le montant, la date/heure, la catégorie, etc. Hérite de la classe Transaction."""
             utilisateur_id,
             float(montant),
             date_transaction,
@@ -38,10 +42,16 @@ class Depense(Transaction):
         self.deductible_fiscalement = deductible_fiscalement
 
     def __str__(self):
-        
-        return f"Dépense(id={self.id_transaction}, montant={self.montant}, date={self.date_transaction}, heure={self.heure_transaction}, catégorie={self.categorie}, utilisateur_id={self.utilisateur_id}, libelle={self.libelle}, deductible_fiscalement={self.deductible_fiscalement})"
+        """Retourne une représentation textuelle lisible de l’objet Depense, utile pour l’affichage.
+"""
+
+        return f"Dépense(id={self.id_transaction}, montant={self.montant}, 
+        date={self.date_transaction}, heure={self.heure_transaction}, catégorie={self.categorie}, 
+        utilisateur_id={self.utilisateur_id}, libelle={self.libelle}, deductible_fiscalement={self.deductible_fiscalement})"
 
     def convert_class_vers_dict(self):
+        """ Convertit l’objet Depense en dictionnaire, nécessaire pour 
+        l’enregistrement dans un fichier JSON via JSONManager."""
         return {
             "id_transaction": self.id_transaction,
             "utilisateur_id": self.utilisateur_id,
@@ -54,12 +64,16 @@ class Depense(Transaction):
         }
 
     def ajouter(self):
-        """Cette méthode ajoute une dépense à la liste des dépenses de l'utilisateur."""
+        """Ajoute une dépense dans le fichier JSON en utilisant JSONManager.
+         Affiche un message de confirmation après l’ajout."""
         gestionnaire_depenses.ajouter(self.convert_class_vers_dict())
         print(f" Dépense ajoutée : {self.libelle} ({self.montant}€)")
 
     @staticmethod
     def modifier(id_transaction, **updates):
+         """Modifie une dépense existante identifiée par son ID avec les nouveaux 
+         attributs fournis. Affiche un message de succès après modification."""
+
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -74,6 +88,8 @@ class Depense(Transaction):
 
     @staticmethod
     def supprimer(id_transaction):
+        """Supprime une dépense spécifique selon son identifiant unique.
+         Affiche une confirmation de suppression."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -82,6 +98,9 @@ class Depense(Transaction):
 
     @staticmethod
     def supprimer_cascade_personne(utilisateur_id):
+        """Supprime toutes les dépenses associées à un utilisateur donné.
+         Utile lors de la suppression complète d’un utilisateur.
+"""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -92,6 +111,9 @@ class Depense(Transaction):
 
     @staticmethod
     def supprimer_cascade_categorie(categorie_description):
+        """ Supprime toutes les dépenses liées à une catégorie spécifique. 
+        Utile lors de la suppression d’une catégorie.
+"""
         def condition(item):
             return item["categorie"] == categorie_description
 
@@ -102,6 +124,8 @@ class Depense(Transaction):
 
     @staticmethod
     def depenses_par_utilisateur(utilisateur_id):
+        """ Retourne toutes les dépenses effectuées par un utilisateur, sous forme d’objets Depense.
+"""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -122,6 +146,9 @@ class Depense(Transaction):
 
     @staticmethod
     def depenses_par_utilisateur_et_mois(utilisateur_id, mois, annee):
+        """Filtre les dépenses d’un utilisateur sur un mois et une année donnés. 
+        Très utile pour les rapports mensuels ou les analyses.
+"""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -139,14 +166,10 @@ class Depense(Transaction):
 
     @staticmethod
     def verifier_limite(utilisateur_id, mois, annee, id_categorie):
-        """
-        Calcule le montant restant que l'utilisateur peut dépenser pour une catégorie donnée,
-        au cours d’un mois et d’une année spécifiques, sans dépasser la limite fixée.
-
-        Retourne un float représentant la différence entre la limite de la catégorie et
-        le total des dépenses déjà enregistrées pour cette catégorie sur la période.
-        Si le résultat est négatif, cela indique un dépassement de la limite.
-        """
+        """Calcule la différence entre la limite fixée pour une catégorie de dépense et 
+        les dépenses totales déjà effectuées par l’utilisateur pour cette catégorie dans un mois donné.
+    Retourne un float représentant le plafond restant. Si négatif, cela indique un dépassement.
+    """
         depenses = Depense.depenses_par_utilisateur_et_mois(utilisateur_id, mois, annee)
         depenses_filtre_categorie = [
             depense for depense in depenses if depense.categorie == id_categorie
@@ -155,8 +178,6 @@ class Depense(Transaction):
         limite_cateorie = CategorieDepense.afficher_limite(id_categorie)
         plafond_restant_categorie = limite_cateorie - total_depense
         return plafond_restant_categorie
-
-
 
 
 # d = Depense("818b873d-c6f2-47a1-8995-41da0623f0c8", 150, "2025-06-15", "14:28", "e147918c-fdbf-4606-806f-39ea52800e1c", "test")

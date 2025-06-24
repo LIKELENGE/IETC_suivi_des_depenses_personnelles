@@ -1,11 +1,11 @@
 from abc import ABC, abstractmethod
 from uuid import uuid4
 
-
-class Transaction(ABC):
-    """Cette classe représente une transaction financière. 
+  """Cette classe représente une transaction financière. 
     Elle est abstraite et doit être étendue par des classes concrètes. 
     Elle devient soit une dépense, soit un revenu."""
+
+class Transaction(ABC):
     def __init__(
         self,
         utilisateur_id,
