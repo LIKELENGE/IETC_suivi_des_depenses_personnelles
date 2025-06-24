@@ -108,4 +108,4 @@ def modifier_revenu(id_transaction):
 def supprimer_revenu(id_transaction):
     Revenu.supprimer(id_transaction)
     flash("Revenu supprimé.", "info")
-    return redirect(url_for('uitilisateur.profil'))
+    return redirect(url_for('utilisateur.profil'))

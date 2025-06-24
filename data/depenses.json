@@ -58,5 +58,15 @@
         "categorie": "fb6700af-4a95-4cb3-bd61-0a3a2df9bea5",
         "libelle": "aller-retour bruxelle charleroi",
         "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "75fad720-66c0-403b-8122-15b96284b3c9",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 50.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "18:11",
+        "categorie": "0e0b8744-251e-4bc6-8f59-36c0d6b1a066",
+        "libelle": "plein",
+        "deductible_fiscalement": true
     }
 ]

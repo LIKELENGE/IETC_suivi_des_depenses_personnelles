@@ -88,14 +88,5 @@
         "heure_transaction": "17:31",
         "imposable": true,
         "libelle": "Salaire intérim adecco"
-    },
-    {
-        "id_transaction": "507f20bc-550e-42b3-a38c-3d38fb2ce3f8",
-        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
-        "montant": 100.0,
-        "date_transaction": "2025-06-24",
-        "heure_transaction": "17:42",
-        "imposable": true,
-        "libelle": "Salaire intérim adecco"
     }
 ]
