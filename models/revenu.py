@@ -28,10 +28,6 @@ class Revenu(Transaction):
         imposable=True,
     ):
         super().__init__(
-            """Initialise une instance de la classe Revenu, héritée de Transaction, 
-            avec des attributs comme le montant, la date/heure, le libellé, 
-            et un indicateur d’imposabilité."""
-
             utilisateur_id,
             montant,
             date_transaction,
@@ -39,12 +35,15 @@ class Revenu(Transaction):
             libelle,
             id_transaction,
         )
+        """Initialise une instance de la classe Revenu, héritée de Transaction, 
+            avec des attributs comme le montant, la date/heure, le libellé, 
+            et un indicateur d’imposabilité."""
         self.imposable = imposable
 
     def convert_class_vers_dict(self):
         """ Convertit une instance de Revenu en dictionnaire.
-Cette méthode est une surcharge de celle définie dans la classe Transaction.
-"""
+        Cette méthode est une surcharge de celle définie dans la classe Transaction.
+        """
         
         return {
             "id_transaction": self.id_transaction,
@@ -65,7 +64,7 @@ Cette méthode est une surcharge de celle définie dans la classe Transaction.
     @staticmethod
     def modifier(id_transaction, **updates):
         """Modifie un revenu existant identifié par son id_transaction, en mettant à jour les champs spécifiés.
-Affiche un message de confirmation après modification."""
+        Affiche un message de confirmation après modification."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -80,8 +79,7 @@ Affiche un message de confirmation après modification."""
     @staticmethod
     def supprimer(id_transaction):
         """Supprime un revenu spécifique à partir de son identifiant.
-Affiche un message de confirmation après suppression."""
-       
+        Affiche un message de confirmation après suppression."""
         def condition(item):
             return item["id_transaction"] == id_transaction
 
@@ -89,9 +87,9 @@ Affiche un message de confirmation après suppression."""
         print("Revenu supprimé.")
 
     @staticmethod
-    def revenue_par_utilisateur(utilisateur_id):
+    def revenus_par_utilisateur(utilisateur_id):
         """ Récupère tous les revenus enregistrés pour un utilisateur donné.
-Retourne une liste d’objets Revenu.
+            Retourne une liste d’objets Revenu.
 """
         
         def condition(item):
@@ -103,8 +101,9 @@ Retourne une liste d’objets Revenu.
     @staticmethod
     def revenus_par_utilisateur_et_mois(utilisateur_id, mois, annee):
         """ Filtre les revenus d’un utilisateur pour un mois et une année donnés.
-Retourne une liste de revenus correspondant à la période spécifiée."""
-        
+        Retourne une liste de revenus correspondant à la période spécifiée.
+        """
+
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
@@ -121,8 +120,7 @@ Retourne une liste de revenus correspondant à la période spécifiée."""
     
     def supprimer_cascade_personne(utilisateur_id):
         """Supprime tous les revenus associés à un utilisateur donné.
-Utilisé notamment lors de la suppression complète d’un utilisateur de la plateforme."""
-        
+        Utilisé notamment lors de la suppression complète d’un utilisateur de la plateforme."""
         def condition(item):
             return item["utilisateur_id"] == utilisateur_id
 
