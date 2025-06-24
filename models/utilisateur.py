@@ -4,8 +4,10 @@ from flask_login import UserMixin
 
 try:
     from .classe_generique import JSONManager
+    from .categorie_depense import CategorieDepense
 except ImportError:
     from classe_generique import JSONManager
+    from categorie_depense import CategorieDepense
 
 CHEMIN = "data/utilisateur.json"
 gestionnaire = JSONManager(CHEMIN)
@@ -100,15 +102,19 @@ class Utilisateur(UserMixin):
         gestionnaire.modifier(condition, update)
         print("Utilisateur modifié.")
 
+    
     @staticmethod
     def supprimer(id_utilisateur):
-        """Cette méthode supprime un utilisateur du fichier JSON.
-        Elle prend en paramètre l'identifiant de l'utilisateur à supprimer."""
         def condition(item):
-            return item["id_utilisateur"] == id_utilisateur
+            return item.get("id_utilisateur") == id_utilisateur
 
-        if not gestionnaire.supprimer(condition):
-            raise ValueError("Utilisateur introuvable.")
+        try:
+            gestionnaire.supprimer(condition)
+            CategorieDepense.supprimer_cascade_personne(id_utilisateur)
+            print("Utilisateur supprimé.")
+        except ValueError as e:
+            raise ValueError("Utilisateur introuvable.") from e
+
 
     @staticmethod
     def se_connecter(email, mot_de_passe):
@@ -137,7 +143,7 @@ class Utilisateur(UserMixin):
 
 
 # cas d'utilisation modifier
-# Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
+#Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
 
 # cas utilisation supprimer
-# Utilisateur.supprimer("125f6cea-a3c2-46de-8554-78b3d4f81da6")
+Utilisateur.supprimer("125f6cea-a3c2-46de-8554-78b3d4f81da6")

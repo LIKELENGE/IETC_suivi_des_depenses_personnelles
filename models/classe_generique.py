@@ -46,6 +46,8 @@ class JSONManager:
         data = self.lire()
         data_filtrée = [item for item in data if not condition_fn(item)]
         self.ecrire(data_filtrée)
+        return len(data_filtrée) < len(data)
+
 
     def modifier(self, condition_fn, update_fn):
         data = self.lire()

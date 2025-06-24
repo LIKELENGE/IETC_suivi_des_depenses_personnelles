@@ -2,11 +2,15 @@ from uuid import uuid4
 
 try:
     from .classe_generique import JSONManager
+    
 except ImportError:
     from classe_generique import JSONManager
+    
+CHEMIN_CATEGORIE_DEPENSE = "data/categories_depenses.json"
+gestionnaire_categorie_depense = JSONManager(CHEMIN_CATEGORIE_DEPENSE)
+CHEMIN_DEPENSE = "data/depenses.json"
+gestionnaire_depense = JSONManager(CHEMIN_DEPENSE)
 
-CHEMIN = "data/categories_depenses.json"
-gestionnaire = JSONManager(CHEMIN)
 
 class CategorieDepense:
     """Cette classe represente categorie de dépense liées à l'utilisateur de l'application."""
@@ -32,14 +36,14 @@ class CategorieDepense:
                 and item["id_utilisateur"] == id_utilisateur
             )
 
-        if gestionnaire.lire_avec_conditions(condition):
+        if gestionnaire_categorie_depense.lire_avec_conditions(condition):
             print("Cette catégorie de dépense existe déjà pour cet utilisateur.")
             return False
         return True
 
     def ajouter(self):
         if self.verification_unicite(self.description, self.id_utilisateur):
-            gestionnaire.ajouter(self.convert_class_vers_dict())
+            gestionnaire_categorie_depense.ajouter(self.convert_class_vers_dict())
 
     @staticmethod
     def modifier(id_categorie, **updates):
@@ -54,7 +58,7 @@ class CategorieDepense:
                     and item["id_categorie"] != id_categorie
                 )
 
-            deja_existe = gestionnaire.lire_avec_conditions(meme_description)
+            deja_existe = gestionnaire_categorie_depense.lire_avec_conditions(meme_description)
             if deja_existe:
                 print(
                     "Erreur : une catégorie avec cette description"
@@ -70,7 +74,7 @@ class CategorieDepense:
                 if key in item:
                     item[key] = value
 
-        gestionnaire.modifier(condition, update)
+        gestionnaire_categorie_depense.modifier(condition, update)
         print(f"Catégorie '{id_categorie}' modifiée.")
 
     @staticmethod
@@ -79,7 +83,7 @@ class CategorieDepense:
         def condition(item):
             return item["id_categorie"] == id_categorie
 
-        resultats = gestionnaire.lire_avec_conditions(condition)
+        resultats = gestionnaire_categorie_depense.lire_avec_conditions(condition)
 
         if resultats:
             return CategorieDepense(**resultats[0])
@@ -91,19 +95,28 @@ class CategorieDepense:
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
-        categories_depenses = gestionnaire.lire_avec_conditions(condition)
+        categories_depenses = gestionnaire_categorie_depense.lire_avec_conditions(condition)
         return [
             CategorieDepense(**categorie_depense)
             for categorie_depense in categories_depenses
         ]
-
     @staticmethod
     def supprimer(id_categorie):
-        """Cette méthode supprime une catégorie de dépense par son identifiant."""
-        def condition(item):
-            return item["id_categorie"] == id_categorie
+        def condition_categorie(item):
+            print("Vérification catégorie :", item.get("id_categorie"))
+            return item.get("id_categorie") == id_categorie
 
-        gestionnaire.supprimer(condition)
+        if not gestionnaire_categorie_depense.supprimer(condition_categorie):
+            raise ValueError(f"Catégorie '{id_categorie}' introuvable.")
+
+        def condition_depense(item):
+            print("Vérification dépense :", item.get("categorie"))
+            return item.get("categorie") == id_categorie
+
+        gestionnaire_depense.supprimer(condition_depense)
+        print(f"Catégorie '{id_categorie}' et ses dépenses associées ont été supprimées.")
+
+
 
     @staticmethod
     def supprimer_cascade_personne(id_personne):
@@ -112,7 +125,7 @@ class CategorieDepense:
         def condition(item):
             return item["id_utilisateur"] == id_personne
 
-        gestionnaire.supprimer(condition)
+        gestionnaire_categorie_depense.supprimer(condition)
 
     @staticmethod
     def afficher_categorie_par_utilisateur(id_utilisateur):
@@ -120,7 +133,7 @@ class CategorieDepense:
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
-        categories = gestionnaire.lire_avec_conditions(condition)
+        categories = gestionnaire_categorie_depense.lire_avec_conditions(condition)
         return [CategorieDepense(**categorie) for categorie in categories]
 
     @staticmethod
@@ -129,7 +142,7 @@ class CategorieDepense:
         def condition(item):
             return item["id_categorie"] == id_categorie
 
-        limite = gestionnaire.lire_avec_conditions(condition)
+        limite = gestionnaire_categorie_depense.lire_avec_conditions(condition)
         return limite[0]["limite"]
 
 
@@ -143,3 +156,6 @@ class CategorieDepense:
 #     limite=700,
 #     id_utilisateur="utilisateur123"
 # )
+
+
+CategorieDepense.supprimer("1")

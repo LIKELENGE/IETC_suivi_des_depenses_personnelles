@@ -20,43 +20,23 @@
         "deductible_fiscalement": true
     },
     {
-        "id_transaction": true,
+        "id_transaction":"4dd93ded-aca4-4283-9300-83bcc29zzzzz",
         "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
         "montant": 100.0,
         "date_transaction": "2025-04-16",
         "heure_transaction": "12:25",
-        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "categorie": "1",
         "libelle": "abonnement tec",
         "deductible_fiscalement": true
     },
     {
-        "id_transaction": false,
+        "id_transaction": "dji444555z",
         "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
         "montant": 150.0,
         "date_transaction": "2025-05-16",
         "heure_transaction": "12:32",
-        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "categorie": "1",
         "libelle": "aller-retour bruxelle charleroi",
-        "deductible_fiscalement": true
-    },
-    {
-        "id_transaction": true,
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 100.0,
-        "date_transaction": "2025-05-16",
-        "heure_transaction": "18:12",
-        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
-        "libelle": "uber",
-        "deductible_fiscalement": true
-    },
-    {
-        "id_transaction": false,
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 100.0,
-        "date_transaction": "2025-06-17",
-        "heure_transaction": "17:58",
-        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
-        "libelle": "tetst transport",
         "deductible_fiscalement": true
     }
 ]
