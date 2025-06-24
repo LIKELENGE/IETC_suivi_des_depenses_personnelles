@@ -13,15 +13,14 @@ except ImportError:
 CHEMIN = "data/utilisateur.json"
 gestionnaire = JSONManager(CHEMIN)
 
+
 class Utilisateur(UserMixin):
     """Cette classe gère les utilisateurs de l'application."""
 
-
-    
     def __init__(self, nom, prenom, email, mot_de_passe, id_utilisateur=None):
         """Constructeur : Initialise un utilisateur avec nom, prénom, email et mot de passe.
-Le mot de passe est haché avec SHA-256.
-"""
+        Le mot de passe est haché avec SHA-256.
+        """
         self.id_utilisateur = id_utilisateur or str(uuid4())
         self.nom = nom
         self.prenom = prenom
@@ -29,8 +28,7 @@ Le mot de passe est haché avec SHA-256.
         self.mot_de_passe = hashlib.sha256(mot_de_passe.encode()).hexdigest()
 
     def get_id(self):
-        """Retourne l'identifiant unique de l'utilisateur (requis par Flask-Login).
-"""
+        """Retourne l'identifiant unique de l'utilisateur (requis par Flask-Login)."""
         return self.id_utilisateur
 
     @property
@@ -66,7 +64,7 @@ Le mot de passe est haché avec SHA-256.
     @staticmethod
     def verifier_email(email, id_utilisateur_actuel=None):
         """Vérifie si un email est déjà utilisé par un autre utilisateur.
-Lève une ValueError si c’est le cas."""
+        Lève une ValueError si c’est le cas."""
         utilisateurs = gestionnaire.lire()
         for u in utilisateurs:
             if u["email"] == email:
@@ -80,8 +78,8 @@ Lève une ValueError si c’est le cas."""
 
     def ajouter(self):
         """Ajoute un nouvel utilisateur dans le fichier JSON après vérification de l’unicité de l’email.
-Retourne 1 si l’ajout est effectué avec succès."""
-        
+        Retourne 1 si l’ajout est effectué avec succès."""
+
         Utilisateur.verifier_email(self.email)
         gestionnaire.ajouter(self.convert_class_vers_dict())
         return 1
@@ -89,13 +87,14 @@ Retourne 1 si l’ajout est effectué avec succès."""
     @staticmethod
     def modifier(id_utilisateur, **updates):
         """Modifie les informations d’un utilisateur à partir de son identifiant.
-Si l’email est mis à jour, vérifie qu’il n’est pas déjà pris par un autre utilisateur."""
+        Si l’email est mis à jour, vérifie qu’il n’est pas déjà pris par un autre utilisateur.
+        """
         nouvel_email = updates.get("email")
         if nouvel_email:
             Utilisateur.verifier_email(
                 nouvel_email, id_utilisateur_actuel=id_utilisateur
             )
-            
+
         def condition(item):
             return item["id_utilisateur"] == id_utilisateur
 
@@ -107,11 +106,12 @@ Si l’email est mis à jour, vérifie qu’il n’est pas déjà pris par un au
         gestionnaire.modifier(condition, update)
         print("Utilisateur modifié.")
 
-    
     @staticmethod
     def supprimer(id_utilisateur):
         """Supprime un utilisateur à partir de son identifiant.
-Supprime aussi les données liées : catégories de dépenses et revenus associés."""
+        Supprime aussi les données liées : catégories de dépenses et revenus associés.
+        """
+
         def condition(item):
             return item.get("id_utilisateur") == id_utilisateur
 
@@ -126,8 +126,8 @@ Supprime aussi les données liées : catégories de dépenses et revenus associ�
     @staticmethod
     def se_connecter(email, mot_de_passe):
         """Vérifie les identifiants de connexion à partir de l’email et du mot de passe (haché).
-Retourne l’objet Utilisateur si les informations sont valides, sinon None."""
-       
+        Retourne l’objet Utilisateur si les informations sont valides, sinon None."""
+
         data = gestionnaire.lire()
         mot_de_passe_hache = hashlib.sha256(mot_de_passe.encode()).hexdigest()
         for item in data:
@@ -144,13 +144,12 @@ Retourne l’objet Utilisateur si les informations sont valides, sinon None."""
 
 
 # cas d'utilisation ajouter
-#u = Utilisateur("Doe", "John", "johndoe@gmail.com", "johndoe@gmail.com")
-#u.ajouter()
-
+# u = Utilisateur("Doe", "John", "johndoe@gmail.com", "johndoe@gmail.com")
+# u.ajouter()
 
 
 # cas d'utilisation modifier
-#Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
+# Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
 
 # cas utilisation supprimer
-#Utilisateur.supprimer("test")
+# Utilisateur.supprimer("test")

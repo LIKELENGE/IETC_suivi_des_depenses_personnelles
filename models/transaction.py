@@ -5,6 +5,7 @@ from uuid import uuid4
     Elle est abstraite et doit être étendue par des classes concrètes. 
     Elle devient soit une dépense, soit un revenu."""
 
+
 class Transaction(ABC):
     def __init__(
         self,
@@ -15,8 +16,7 @@ class Transaction(ABC):
         libelle,
         id_transaction=None,
     ):
-        self.id_transaction = id_transaction if id_transaction else str(uuid4()
-        )
+        self.id_transaction = id_transaction if id_transaction else str(uuid4())
         self.utilisateur_id = utilisateur_id
         self.montant = montant
         self.libelle = libelle

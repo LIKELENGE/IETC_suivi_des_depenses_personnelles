@@ -63,12 +63,11 @@ def profil():
     
 
 @utilisateur_bp.route("/inscription", methods=["GET", "POST"])
+def inscription():
     """Route pour l'inscription
     Récupération des champs du formulaire
     Vérifie si les mots de passe correspondent
     Création d’un nouvel utilisateur"""
-def inscription():
-    
     if request.method == "POST":
         nom = request.form["nom"]
         prenom = request.form["prenom"]
@@ -93,9 +92,9 @@ def inscription():
 
 
 @utilisateur_bp.route("/modification", methods=["GET", "POST"])
-"""Route pour modifier les informations de l'utilisateur"""
 @login_required
 def modification():
+    """Route pour modifier les informations de l'utilisateur"""
     if request.method == "POST":
         nom = request.form["nom"]
         prenom = request.form["prenom"]
@@ -117,9 +116,9 @@ def modification():
     return render_template("modification.html", utilisateur=current_user)
 
 @utilisateur_bp.route("/suppression", methods=["GET", "POST"])
-"""Route pour supprimer le compte utilisateur"""
 @login_required
 def suppression():
+    """Route pour supprimer le compte utilisateur"""
     if request.method == "POST":
         try:
             Utilisateur.supprimer(current_user.id_utilisateur)
@@ -132,33 +131,33 @@ def suppression():
 
 
 @utilisateur_bp.route("/deconnexion")
-#Route pour se déconnecter
 def deconnexion():
+    """Route pour se déconnecter"""
     if current_user.is_authenticated:
         logout_user()
     return redirect(url_for("utilisateur.accueil"))
 
 
 @utilisateur_bp.route("/export_csv", endpoint="export_csv")
-#Route pour exporter les statistiques en CSV
 @login_required
 def export_csv():
+    """Route pour exporter les statistiques en CSV"""
     mois = request.args.get('mois', type=int)
     annee = request.args.get('annee', type=int)
     stats = StatistiqueFinanciere(mois, annee)
     return stats.generer_csv()
 
 @utilisateur_bp.route("/export_pdf", endpoint="export_pdf")
-#Route pour exporter les statistiques en PDF
 @login_required
 def export_pdf():
+    """Route pour exporter les statistiques en PDF"""
     mois = request.args.get('mois', type=int)
     annee = request.args.get('annee', type=int)
     stats = StatistiqueFinanciere(mois, annee)
     return stats.generer_pdf()
 
 @utilisateur_bp.route("/options-avancees")
-#Route pour afficher les options avancées
 @login_required
 def options_avancees():
+    """Route pour afficher les options avancées"""
     return render_template("options_avancees.html")
