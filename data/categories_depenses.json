@@ -34,5 +34,11 @@
         "description": "Auto Essence",
         "limite": 200.0,
         "id_utilisateur": "57932204-b9e9-481f-8ee7-a71ce94e8524"
+    },
+    {
+        "id_categorie": "2dd41519-3e6e-4898-9c54-f2f6e10bc6b5",
+        "description": "Vacances",
+        "limite": 400.0,
+        "id_utilisateur": "57932204-b9e9-481f-8ee7-a71ce94e8524"
     }
 ]

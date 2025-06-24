@@ -1,45 +1,5 @@
 [
     {
-        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 300.0,
-        "date_transaction": "2025-06-15",
-        "heure_transaction": "14:30",
-        "categorie": "e147918c-fdbf-4606-806f-39ea52800e1c",
-        "libelle": "test",
-        "deductible_fiscalement": true
-    },
-    {
-        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 300.0,
-        "date_transaction": "2025-05-15",
-        "heure_transaction": "14:30",
-        "categorie": "11",
-        "libelle": "test2",
-        "deductible_fiscalement": true
-    },
-    {
-        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
-        "utilisateur_id": "test",
-        "montant": 300.0,
-        "date_transaction": "2025-06-15",
-        "heure_transaction": "14:30",
-        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb7454444",
-        "libelle": "test",
-        "deductible_fiscalement": true
-    },
-    {
-        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
-        "utilisateur_id": "test",
-        "montant": 300.0,
-        "date_transaction": "2025-05-15",
-        "heure_transaction": "14:30",
-        "categorie": "11",
-        "libelle": "test2",
-        "deductible_fiscalement": true
-    },
-    {
         "id_transaction": "ttetsttstst",
         "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
         "montant": 700.0,
@@ -67,6 +27,26 @@
         "heure_transaction": "18:11",
         "categorie": "0e0b8744-251e-4bc6-8f59-36c0d6b1a066",
         "libelle": "plein",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "bc500402-a89e-441a-85e1-c774d0ad1fbd",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 100.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "19:15",
+        "categorie": "2dd41519-3e6e-4898-9c54-f2f6e10bc6b5",
+        "libelle": "visite bruxelle",
+        "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": "5a235767-9bed-494b-b03f-e05a68e3c36c",
+        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
+        "montant": 100.0,
+        "date_transaction": "2025-05-24",
+        "heure_transaction": "19:18",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb74550112",
+        "libelle": "Voyage paris",
         "deductible_fiscalement": true
     }
 ]

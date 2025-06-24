@@ -69,37 +69,7 @@ def lister_revenus():
 
 
 
-@revenu_bp.route('/modifier_revenu/<id_transaction>', methods=['GET', 'POST'])
-@login_required
-def modifier_revenu(id_transaction):
-    revenus = Revenu.revenue_par_utilisateur(current_user.id)
-    revenu = next((r for r in revenus if r.id_transaction == id_transaction), None)
-    
-    if not revenu:
-        flash("Revenu introuvable.", "error")
-        return redirect(url_for('revenu_bp.lister_revenus'))
 
-    if request.method == 'POST':
-        montant = request.form['montant']
-        date = request.form['date']
-        libelle = request.form['libelle']
-        imposable = 'imposable' in request.form
-
-        if not libelle.strip():
-            flash("Le libellé est obligatoire.", "error")
-            return render_template('modifier_revenu.html', revenu=revenu)
-
-        Revenu.modifier(
-            id_transaction,
-            montant=float(montant),
-            date_transaction=date,
-            libelle=libelle,
-            imposable=imposable
-        )
-        flash("Revenu modifié avec succès.", "success")
-        return redirect(url_for('utilisateur.profil'))
-
-    return render_template('modifier_revenu.html', revenu=revenu)
 
 
 
