@@ -26,9 +26,9 @@ def accueil():
     return render_template("index.html")
 
 @utilisateur_bp.route("/profil", methods=["GET", "POST"])
-# Route pour le profil utilisateur (protégée)
 @login_required
 def profil():
+    """Route pour afficher le profil de l'utilisateur"""
     utilisateur = {
         "id_utilisateur": current_user.id_utilisateur,
         "nom": current_user.nom,

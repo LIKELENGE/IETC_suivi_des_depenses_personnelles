@@ -10,6 +10,7 @@ depense_bp = Blueprint("depense", __name__)
 @depense_bp.route("/ajouter_depense", methods=["GET", "POST"])
 @login_required
 def ajouter_depense():
+    """Route pour ajouter une dépense."""
     utilisateur_id = current_user.id
     now = datetime.datetime.now()
     mois = int(request.values.get("mois", now.month))
@@ -141,6 +142,7 @@ def ajouter_depense():
 @depense_bp.route("/depenses_supprimer/<id_transaction>", methods=["POST"])
 @login_required
 def supprimer_depense(id_transaction):
+    """Route pour supprimer une dépense."""
     Depense.supprimer(id_transaction)
     flash("Dépense supprimée.")
     return redirect(url_for("utilisateur.profil"))

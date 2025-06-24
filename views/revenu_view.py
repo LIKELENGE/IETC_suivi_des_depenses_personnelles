@@ -10,6 +10,7 @@ revenu_bp = Blueprint("revenu_bp", __name__)
 @revenu_bp.route("/ajouter_revenu", methods=["GET", "POST"])
 @login_required
 def ajouter_revenu():
+    """Route pour ajouter un revenu."""
     if request.method == "POST":
         montant_str = request.form["montant"]
         date_transaction = request.form.get("date")
@@ -64,6 +65,7 @@ def ajouter_revenu():
 @revenu_bp.route("/revenus")
 @login_required
 def lister_revenus():
+    """Route pour lister les revenus de l'utilisateur."""
     revenus = Revenu.revenue_par_utilisateur(current_user.id)
     return redirect(url_for("utilisateur.profil"))
 
@@ -71,6 +73,7 @@ def lister_revenus():
 @revenu_bp.route("/revenus/supprimer/<id_transaction>", methods=["POST"])
 @login_required
 def supprimer_revenu(id_transaction):
+    """Route pour supprimer un revenu."""
     Revenu.supprimer(id_transaction)
     flash("Revenu supprimé.", "info")
     return redirect(url_for("utilisateur.profil"))
