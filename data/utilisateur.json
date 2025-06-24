@@ -26,5 +26,12 @@
         "prenom": "Kévin",
         "email": "kevindebruyne@gmail.com",
         "mot_de_passe": "d12b983b95a36f2c4802a5c75ed403206ffa53c36488071040603cc453cf8942"
+    },
+    {
+        "id_utilisateur": "221fea43-3dd4-4307-87e2-508f0680bb71",
+        "nom": "Almeda",
+        "prenom": "Tony",
+        "email": "tonyamlda@gmail.com",
+        "mot_de_passe": "f2cffb2aa66709c50a03b648df50a738b3e78c747dfd55f49bbfcaf49bcfeb61"
     }
 ]
