@@ -145,3 +145,8 @@ def export_pdf():
     annee = request.args.get('annee', type=int)
     stats = StatistiqueFinanciere(mois, annee)
     return stats.generer_pdf()
+
+@utilisateur_bp.route("/options-avancees")
+@login_required
+def options_avancees():
+    return render_template("options_avancees.html")

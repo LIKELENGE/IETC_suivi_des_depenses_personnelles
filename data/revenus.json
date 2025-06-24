@@ -61,5 +61,14 @@
         "heure_transaction": "14:28",
         "imposable": true,
         "libelle": "uber"
+    },
+    {
+        "id_transaction": "fb379cf3-675f-440d-932d-97eb6b3ac7f9",
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 3000.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "16:32",
+        "imposable": true,
+        "libelle": "Salaire principal mois juin"
     }
 ]

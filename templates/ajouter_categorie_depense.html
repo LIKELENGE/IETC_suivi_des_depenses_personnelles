@@ -15,9 +15,46 @@
         <h5 class="card-title mb-4">Ajouter une dépense</h5>
         <form method="post">
           <div class="mb-3">
-            <label for="description" class="form-label">Description</label>
-            <input type="text" name="description" id="description" class="form-control" required>
-          </div>
+          <label for="description" class="form-label">Catégorie</label>
+          <select name="description" id="description" class="form-select" required>
+            <option value="">-- Choisissez une catégorie --</option>
+            <option value="Alimentation">Alimentation</option>
+            <option value="Loyer">Loyer</option>
+            <option value="Transports">Transports</option>
+            <option value="Auto Essence">Auto Essence</option>
+            <option value="Auto Assurance">Auto Assurance</option>
+            <option value="Auto Entretien">Auto Entretien</option>
+            <option value="Auto Parking">Auto Parking</option>
+            <option value="Auto Péages">Auto Péages</option>
+            <option value="Auto Crédit">Auto Crédit</option>
+            <option value="Santé">Santé</option>
+            <option value="Loisirs">Loisirs</option>
+            <option value="Shopping">Shopping</option>
+            <option value="Assurances">Assurances</option>
+            <option value="Services">Services</option>
+            <option value="Dons">Dons</option>
+            <option value="Vacances">Vacances</option>
+            <option value="Téléphonie/Internet">Téléphonie/Internet</option>
+            <option value="Impôts Taxes">Impôts Taxes</option>
+            <option value="Education">Éducation</option>
+            <option value="Enfants">Enfants</option>
+            <option value="Animaux">Animaux</option>
+            <option value="Cadeaux">Cadeaux</option>
+            <option value="Maison Entretien">Maison Entretien</option>
+            <option value="Frais bancaires">Frais bancaires</option>
+            <option value="Abonnements">Abonnements</option>
+            <option value="Investissements">Investissements</option>
+            <option value="Épargne">Épargne</option>
+            <option value="Divers">Divers</option>
+            <option value="Frais professionnels">Frais professionnels</option>
+            <option value="Frais médicaux">Frais médicaux</option> 
+            <option value="Frais juridiques">Frais juridiques</option>
+            <option value="Frais de scolarité">Frais de scolarité</option>
+            <option value="Amendes routieres">Amendes routières</option>
+            <option value="Autre">Autre...</option>
+          </select>
+        </div>
+
           <div class="mb-3">
             <label for="limite" class="form-label">Limite (en €)</label>
             <input type="number" name="limite" id="limite" step="0.01" class="form-control" required>

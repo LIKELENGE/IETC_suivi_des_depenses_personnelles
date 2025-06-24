@@ -40,7 +40,7 @@ def ajouter_revenu():
 @login_required
 def lister_revenus():
     revenus = Revenu.revenue_par_utilisateur(current_user.id)
-    return render_template('liste_revenus.html', revenus=revenus)
+    return  redirect(url_for('utilisateur.profil'))
 
 
 
@@ -72,7 +72,7 @@ def modifier_revenu(id_transaction):
             imposable=imposable
         )
         flash("Revenu modifié avec succès.", "success")
-        return redirect(url_for('revenu_bp.lister_revenus'))
+        return redirect(url_for('utilisateur.profil'))
 
     return render_template('modifier_revenu.html', revenu=revenu)
 

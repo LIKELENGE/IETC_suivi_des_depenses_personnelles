@@ -38,5 +38,15 @@
         "categorie": "11",
         "libelle": "test2",
         "deductible_fiscalement": true
+    },
+    {
+        "id_transaction": false,
+        "utilisateur_id": "57932204-b9e9-481f-8ee7-a71ce94e8524",
+        "montant": 700.0,
+        "date_transaction": "2025-06-24",
+        "heure_transaction": "16:31",
+        "categorie": "a9910a59-2afd-4a70-a313-c89c89f261f8",
+        "libelle": "Frais loyer juin 2025",
+        "deductible_fiscalement": true
     }
 ]

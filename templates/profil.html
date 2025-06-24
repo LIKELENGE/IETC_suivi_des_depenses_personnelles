@@ -5,12 +5,12 @@
 {% block content %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light rounded mb-4">
   <div class="container-fluid">
-    <span class="navbar-brand fw-bold">Actions rapides</span>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#actionsNavbar" aria-controls="actionsNavbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="actionsNavbar">
-      <ul class="navbar-nav ms-auto gap-2">
+      <ul class="navbar-nav justify-content-center gap-2 w-100">
         <li class="nav-item">
           <a class="btn btn-outline-dark me-2 mb-2 mb-lg-0" href="{{ url_for('categorie_depense.ajouter_categorie_depense') }}">
             Ajouter une catégorie
@@ -41,10 +41,17 @@
             Déconnexion
           </a>
         </li>
+        <li class="nav-item">
+          <a class="btn btn-outline-danger mb-2 mb-lg-0" href="{{ url_for('utilisateur.options_avancees') }}">
+            Modifier son compte
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
+
+
 
 
 
@@ -117,7 +124,6 @@
               <strong>{{ revenu.montant }} €</strong> — {{ revenu.date_transaction }} — {{ revenu.libelle }}
             </div>
             <div>
-              <a href="{{ url_for('revenu_bp.modifier_revenu', id_transaction=revenu.id_transaction) }}" class="btn btn-sm btn-outline-warning me-2">Modifier</a>
               <form method="post" action="{{ url_for('revenu_bp.supprimer_revenu', id_transaction=revenu.id_transaction) }}" class="d-inline">
                 <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Voulez-vous vraiment supprimer ce revenu ?');">Supprimer</button>
               </form>
@@ -131,7 +137,6 @@
   {% endif %}
 
   <!-- Dépenses -->
-  <a href="{{ url_for('depense.ajouter_depense') }}" class="btn btn-outline-primary mb-3">Ajouter une dépense</a>
   {% if depenses %}
     <h5>Dépenses pour {{ mois_courant }}/{{ annee_courante }}</h5>
     <ul class="list-group mb-4">
@@ -154,10 +159,7 @@
   {% endif %}
 
   <!-- Actions utilisateur -->
-  <div class="mt-4">
-    <a href="{{ url_for('utilisateur.modification') }}" class="btn btn-outline-secondary me-2">Modifier le profil</a>
-    <a href="{{ url_for('utilisateur.suppression') }}" class="btn btn-outline-danger me-2">Supprimer le compte</a>
-  </div>
+
 
 
 

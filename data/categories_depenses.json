@@ -22,5 +22,11 @@
         "description": "Nourriture",
         "limite": 800.0,
         "id_utilisateur": "test"
+    },
+    {
+        "id_categorie": "a9910a59-2afd-4a70-a313-c89c89f261f8",
+        "description": "Loyer",
+        "limite": 1000.0,
+        "id_utilisateur": "57932204-b9e9-481f-8ee7-a71ce94e8524"
     }
 ]
