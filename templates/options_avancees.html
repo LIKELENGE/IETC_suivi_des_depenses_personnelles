@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Options avancées{% endblock %}
+{% block content %}
+<h3>Options avancées du profil</h3>
+<div class="mb-3">
+  <a href="{{ url_for('utilisateur.modification') }}" class="btn btn-outline-secondary me-2">Modifier le profil</a>
+  <a href="{{ url_for('utilisateur.suppression') }}" class="btn btn-outline-danger me-2">Supprimer le compte</a>
+  <a href="{{ url_for('utilisateur.profil') }}" class="btn btn-outline-dark">Retour au profil</a>
+</div>
+{% endblock %}
