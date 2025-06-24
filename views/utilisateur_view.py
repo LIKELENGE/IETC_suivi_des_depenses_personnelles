@@ -9,6 +9,7 @@ from models.statistique_financiere import StatistiqueFinanciere
 utilisateur_bp = Blueprint("utilisateur", __name__)
 
 @utilisateur_bp.route("/", methods=["GET", "POST"])
+#Route principale (accueil + connexion)
 def accueil():
     if current_user.is_authenticated:
         return redirect(url_for("utilisateur.profil"))
@@ -25,6 +26,7 @@ def accueil():
     return render_template("index.html")
 
 @utilisateur_bp.route("/profil", methods=["GET", "POST"])
+# Route pour le profil utilisateur (protégée)
 @login_required
 def profil():
     utilisateur = {
@@ -61,6 +63,10 @@ def profil():
     
 
 @utilisateur_bp.route("/inscription", methods=["GET", "POST"])
+    """Route pour l'inscription
+    Récupération des champs du formulaire
+    Vérifie si les mots de passe correspondent
+    Création d’un nouvel utilisateur"""
 def inscription():
     
     if request.method == "POST":
@@ -87,6 +93,7 @@ def inscription():
 
 
 @utilisateur_bp.route("/modification", methods=["GET", "POST"])
+"""Route pour modifier les informations de l'utilisateur"""
 @login_required
 def modification():
     if request.method == "POST":
@@ -110,6 +117,7 @@ def modification():
     return render_template("modification.html", utilisateur=current_user)
 
 @utilisateur_bp.route("/suppression", methods=["GET", "POST"])
+"""Route pour supprimer le compte utilisateur"""
 @login_required
 def suppression():
     if request.method == "POST":
@@ -124,6 +132,7 @@ def suppression():
 
 
 @utilisateur_bp.route("/deconnexion")
+#Route pour se déconnecter
 def deconnexion():
     if current_user.is_authenticated:
         logout_user()
@@ -131,6 +140,7 @@ def deconnexion():
 
 
 @utilisateur_bp.route("/export_csv", endpoint="export_csv")
+#Route pour exporter les statistiques en CSV
 @login_required
 def export_csv():
     mois = request.args.get('mois', type=int)
@@ -139,6 +149,7 @@ def export_csv():
     return stats.generer_csv()
 
 @utilisateur_bp.route("/export_pdf", endpoint="export_pdf")
+#Route pour exporter les statistiques en PDF
 @login_required
 def export_pdf():
     mois = request.args.get('mois', type=int)
@@ -147,6 +158,7 @@ def export_pdf():
     return stats.generer_pdf()
 
 @utilisateur_bp.route("/options-avancees")
+#Route pour afficher les options avancées
 @login_required
 def options_avancees():
     return render_template("options_avancees.html")
