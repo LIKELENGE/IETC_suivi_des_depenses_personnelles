@@ -146,4 +146,4 @@ class Utilisateur(UserMixin):
 #Utilisateur.modifier("125f6cea-a3c2-46de-8554-78b3d4f81da6", nom ="test", prenom="test")
 
 # cas utilisation supprimer
-Utilisateur.supprimer("125f6cea-a3c2-46de-8554-78b3d4f81da6")
+Utilisateur.supprimer("test")

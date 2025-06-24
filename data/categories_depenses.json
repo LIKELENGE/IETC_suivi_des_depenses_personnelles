@@ -15,6 +15,12 @@
         "id_categorie": "2dedfed3-f2a7-402b-8b3c-4ffb7454444",
         "description": "transport",
         "limite": 550.0,
-        "id_utilisateur": "125f6cea-a3c2-46de-8554-78b3d4f81da6"
+        "id_utilisateur": "test"
+    },
+    {
+        "id_categorie": "11",
+        "description": "Nourriture",
+        "limite": 800.0,
+        "id_utilisateur": "test"
     }
 ]

@@ -15,28 +15,28 @@
         "montant": 300.0,
         "date_transaction": "2025-05-15",
         "heure_transaction": "14:30",
-        "categorie": "e147918c-fdbf-4606-806f-39ea52800e1c",
+        "categorie": "11",
         "libelle": "test2",
         "deductible_fiscalement": true
     },
     {
-        "id_transaction":"4dd93ded-aca4-4283-9300-83bcc29zzzzz",
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 100.0,
-        "date_transaction": "2025-04-16",
-        "heure_transaction": "12:25",
-        "categorie": "1",
-        "libelle": "abonnement tec",
+        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
+        "utilisateur_id": "test",
+        "montant": 300.0,
+        "date_transaction": "2025-06-15",
+        "heure_transaction": "14:30",
+        "categorie": "2dedfed3-f2a7-402b-8b3c-4ffb7454444",
+        "libelle": "test",
         "deductible_fiscalement": true
     },
     {
-        "id_transaction": "dji444555z",
-        "utilisateur_id": "818b873d-c6f2-47a1-8995-41da0623f0c8",
-        "montant": 150.0,
-        "date_transaction": "2025-05-16",
-        "heure_transaction": "12:32",
-        "categorie": "1",
-        "libelle": "aller-retour bruxelle charleroi",
+        "id_transaction": "4dd93ded-aca4-4283-9300-83bcc29308b1",
+        "utilisateur_id": "test",
+        "montant": 300.0,
+        "date_transaction": "2025-05-15",
+        "heure_transaction": "14:30",
+        "categorie": "11",
+        "libelle": "test2",
         "deductible_fiscalement": true
     }
 ]
