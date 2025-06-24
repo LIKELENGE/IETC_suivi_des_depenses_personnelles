@@ -39,7 +39,8 @@ la-pecuniaire-magique/
 ├── models/             # Modèles métier (POO + JSON)
 │   ├── classe_generique.py         # Classe mère avec logique de persistance
 │   ├── utilisateur.py
-│   ├── categorie.py
+│   ├── statistique_financiere.py 
+│   ├── categorie_depense.py
 │   └── transaction.py
 │
 ├── views/              
@@ -115,8 +116,8 @@ la-pecuniaire-magique/
 
 ### 1. Cloner le projet
 ```bash
-git clone https://github.com/votre-compte/la-pecuniaire-magique.git
-cd la-pecuniaire-magique
+git clone [https://github.com/votre-compte/la-pecuniaire-magique.git](https://github.com/LIKELENGE/IETC_suivi_des_depenses_personnelles.git)
+cd IETC_suivi_des_depenses_personnelles
 ```
 
 ### 2. Créer un environnement virtuel
